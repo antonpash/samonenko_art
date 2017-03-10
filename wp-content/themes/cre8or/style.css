@@ -1,0 +1,230 @@
+/*
+Theme Name: Cre8or
+Theme URI: http://demo.teslathemes.com/cre8or
+Description:  Creative Multipurpose Wordpress theme
+Version: 2.5.2
+Author: TeslaThemes
+Author URI: http://www.teslathemes.com/
+License: GNU General Public License version 3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Tags: light, theme-options, creative, responsive, unique, filtered portfolio
+*/
+
+.menu-bottom-container{
+    position: absolute;
+    bottom: 3%;
+}
+.menu-bottom-container ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu-bottom-container ul li{
+    display: inline-block;
+    margin-right: 5px;
+}
+.menu-bottom-container ul li a{
+    color: rgba(255, 255, 255, 0.4);
+}
+.menu-bottom-container ul li a:hover{
+    color: #FFFFFF;
+}
+
+*, *:before, *:after{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/*| .second_navigation |*/
+
+.second_nav{
+    width: 100%;
+    height: 81px;
+    background: #fff;
+    box-shadow: 0 3px 10px -2px rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.1);
+    margin-top: 50px;
+}
+.second_nav ul{
+    list-style: none;
+    display: block;
+    float: left;
+}
+
+.second_nav ul.social{
+    float: right;
+    margin-right: 15px;
+    border-left: 1px solid;
+    padding-left: 15px;
+    border-color: #d7d7d7;
+}
+.second_nav ul.social li:hover{
+    background:none;
+}
+.second_nav ul.social li a{
+    color: #5f1e46;
+}
+.second_nav ul.social li:hover a{
+    color: #ef796c !important;
+}
+.second_nav ul.social li a{
+    font-size: 1.1em;
+    padding: 27px 15px;
+}
+
+.second_nav ul li{
+    position: relative;
+    float: left;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.second_nav ul li.current_page_item, .second_nav ul li.current_page_parent{
+    background: #ef796c;
+}
+.second_nav ul li.current_page_item a, .second_nav ul li.current_page_parent a{
+    color: #ffffff;
+}
+
+.second_nav ul li:hover{background: #5f1e46;}
+.second_nav ul li:hover > ul{display: block;}
+.second_nav ul li{
+    float: left;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.second_nav ul li a{
+    display: block;
+    padding: 30px 20px;
+    color: #222;
+    font-size: .9em;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.second_nav ul li:hover a{
+    color: #ffffff !important;
+}
+.second_nav ul li:hover > ul li a{
+    color: #222 !important;
+}
+.second_nav ul li:hover > ul li:hover a{
+    color: #fff !important;
+}
+.second_nav ul ul{
+    display: none;
+    left: -45px;
+    background: #fff;
+    position: absolute;
+    top: calc(100% - 10px);
+    box-shadow: -3px 3px 10px -2px rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.1);
+    z-index: 9999;
+}
+.second_nav ul ul li{
+    float: none;
+    position: relative;
+    z-index: 9999;
+    width:201px;
+}
+.second_nav ul ul li a {
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.second_nav ul ul ul {
+    position: absolute;
+    left: 100%;
+    top:0;
+}
+
+.woocommerce .price_label{
+    text-align: left;
+}
+
+.woocommerce .widget:not(.widget_shopping_cart){
+    margin-top: 40px;
+}
+
+.logo{
+    display: inline !important;
+}
+
+.woocommerce div.product_custom p.price{
+    color: #5f1e46;
+    font-size: 1.4em;
+    margin-top: 20px;
+}
+.woocommerce div.product_custom p.price del{
+    opacity: 0.5;
+}
+.woocommerce div.product_custom p.price ins {
+    background: inherit;
+    font-weight: 600;
+}
+
+.woocommerce .portfolio-info li a{
+    vertical-align: inherit;
+}
+
+.woocommerce div.product_custom .portfolio-title{
+    font-size: 25px;
+}
+.woocommerce div.product_custom form.cart {
+    margin: 0;
+}
+.woocommerce div.product_custom table.variations{
+    border: none;
+    margin: 0;
+}
+.woocommerce div.product_custom table.variations tr td{
+    padding: 4px 0;
+}
+.woocommerce div.product_custom a.reset_variations{
+    font-size: 20px;
+    margin-left: 5px;
+}
+.woocommerce div.product_custom form.cart div.quantity{
+    float: left;
+    margin: 0 4px 0 0;
+}
+.woocommerce div.product_custom p.stock.in-stock{
+    margin: 5px 0;
+    color: #ef796c;
+}
+.woocommerce div.product_custom .woo-social-buttons span.custom{
+    float: left;
+    margin: 0 2px 5px 3px;
+    width: 15%;
+}
+.woocommerce div.product_custom aside.portfolio-sidebar{
+    position: relative;
+}
+.woocommerce div.related.products{
+    background-color: #fff;
+    padding: 10px 24px 0;
+}
+
+p.portfolio-price{
+    float: left;
+    font-size: 24px;
+    line-height: 50px;
+    padding-left: 25px;
+}
+
+.breadcrumb{
+    margin: 0 0 1em;
+    padding: 0 5px 15px;
+    font-size: .92em;
+    color: #777;
+}
+.breadcrumb div, .woocommerce-breadcrumb div{
+    display: inline;
+}

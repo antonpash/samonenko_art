@@ -1,0 +1,69 @@
+Version 2.5.2 - Release: 30.12.2015
+================================================
+Fixed  :  CSS shape class conflict with VC, horizontal scroll
+
+Version 2.5.1 - Release: 27.11.2015
+================================================
+Fixed  :  Porfolio filters in shortcode
+
+Version 2.5 - Release: 12.11.2015
+================================================
+Fixed  :  Slider issue
+
+Version 2.4 - Release: 09.11.2015
+================================================
+Added  :  Portfolio feed video preview
+
+Version 2.3 - Release: 05.11.2015
+================================================
+Fixed  :  Autoprefixer for CSS
+
+Version 2.1 - Release: 03.11.2015
+================================================
+Fixed  :  Preloader show un-rendered HTML
+
+Version 2.0 - Release: 02.11.2015
+================================================
+Fixed  :  Firefox document.write() issue
+
+Version 1.9 - Release: 30.10.2015
+================================================
+Updated  :  Visual Composer V 4.8
+
+Version 1.8 - Release: 27.10.2015
+================================================
+Fixed  :  Custom taxonomy issue
+
+Version 1.7 - Release: 22.10.2015
+================================================
+Fixed  :  Page comments, image zoom conflict with sticky sidebar
+
+Version 1.6 - Release: 21.10.2015
+================================================
+Fixed  :  Data Validation issues, site icon
+
+Version 1.5 - Release: 19.10.2015
+================================================
+Fixed  :  SVG logo color picker
+
+Version 1.4 - Release: 16.10.2015
+================================================
+Fixed  :  Avoid duplicate portfolio images on zoom
+Added  :  Twitter, Instagram new widget
+
+Version 1.3 - Release: 07.10.2015
+================================================
+Fixed  :  Contact form ajax conflict
+
+Version 1.2 - Release: 07.10.2015
+================================================
+Fixed  :  Ajax load page
+
+Version 1.1 - Release: 05.10.2015
+================================================
+- Allow WP media uploader files *.svg
+- Visual Composer updated
+
+Version 1.0 - Initial Release: 29.09.2015
+================================================
+- Initial Release

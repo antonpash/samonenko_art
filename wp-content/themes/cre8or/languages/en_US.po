@@ -1,0 +1,3739 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cre8or v0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-09-28 09:05:13+0000\n"
+"Last-Translator: admin <admin@admin.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:17
+#@ cre8or
+msgid "Sorry, the page not found!"
+msgstr ""
+
+#: 404.php:18
+#@ cre8or
+msgid "Go to"
+msgstr ""
+
+#: 404.php:18
+#@ cre8or
+msgid "Home page"
+msgstr ""
+
+#: 404.php:18
+#@ cre8or
+msgid "and try again or choose another page."
+msgstr ""
+
+#: comments.php:13
+#@ cre8or
+msgid "Comments"
+msgstr ""
+
+#: comments.php:13
+#@ cre8or
+msgid "Comment"
+msgstr ""
+
+#: footer.php:9
+#@ cre8or
+msgid "&copy; copyright"
+msgstr ""
+
+#: footer.php:11
+#@ cre8or
+msgid "Crafted by"
+msgstr ""
+
+#: functions.php:76
+#@ cre8or
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:80
+#@ cre8or
+msgid "Footer Menu"
+msgstr ""
+
+#: functions.php:285
+#@ cre8or
+msgid "Post cover"
+msgstr ""
+
+#: functions.php:288
+#@ cre8or
+msgid "Cover image"
+msgstr ""
+
+#: functions.php:289
+#@ default
+msgid "Insert Youtube ID"
+msgstr ""
+
+#: functions.php:553
+#: functions.php:1263
+#@ cre8or
+msgid "Share"
+msgstr ""
+
+#: functions.php:764
+#: functions.php:772
+#@ cre8or
+msgid "Read more"
+msgstr ""
+
+#: functions.php:847
+#@ cre8or
+msgid "Main left sidebar"
+msgstr ""
+
+#: functions.php:849
+#: functions.php:859
+#@ cre8or
+msgid "Use this sidebar for left side widgets"
+msgstr ""
+
+#: functions.php:857
+#@ cre8or
+msgid "Main right sidebar"
+msgstr ""
+
+#: functions.php:867
+#@ cre8or
+msgid "Footer widget area"
+msgstr ""
+
+#: functions.php:869
+#@ cre8or
+msgid "Use this sidebar to show widgets in the footer"
+msgstr ""
+
+#: functions.php:877
+#@ cre8or
+msgid "Page optional sidebar"
+msgstr ""
+
+#: functions.php:879
+#@ cre8or
+msgid "Use this sidebar only with Visual Composer"
+msgstr ""
+
+#: functions.php:974
+#@ cre8or
+msgid "Search blog"
+msgstr ""
+
+#: functions.php:989
+#@ cre8or
+msgid "Reply"
+msgstr ""
+
+#: functions.php:1027
+#@ cre8or
+msgid "Your comment is awaiting moderation"
+msgstr ""
+
+#: functions.php:1042
+#@ cre8or
+msgid " from "
+msgstr ""
+
+#: functions.php:1051
+#@ cre8or
+msgid "From: "
+msgstr ""
+
+#: functions.php:1052
+#@ cre8or
+msgid "Reply-To: "
+msgstr ""
+
+#: functions.php:1054
+#@ cre8or
+msgid "Message successfully sent."
+msgstr ""
+
+#: functions.php:1056
+#@ cre8or
+msgid "Message could not be sent."
+msgstr ""
+
+#: functions.php:1058
+#@ cre8or
+msgid "Please fill all the fields in the form."
+msgstr ""
+
+#: functions.php:1073
+#@ cre8or
+msgid "Name"
+msgstr ""
+
+#: functions.php:1078
+#@ cre8or
+msgid "E-mail"
+msgstr ""
+
+#: functions.php:1083
+#@ cre8or
+msgid "URL"
+msgstr ""
+
+#: functions.php:1089
+#: templates/shortcodes/tt_contact_form.php:13
+#@ cre8or
+msgid "Message"
+msgstr ""
+
+#: functions.php:1092
+#@ cre8or
+msgid "Post comment"
+msgstr ""
+
+#: functions.php:1097
+#, php-format
+#@ cre8or
+msgid ""
+"Logged in as <a href=\"%1$s\">%2$s</a>. \n"
+"                                <a href=\"%3$s\" title=\"Log out of this account\">Log out?</a>"
+msgstr ""
+
+#: functions.php:1106
+#@ cre8or
+msgid "If you want to share your opinion, leave a comment."
+msgstr ""
+
+#: functions.php:1112
+#@ cre8or
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes:"
+msgstr ""
+
+#: functions.php:1120
+#@ cre8or
+msgid "Leave a comment"
+msgstr ""
+
+#: functions.php:1121
+#, php-format
+#@ cre8or
+msgid "Leave a comment to %s"
+msgstr ""
+
+#: functions.php:1122
+#@ cre8or
+msgid "Cancel reply"
+msgstr ""
+
+#: functions.php:1161
+#, php-format
+#@ default
+msgid "Portfolio page: %s"
+msgstr ""
+
+#: functions.php:1161
+#@ default
+msgid "&mdash; Select &mdash;"
+msgstr ""
+
+#: functions.php:1188
+#@ cre8or
+msgid "All"
+msgstr ""
+
+#: functions.php:1263
+#@ cre8or
+msgid "Tweet"
+msgstr ""
+
+#: functions.php:1289
+#@ cre8or
+msgid "Portfolio Archive"
+msgstr ""
+
+#: index.php:36
+#: single-portfolio.php:13
+#@ cre8or
+msgid "No posts found."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:333
+#@ tgmpa
+msgid "Install Required Plugins"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:334
+#@ tgmpa
+msgid "Install Plugins"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:335
+#, php-format
+#@ tgmpa
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:336
+#@ tgmpa
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:338
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:343
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:348
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:353
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:358
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:363
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:368
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:373
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:378
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:383
+#@ tt-dashboard-metaboxes
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:388
+#@ tt-dashboard-metaboxes
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:393
+#@ tt-dashboard-metaboxes
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:397
+#@ tgmpa
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:398
+#@ tgmpa
+msgid "Return to the dashboard"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:399
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3034
+#@ tgmpa
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:401
+#, php-format
+#@ tgmpa
+msgid "No action taken. Plugin %1$s was already active."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:402
+#, php-format
+#@ tgmpa
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:403
+#, php-format
+#@ tgmpa
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:404
+#@ tgmpa
+msgid "Dismiss this notice"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:405
+#@ tgmpa
+msgid "Please contact the administrator of this site for help."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:524
+#@ tgmpa
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:525
+#@ tgmpa
+msgid "Update Required"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:639
+#@ tgmpa
+msgid "Set the parent_slug config variable instead."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:833
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3443
+#@ tgmpa
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:940
+#@ tgmpa
+msgid "The remote plugin package does not contain a folder with the desired slug and renaming did not work."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:940
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:943
+#@ tgmpa
+msgid "Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:943
+#@ tgmpa
+msgid "The remote plugin package consists of more than one file, but the files are not packaged in a folder."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:1121
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2833
+#@ tgmpa
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:1886
+#, php-format
+#@ tgmpa
+msgctxt "%s = version number"
+msgid "TGMPA v%s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2172
+#@ tgmpa
+msgid "Required"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2175
+#@ tgmpa
+msgid "Recommended"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2191
+#@ tgmpa
+msgid "WordPress Repository"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2194
+#@ tgmpa
+msgid "External Source"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2197
+#@ tgmpa
+msgid "Pre-Packaged"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2214
+#@ tgmpa
+msgid "Not Installed"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2218
+#@ tgmpa
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2220
+#@ tgmpa
+msgid "Active"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2226
+#@ tgmpa
+msgid "Required Update not Available"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2229
+#@ tgmpa
+msgid "Requires Update"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2232
+#@ tgmpa
+msgid "Update recommended"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2240
+#, php-format
+#@ tgmpa
+msgctxt "%1$s = install status, %2$s = update status"
+msgid "%1$s, %2$s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2285
+#, php-format
+#@ tgmpa
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2288
+#, php-format
+#@ tgmpa
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2291
+#, php-format
+#@ tgmpa
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2294
+#, php-format
+#@ tgmpa
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2376
+#@ tgmpa
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2384
+#@ tgmpa
+msgid "Installed version:"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2392
+#@ tgmpa
+msgid "Minimum required version:"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2404
+#@ tgmpa
+msgid "Available version:"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2427
+#, php-format
+#@ tgmpa
+msgid "No plugins to install, update or activate. <a href=\"%1$s\">Return to the Dashboard</a>"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2441
+#@ tgmpa
+msgid "Plugin"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2442
+#@ tgmpa
+msgid "Source"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2443
+#@ tgmpa
+msgid "Type"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2447
+#@ tgmpa
+msgid "Version"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2448
+#@ tgmpa
+msgid "Status"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2496
+#, php-format
+#@ tgmpa
+msgctxt "%2$s = plugin name in screen reader markup"
+msgid "Install %2$s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2500
+#, php-format
+#@ tgmpa
+msgctxt "%2$s = plugin name in screen reader markup"
+msgid "Update %2$s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2505
+#, php-format
+#@ tgmpa
+msgctxt "%2$s = plugin name in screen reader markup"
+msgid "Activate %2$s"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2575
+#@ tgmpa
+msgid "Upgrade message from the plugin author:"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2608
+#@ tgmpa
+msgid "Install"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2614
+#@ tgmpa
+msgid "Update"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2617
+#@ tgmpa
+msgid "Activate"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2648
+#@ tgmpa
+msgid "No plugins were selected to be installed. No action taken."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2650
+#@ tgmpa
+msgid "No plugins were selected to be updated. No action taken."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2686
+#@ tgmpa
+msgid "No plugins are available to be installed at this time."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2688
+#@ tgmpa
+msgid "No plugins are available to be updated at this time."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2793
+#@ tgmpa
+msgid "No plugins were selected to be activated. No action taken."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2819
+#@ tgmpa
+msgid "No plugins are available to be activated at this time."
+msgstr ""
+
+#. gettext fix: identical singular and plural forms found, that may be ambiguous! Please check the code!
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:2837
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:400
+#@ tgmpa
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3033
+#@ tgmpa
+msgid "Plugin activation failed."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3367
+#, php-format
+#@ tgmpa
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3369
+#, php-format
+#@ tgmpa
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3370
+#, php-format
+#@ tgmpa
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3374
+#@ tgmpa
+msgid "The installation and activation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3375
+#, php-format
+#@ tgmpa
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3375
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3381
+#@ tgmpa
+msgid "Show Details"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3375
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3381
+#@ tgmpa
+msgid "Hide Details"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3376
+#@ tgmpa
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3377
+#, php-format
+#@ tgmpa
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3380
+#@ tgmpa
+msgid "The installation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3381
+#, php-format
+#@ tgmpa
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3382
+#@ tgmpa
+msgid "All installations have been completed."
+msgstr ""
+
+#: plugins/tgm-plugin-activation/class-tgm-plugin-activation.php:3383
+#, php-format
+#@ tgmpa
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: templates/portfolio/tt-single-five.php:40
+#: templates/portfolio/tt-single-one.php:49
+#: templates/portfolio/tt-single-three.php:10
+#@ cre8or
+msgid "Share your love:"
+msgstr ""
+
+#: templates/portfolio/tt-single-five.php:63
+#: templates/portfolio/tt-single-one.php:73
+#: templates/portfolio/tt-single-three.php:76
+#: templates/portfolio/tt-single-two.php:65
+#@ cre8or
+msgid "Prev project"
+msgstr ""
+
+#: templates/portfolio/tt-single-five.php:75
+#: templates/portfolio/tt-single-one.php:85
+#: templates/portfolio/tt-single-three.php:88
+#: templates/portfolio/tt-single-two.php:77
+#@ cre8or
+msgid "Next project"
+msgstr ""
+
+#: templates/shortcodes/tt_contact_form.php:10
+#@ cre8or
+msgid "Your name"
+msgstr ""
+
+#: templates/shortcodes/tt_contact_form.php:11
+#@ cre8or
+msgid "Your e-mail"
+msgstr ""
+
+#: templates/shortcodes/tt_contact_form.php:12
+#@ cre8or
+msgid "Your phone"
+msgstr ""
+
+#: templates/shortcodes/tt_contact_form.php:14
+#@ cre8or
+msgid "Send Message"
+msgstr ""
+
+#: templates/tt-blog-loop.php:66
+#@ cre8or
+msgid "Tags:"
+msgstr ""
+
+#: templates/tt-blog-loop.php:81
+#@ cre8or
+msgid "Related posts"
+msgstr ""
+
+#: templates/tt-blog-loop.php:96
+#: widgets/recent-posts.php:97
+#@ cre8or
+msgid "View"
+msgstr ""
+
+#: templates/tt-breadcrumbs.php:14
+#@ megalith
+msgid "Home"
+msgstr ""
+
+#: tesla_framework/core/tesla_slider.php:1236
+#: tesla_framework/core/tesla_slider.php:1249
+#@ tesla
+msgctxt "portfolio category order"
+msgid "Order"
+msgstr ""
+
+#: tesla_framework/core/tesla_slider.php:1238
+#: tesla_framework/core/tesla_slider.php:1252
+#@ tesla
+msgctxt "portfolio category order"
+msgid "Set the order in which the categories should be displayed."
+msgstr ""
+
+#: tesla_framework/core/tesla_slider.php:1269
+#@ tesla
+msgctxt "portfolio category order column"
+msgid "Order"
+msgstr ""
+
+#: tesla_framework/core/teslaframework.php:42
+#@ TeslaFramework
+msgid "Simple Meta Box fields"
+msgstr ""
+
+#: tesla_framework/core/tt_contact_form.php:69
+#@ TeslaFramework
+msgid "From "
+msgstr ""
+
+#: tesla_framework/core/tt_contact_form.php:69
+#@ TeslaFramework
+msgid " Contact Form "
+msgstr ""
+
+#: tesla_framework/core/tt_subscription.php:75
+#@ TeslaFramework
+msgid "Subscribed"
+msgstr ""
+
+#: tesla_framework/core/tt_subscription.php:77
+#@ TeslaFramework
+msgid "Error"
+msgstr ""
+
+#: tesla_framework/core/tt_subscription.php:81
+#@ TeslaFramework
+msgid "MailChimp Error"
+msgstr ""
+
+#: tesla_framework/core/tt_subscription.php:88
+#@ TeslaFramework
+msgid "No data received"
+msgstr ""
+
+#: tesla_framework/core/tt_subscription.php:116
+#@ TeslaFramework
+msgid "No API key for mailchimp"
+msgstr ""
+
+#: tesla_framework/core/tt_subscription.php:130
+#@ TeslaFramework
+msgid "Not a valid mailchimp api key."
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:250
+#@ tax-meta
+msgid "Delete this image"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:250
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:882
+#@ tax-meta
+msgid "Delete"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:357
+#@ tax-meta
+msgid "Cannot delete file. Something's wrong."
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:582
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:629
+#: tesla_framework/extensions/meta-box-class/my-meta-box-class.php:438
+#: tesla_framework/extensions/meta-box-class/my-meta-box-class.php:477
+#: tesla_framework/views/admin.php:137
+#: theme_config/helper/custom_meta_box.php:182
+#@ tax-meta
+#@ mmb
+#@ TeslaFramework
+#@ cre8or
+msgid "Remove"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:595
+#: tesla_framework/extensions/meta-box-class/my-meta-box-class.php:450
+#@ tax-meta
+#@ mmb
+msgid "Add"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:878
+#@ tax-meta
+msgid "Uploaded files"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:889
+#@ tax-meta
+msgid "Upload new files"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:895
+#@ tax-meta
+msgid "Add more files"
+msgstr ""
+
+#: tesla_framework/extensions/Tax-meta-class/Tax-meta-class.php:947
+#: tesla_framework/extensions/meta-box-class/my-meta-box-class.php:804
+#@ tax-meta
+#@ apc
+msgid "Select a color"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:145
+#: tesla_framework/extensions/autoimport/autoimporter.php:153
+#: tesla_framework/extensions/autoimport/autoimporter.php:235
+#: tesla_framework/extensions/autoimport/autoimporter.php:239
+#: tesla_framework/extensions/autoimport/autoimporter.php:248
+#@ tt-dashboard-metaboxes
+msgid "Sorry, there has been an error."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:146
+#@ tt-dashboard-metaboxes
+msgid "The file does not exist, please try again."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:240
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:256
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:280
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to import author %s. Their posts will be attributed to the current user."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:340
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:391
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to import category %s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:431
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to import post tag %s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:477
+#: tesla_framework/extensions/autoimport/autoimporter.php:618
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to import %s %s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:503
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:525
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:584
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:749
+#@ tt-dashboard-metaboxes
+msgid "Menu item skipped due to missing menu slug"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:756
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:819
+#@ tt-dashboard-metaboxes
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:832
+#@ tt-dashboard-metaboxes
+msgid "Invalid file type"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:876
+#@ tt-dashboard-metaboxes
+msgid "Remote server did not respond"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:882
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Remote server returned error response %1$d %2$s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:889
+#@ tt-dashboard-metaboxes
+msgid "Remote file is incorrect size"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:894
+#@ tt-dashboard-metaboxes
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/autoimporter.php:900
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/parsers.php:43
+#: tesla_framework/extensions/autoimport/parsers.php:75
+#: tesla_framework/extensions/autoimport/parsers.php:83
+#@ wordpress-importer
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/parsers.php:44
+#@ wordpress-importer
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr ""
+
+#: tesla_framework/extensions/autoimport/parsers.php:87
+#: tesla_framework/extensions/autoimport/parsers.php:92
+#: tesla_framework/extensions/autoimport/parsers.php:283
+#: tesla_framework/extensions/autoimport/parsers.php:473
+#@ wordpress-importer
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: tesla_framework/extensions/meta-box-class/my-meta-box-class.php:1884
+#: tesla_framework/extensions/meta-box-class/my-meta-box-class.php:1892
+#@ TeslaFramework
+msgid "Sorry, you cannot upload this file type for this field."
+msgstr ""
+
+#: tesla_framework/views/admin.php:21
+#@ TeslaFramework
+msgid "Documentation"
+msgstr ""
+
+#: tesla_framework/views/admin.php:24
+#@ TeslaFramework
+msgid "Support"
+msgstr ""
+
+#: tesla_framework/views/admin.php:27
+#@ TeslaFramework
+msgid "Latest News"
+msgstr ""
+
+#: tesla_framework/views/admin.php:32
+#@ TeslaFramework
+msgid "Framework "
+msgstr ""
+
+#: tesla_framework/views/admin.php:53
+#: tesla_framework/views/admin.php:81
+#: tesla_framework/views/admin.php:115
+#: tesla_framework/views/admin.php:157
+#: tesla_framework/views/options/button.php:5
+#: tesla_framework/views/options/image_upload.php:13
+#, php-format
+#@ tt-dashboard-metaboxes
+msgid "%s"
+msgstr ""
+
+#: tesla_framework/views/admin.php:155
+#@ TeslaFramework
+msgid "Save Changes"
+msgstr ""
+
+#: tesla_framework/views/options/image_upload.php:15
+#@ tt-dashboard-metaboxes
+msgid "Upload Image"
+msgstr ""
+
+#: tesla_framework/views/options/image_upload.php:17
+#@ tt-dashboard-metaboxes
+msgid "Remove Image"
+msgstr ""
+
+#: tesla_framework/views/options/image_upload.php:19
+#@ tt-dashboard-metaboxes
+msgid "Preview"
+msgstr ""
+
+#: tesla_framework/views/options/text.php:45
+#@ tt-dashboard-metaboxes
+msgid "Text Logo Preview"
+msgstr ""
+
+#: theme_config/slider-options.php:15
+#@ cre8or
+msgid "Select single portfolio view"
+msgstr ""
+
+#: theme_config/slider-options.php:18
+#@ cre8or
+msgid "Portfolio view Nr. 1"
+msgstr ""
+
+#: theme_config/slider-options.php:19
+#@ cre8or
+msgid "Portfolio view Nr. 2"
+msgstr ""
+
+#: theme_config/slider-options.php:20
+#@ cre8or
+msgid "Portfolio view Nr. 3"
+msgstr ""
+
+#: theme_config/slider-options.php:21
+#@ cre8or
+msgid "Portfolio view Nr. 4"
+msgstr ""
+
+#: theme_config/slider-options.php:22
+#@ cre8or
+msgid "Portfolio view Nr. 5"
+msgstr ""
+
+#: theme_config/slider-options.php:27
+#@ default
+msgid "Provide gallery of images used on single portfolio page"
+msgstr ""
+
+#: theme_config/slider-options.php:28
+#@ cre8or
+msgid "Portfolio images"
+msgstr ""
+
+#: theme_config/slider-options.php:33
+#@ cre8or
+msgid "Portfolio meta information"
+msgstr ""
+
+#: theme_config/slider-options.php:34
+#@ cre8or
+msgid "This info is optional and can be anything you want, like atuhor, client name or which tools you used to create this item"
+msgstr ""
+
+#: theme_config/slider-options.php:40
+#@ cre8or
+msgid "Portfolio item meta info title"
+msgstr ""
+
+#: theme_config/slider-options.php:41
+#@ cre8or
+msgid "Meta title"
+msgstr ""
+
+#: theme_config/slider-options.php:45
+#@ cre8or
+msgid "Portfolio item meta info value"
+msgstr ""
+
+#: theme_config/slider-options.php:46
+#@ cre8or
+msgid "Meta value"
+msgstr ""
+
+#: theme_config/slider-options.php:51
+#@ cre8or
+msgid "Social networks"
+msgstr ""
+
+#: theme_config/slider-options.php:52
+#@ cre8or
+msgid "Enable share box. Please provide social network to appear in share box"
+msgstr ""
+
+#: theme_config/slider-options.php:58
+#: theme_config/tt-map.php:391
+#@ cre8or
+#@ js_composer
+msgid "Select social network"
+msgstr ""
+
+#: theme_config/slider-options.php:61
+#@ cre8or
+msgid "Google plus"
+msgstr ""
+
+#: theme_config/slider-options.php:62
+#: theme_config/tt-map.php:384
+#@ cre8or
+#@ js_composer
+msgid "Facebook"
+msgstr ""
+
+#: theme_config/slider-options.php:63
+#: theme_config/tt-map.php:385
+#@ cre8or
+#@ js_composer
+msgid "Twitter"
+msgstr ""
+
+#: theme_config/slider-options.php:64
+#@ cre8or
+msgid "Pinterest"
+msgstr ""
+
+#: theme_config/slider-options.php:65
+#@ cre8or
+msgid "Linkedin"
+msgstr ""
+
+#: theme_config/tt-map.php:7
+#@ js_composer
+msgid "Icon library"
+msgstr ""
+
+#: theme_config/tt-map.php:9
+#@ js_composer
+msgid "Font Awesome"
+msgstr ""
+
+#: theme_config/tt-map.php:10
+#@ js_composer
+msgid "Open Iconic"
+msgstr ""
+
+#: theme_config/tt-map.php:11
+#@ js_composer
+msgid "Typicons"
+msgstr ""
+
+#: theme_config/tt-map.php:12
+#@ js_composer
+msgid "Entypo"
+msgstr ""
+
+#: theme_config/tt-map.php:13
+#@ js_composer
+msgid "Linecons"
+msgstr ""
+
+#: theme_config/tt-map.php:14
+#@ js_composer
+msgid "Ionicon"
+msgstr ""
+
+#: theme_config/tt-map.php:18
+#@ js_composer
+msgid "Select icon library."
+msgstr ""
+
+#: theme_config/tt-map.php:22
+#: theme_config/tt-map.php:39
+#: theme_config/tt-map.php:55
+#: theme_config/tt-map.php:71
+#: theme_config/tt-map.php:86
+#: theme_config/tt-map.php:102
+#@ js_composer
+msgid "Icon"
+msgstr ""
+
+#: theme_config/tt-map.php:35
+#: theme_config/tt-map.php:51
+#: theme_config/tt-map.php:67
+#: theme_config/tt-map.php:98
+#: theme_config/tt-map.php:114
+#@ js_composer
+msgid "Select icon from library."
+msgstr ""
+
+#: theme_config/tt-map.php:125
+#@ js_composer
+msgid "Use Map?"
+msgstr ""
+
+#: theme_config/tt-map.php:127
+#@ js_composer
+msgid "If checked, map will be used as row background."
+msgstr ""
+
+#: theme_config/tt-map.php:128
+#: theme_config/tt-map.php:616
+#: theme_config/tt-map.php:661
+#: theme_config/tt-map.php:668
+#@ js_composer
+msgid "Yes"
+msgstr ""
+
+#: theme_config/tt-map.php:132
+#@ js_composer
+msgid "Map latitude"
+msgstr ""
+
+#: theme_config/tt-map.php:135
+#@ js_composer
+msgid "Set latitude for map"
+msgstr ""
+
+#: theme_config/tt-map.php:143
+#@ js_composer
+msgid "Map longitude"
+msgstr ""
+
+#: theme_config/tt-map.php:146
+#@ js_composer
+msgid "Set longitude for map"
+msgstr ""
+
+#: theme_config/tt-map.php:154
+#@ js_composer
+msgid "Map zoom"
+msgstr ""
+
+#: theme_config/tt-map.php:157
+#@ js_composer
+msgid "Set zoom for map"
+msgstr ""
+
+#: theme_config/tt-map.php:165
+#@ js_composer
+msgid "Map Pin"
+msgstr ""
+
+#: theme_config/tt-map.php:168
+#@ js_composer
+msgid "Set pin for map"
+msgstr ""
+
+#: theme_config/tt-map.php:178
+#: theme_config/tt-map.php:185
+#: theme_config/tt-map.php:470
+#@ js_composer
+msgid "Contact info"
+msgstr ""
+
+#: theme_config/tt-map.php:180
+#: theme_config/tt-map.php:269
+#: theme_config/tt-map.php:305
+#: theme_config/tt-map.php:334
+#: theme_config/tt-map.php:421
+#: theme_config/tt-map.php:465
+#: theme_config/tt-map.php:560
+#: theme_config/tt-map.php:608
+#@ js_composer
+msgid "TeslaThemes"
+msgstr ""
+
+#: theme_config/tt-map.php:181
+#@ js_composer
+msgid "Create contact info block"
+msgstr ""
+
+#: theme_config/tt-map.php:187
+#: theme_config/tt-map.php:472
+#@ js_composer
+msgid "Enter values for graph - value, title and color."
+msgstr ""
+
+#: theme_config/tt-map.php:190
+#@ js_composer
+msgid "Mail"
+msgstr ""
+
+#: theme_config/tt-map.php:197
+#@ js_composer
+msgid "Phone"
+msgstr ""
+
+#: theme_config/tt-map.php:204
+#@ js_composer
+msgid "Address"
+msgstr ""
+
+#: theme_config/tt-map.php:214
+#: theme_config/tt-map.php:274
+#@ js_composer
+msgid "Title"
+msgstr ""
+
+#: theme_config/tt-map.php:216
+#@ js_composer
+msgid "Enter text used as title"
+msgstr ""
+
+#: theme_config/tt-map.php:228
+#: theme_config/tt-map.php:520
+#@ js_composer
+msgid "Icon Color"
+msgstr ""
+
+#: theme_config/tt-map.php:230
+#: theme_config/tt-map.php:522
+#@ js_composer
+msgid "Select icon color"
+msgstr ""
+
+#: theme_config/tt-map.php:234
+#: theme_config/tt-map.php:526
+#@ js_composer
+msgid "Icon size"
+msgstr ""
+
+#: theme_config/tt-map.php:237
+#: theme_config/tt-map.php:529
+#@ js_composer
+msgid "Enter icon size (no units required)"
+msgstr ""
+
+#: theme_config/tt-map.php:241
+#@ js_composer
+msgid "Contact text"
+msgstr ""
+
+#: theme_config/tt-map.php:245
+#: theme_config/tt-map.php:536
+#@ js_composer
+msgid "Enter text used as contact info"
+msgstr ""
+
+#: theme_config/tt-map.php:252
+#: theme_config/tt-map.php:288
+#: theme_config/tt-map.php:317
+#: theme_config/tt-map.php:404
+#: theme_config/tt-map.php:448
+#: theme_config/tt-map.php:543
+#: theme_config/tt-map.php:579
+#: theme_config/tt-map.php:672
+#@ js_composer
+msgid "Extra class name"
+msgstr ""
+
+#: theme_config/tt-map.php:254
+#: theme_config/tt-map.php:290
+#: theme_config/tt-map.php:319
+#: theme_config/tt-map.php:406
+#: theme_config/tt-map.php:450
+#: theme_config/tt-map.php:545
+#: theme_config/tt-map.php:581
+#: theme_config/tt-map.php:674
+#@ js_composer
+msgid "Style particular content element differently - add a class name and refer to it in custom CSS."
+msgstr ""
+
+#: theme_config/tt-map.php:258
+#: theme_config/tt-map.php:294
+#: theme_config/tt-map.php:323
+#: theme_config/tt-map.php:410
+#: theme_config/tt-map.php:454
+#: theme_config/tt-map.php:549
+#: theme_config/tt-map.php:585
+#: theme_config/tt-map.php:678
+#@ js_composer
+msgid "CSS box"
+msgstr ""
+
+#: theme_config/tt-map.php:260
+#: theme_config/tt-map.php:296
+#: theme_config/tt-map.php:325
+#: theme_config/tt-map.php:412
+#: theme_config/tt-map.php:456
+#: theme_config/tt-map.php:551
+#: theme_config/tt-map.php:587
+#: theme_config/tt-map.php:680
+#@ js_composer
+msgid "Design Options"
+msgstr ""
+
+#: theme_config/tt-map.php:267
+#@ js_composer
+msgid "Fancy title"
+msgstr ""
+
+#: theme_config/tt-map.php:270
+#@ js_composer
+msgid "Create fancy title"
+msgstr ""
+
+#: theme_config/tt-map.php:277
+#@ js_composer
+msgid "Enter the title"
+msgstr ""
+
+#: theme_config/tt-map.php:281
+#@ js_composer
+msgid "Subtitle"
+msgstr ""
+
+#: theme_config/tt-map.php:284
+#@ js_composer
+msgid "Enter the subtitle"
+msgstr ""
+
+#: theme_config/tt-map.php:303
+#@ js_composer
+msgid "Contact form"
+msgstr ""
+
+#: theme_config/tt-map.php:306
+#@ js_composer
+msgid "Create contact form"
+msgstr ""
+
+#: theme_config/tt-map.php:310
+#@ js_composer
+msgid "Email to receive messages"
+msgstr ""
+
+#: theme_config/tt-map.php:313
+#@ js_composer
+msgid "If Email is not set, will be used admin email"
+msgstr ""
+
+#: theme_config/tt-map.php:332
+#@ js_composer
+msgid "Team member"
+msgstr ""
+
+#: theme_config/tt-map.php:335
+#@ js_composer
+msgid "Create team member element"
+msgstr ""
+
+#: theme_config/tt-map.php:339
+#@ js_composer
+msgid "Member photo"
+msgstr ""
+
+#: theme_config/tt-map.php:342
+#@ js_composer
+msgid "Provide team member photo"
+msgstr ""
+
+#: theme_config/tt-map.php:346
+#@ js_composer
+msgid "Member name"
+msgstr ""
+
+#: theme_config/tt-map.php:349
+#@ js_composer
+msgid "Provide member full name"
+msgstr ""
+
+#: theme_config/tt-map.php:354
+#@ js_composer
+msgid "Member job position"
+msgstr ""
+
+#: theme_config/tt-map.php:357
+#@ js_composer
+msgid "Provide job position for team member"
+msgstr ""
+
+#: theme_config/tt-map.php:362
+#@ js_composer
+msgid "Member social networks"
+msgstr ""
+
+#: theme_config/tt-map.php:364
+#@ js_composer
+msgid "Provide social network accounts for team member"
+msgstr ""
+
+#: theme_config/tt-map.php:382
+#@ js_composer
+msgid "Social network"
+msgstr ""
+
+#: theme_config/tt-map.php:386
+#@ js_composer
+msgid "Instagram"
+msgstr ""
+
+#: theme_config/tt-map.php:387
+#@ js_composer
+msgid "Dribbble"
+msgstr ""
+
+#: theme_config/tt-map.php:395
+#@ js_composer
+msgid "Social network url"
+msgstr ""
+
+#: theme_config/tt-map.php:398
+#@ js_composer
+msgid "Provide social network url (used target blank)"
+msgstr ""
+
+#: theme_config/tt-map.php:419
+#@ js_composer
+msgid "Page card"
+msgstr ""
+
+#: theme_config/tt-map.php:422
+#@ js_composer
+msgid "Create page card"
+msgstr ""
+
+#: theme_config/tt-map.php:426
+#@ js_composer
+msgid "Page card photo"
+msgstr ""
+
+#: theme_config/tt-map.php:429
+#@ js_composer
+msgid "Provide a page card photo"
+msgstr ""
+
+#: theme_config/tt-map.php:433
+#@ js_composer
+msgid "Page card title"
+msgstr ""
+
+#: theme_config/tt-map.php:436
+#@ js_composer
+msgid "Provide page card title"
+msgstr ""
+
+#: theme_config/tt-map.php:442
+#@ js_composer
+msgid "Text"
+msgstr ""
+
+#: theme_config/tt-map.php:444
+#@ js_composer
+msgid "<p>I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>"
+msgstr ""
+
+#: theme_config/tt-map.php:463
+#@ js_composer
+msgid "Tabs with icon"
+msgstr ""
+
+#: theme_config/tt-map.php:466
+#@ js_composer
+msgid "Tabbed content"
+msgstr ""
+
+#: theme_config/tt-map.php:475
+#@ js_composer
+msgid "Photography"
+msgstr ""
+
+#: theme_config/tt-map.php:482
+#@ js_composer
+msgid "Blog"
+msgstr ""
+
+#: theme_config/tt-map.php:489
+#@ js_composer
+msgid "Fresh ideas"
+msgstr ""
+
+#: theme_config/tt-map.php:496
+#@ js_composer
+msgid "Popular"
+msgstr ""
+
+#: theme_config/tt-map.php:506
+#@ js_composer
+msgid "Tab title"
+msgstr ""
+
+#: theme_config/tt-map.php:508
+#@ js_composer
+msgid "Enter title for tab"
+msgstr ""
+
+#: theme_config/tt-map.php:533
+#@ js_composer
+msgid "Tab content"
+msgstr ""
+
+#: theme_config/tt-map.php:558
+#@ js_composer
+msgid "Recent blog posts"
+msgstr ""
+
+#: theme_config/tt-map.php:561
+#@ js_composer
+msgid "Show recent post "
+msgstr ""
+
+#: theme_config/tt-map.php:565
+#: theme_config/tt-map.php:620
+#@ js_composer
+msgid "Number of posts"
+msgstr ""
+
+#: theme_config/tt-map.php:568
+#: theme_config/tt-map.php:623
+#@ js_composer
+msgid "How many post need to show"
+msgstr ""
+
+#: theme_config/tt-map.php:572
+#: theme_config/tt-map.php:651
+#@ js_composer
+msgid "Posts per row"
+msgstr ""
+
+#: theme_config/tt-map.php:575
+#@ js_composer
+msgid "Provide items per row (1, 2, 3, 4, 6, 12)"
+msgstr ""
+
+#: theme_config/tt-map.php:594
+#@ js_composer
+msgid "Show all"
+msgstr ""
+
+#: theme_config/tt-map.php:606
+#@ js_composer
+msgid "Portfolio"
+msgstr ""
+
+#: theme_config/tt-map.php:609
+#@ js_composer
+msgid "Show portfolio post "
+msgstr ""
+
+#: theme_config/tt-map.php:613
+#@ js_composer
+msgid "Enable filters"
+msgstr ""
+
+#: theme_config/tt-map.php:615
+#@ js_composer
+msgid "If checked, portfolio filter will be displayed"
+msgstr ""
+
+#: theme_config/tt-map.php:627
+#@ js_composer
+msgid "Order by category"
+msgstr ""
+
+#: theme_config/tt-map.php:630
+#@ js_composer
+msgid "Order portfolio by category"
+msgstr ""
+
+#: theme_config/tt-map.php:634
+#@ js_composer
+msgid "Order portfolio"
+msgstr ""
+
+#: theme_config/tt-map.php:636
+#@ js_composer
+msgid "Descendent"
+msgstr ""
+
+#: theme_config/tt-map.php:637
+#@ js_composer
+msgid "Ascendent"
+msgstr ""
+
+#: theme_config/tt-map.php:640
+#@ js_composer
+msgid "Order portfolio items"
+msgstr ""
+
+#: theme_config/tt-map.php:644
+#@ js_composer
+msgid "Offset"
+msgstr ""
+
+#: theme_config/tt-map.php:647
+#@ js_composer
+msgid "Number of portfolio post to be skipped from begin"
+msgstr ""
+
+#: theme_config/tt-map.php:654
+#@ js_composer
+msgid "Provide items per row (1, 2, 3, 4, 5, 6, 12)"
+msgstr ""
+
+#: theme_config/tt-map.php:658
+#@ js_composer
+msgid "Fit columns"
+msgstr ""
+
+#: theme_config/tt-map.php:660
+#@ js_composer
+msgid "If checked, portfolio items will fit"
+msgstr ""
+
+#: theme_config/tt-map.php:665
+#@ js_composer
+msgid "Use long thumbnails"
+msgstr ""
+
+#: theme_config/tt-map.php:667
+#@ js_composer
+msgid "Change thumbnail size for portfolio items grid"
+msgstr ""
+
+#: theme_config/tt_icons.php:6
+#@ cre8or
+msgid "badass, framework, sexy, hawt"
+msgstr ""
+
+#: theme_config/tt_icons.php:21
+#@ cre8or
+msgid "switch, flip"
+msgstr ""
+
+#: theme_config/tt_icons.php:22
+#@ cre8or
+msgid "pinch"
+msgstr ""
+
+#: theme_config/tt_icons.php:23
+#@ cre8or
+msgid "fullscreen"
+msgstr ""
+
+#: theme_config/tt_icons.php:24
+#: theme_config/tt_icons.php:25
+#@ cre8or
+msgid "drag"
+msgstr ""
+
+#: theme_config/tt_icons.php:26
+#@ cre8or
+msgid "arrow, up"
+msgstr ""
+
+#: theme_config/tt_icons.php:27
+#@ cre8or
+msgid "arrow, right"
+msgstr ""
+
+#: theme_config/tt_icons.php:28
+#@ cre8or
+msgid "arrow, down"
+msgstr ""
+
+#: theme_config/tt_icons.php:29
+#@ cre8or
+msgid "arrow, left"
+msgstr ""
+
+#: theme_config/tt_icons.php:30
+#: theme_config/tt_icons.php:31
+#@ cre8or
+msgid "menu, hamburger, slide menu"
+msgstr ""
+
+#: theme_config/tt_icons.php:32
+#: theme_config/tt_icons.php:428
+#@ cre8or
+msgid "reorder, move, drag"
+msgstr ""
+
+#: theme_config/tt_icons.php:33
+#@ cre8or
+msgid "sign in, "
+msgstr ""
+
+#: theme_config/tt_icons.php:34
+#@ cre8or
+msgid "sign out"
+msgstr ""
+
+#: theme_config/tt_icons.php:35
+#: theme_config/tt_icons.php:36
+#: theme_config/tt_icons.php:37
+#@ cre8or
+msgid "complete, finished, success, on"
+msgstr ""
+
+#: theme_config/tt_icons.php:38
+#: theme_config/tt_icons.php:39
+#: theme_config/tt_icons.php:40
+#@ cre8or
+msgid "delete, trash, kill, x"
+msgstr ""
+
+#: theme_config/tt_icons.php:41
+#: theme_config/tt_icons.php:42
+#: theme_config/tt_icons.php:43
+#: theme_config/tt_icons.php:274
+#: theme_config/tt_icons.php:275
+#: theme_config/tt_icons.php:276
+#@ cre8or
+msgid "add, include, new, invite, +"
+msgstr ""
+
+#: theme_config/tt_icons.php:44
+#: theme_config/tt_icons.php:45
+#: theme_config/tt_icons.php:46
+#: theme_config/tt_icons.php:280
+#: theme_config/tt_icons.php:281
+#: theme_config/tt_icons.php:282
+#@ cre8or
+msgid "hide, remove, minimize, -"
+msgstr ""
+
+#: theme_config/tt_icons.php:47
+#: theme_config/tt_icons.php:48
+#@ cre8or
+msgid "help, more, tooltip"
+msgstr ""
+
+#: theme_config/tt_icons.php:49
+#: theme_config/tt_icons.php:50
+#: theme_config/tt_icons.php:53
+#@ cre8or
+msgid "question, ?"
+msgstr ""
+
+#: theme_config/tt_icons.php:51
+#: theme_config/tt_icons.php:52
+#@ cre8or
+msgid "delete, remove, back"
+msgstr ""
+
+#: theme_config/tt_icons.php:54
+#: theme_config/tt_icons.php:62
+#@ cre8or
+msgid "favorite, mark, star"
+msgstr ""
+
+#: theme_config/tt_icons.php:55
+#: theme_config/tt_icons.php:56
+#@ cre8or
+msgid "attention, warning, notice, !, exclamation"
+msgstr ""
+
+#: theme_config/tt_icons.php:57
+#: theme_config/tt_icons.php:312
+#@ cre8or
+msgid "reload, renew"
+msgstr ""
+
+#: theme_config/tt_icons.php:58
+#@ cre8or
+msgid "refresh"
+msgstr ""
+
+#: theme_config/tt_icons.php:59
+#@ cre8or
+msgid "random"
+msgstr ""
+
+#: theme_config/tt_icons.php:60
+#: theme_config/tt_icons.php:298
+#: theme_config/tt_icons.php:299
+#@ cre8or
+msgid "house"
+msgstr ""
+
+#: theme_config/tt_icons.php:61
+#: theme_config/tt_icons.php:563
+#@ cre8or
+msgid "magnifying glass"
+msgstr ""
+
+#: theme_config/tt_icons.php:63
+#: theme_config/tt_icons.php:316
+#: theme_config/tt_icons.php:317
+#@ cre8or
+msgid "favorite"
+msgstr ""
+
+#: theme_config/tt_icons.php:64
+#: theme_config/tt_icons.php:65
+#: theme_config/tt_icons.php:294
+#: theme_config/tt_icons.php:295
+#@ cre8or
+msgid "love"
+msgstr ""
+
+#: theme_config/tt_icons.php:66
+#: theme_config/tt_icons.php:67
+#@ cre8or
+msgid "settings, options, cog"
+msgstr ""
+
+#: theme_config/tt_icons.php:68
+#: theme_config/tt_icons.php:69
+#: theme_config/tt_icons.php:344
+#: theme_config/tt_icons.php:345
+#@ cre8or
+msgid "settings, options, switch"
+msgstr ""
+
+#: theme_config/tt_icons.php:70
+#@ cre8or
+msgid "options, tools"
+msgstr ""
+
+#: theme_config/tt_icons.php:71
+#: theme_config/tt_icons.php:72
+#@ cre8or
+msgid "settings, options, tools"
+msgstr ""
+
+#: theme_config/tt_icons.php:73
+#@ cre8or
+msgid "change, update, write, type, pencil"
+msgstr ""
+
+#: theme_config/tt_icons.php:74
+#: theme_config/tt_icons.php:75
+#@ cre8or
+msgid "delete, remove, dump"
+msgstr ""
+
+#: theme_config/tt_icons.php:76
+#: theme_config/tt_icons.php:77
+#@ cre8or
+msgid "paper, file"
+msgstr ""
+
+#: theme_config/tt_icons.php:78
+#@ cre8or
+msgid "write"
+msgstr ""
+
+#: theme_config/tt_icons.php:79
+#@ cre8or
+msgid "cut"
+msgstr ""
+
+#: theme_config/tt_icons.php:80
+#@ cre8or
+msgid "sort"
+msgstr ""
+
+#: theme_config/tt_icons.php:81
+#@ cre8or
+msgid "favorite, tag, save"
+msgstr ""
+
+#: theme_config/tt_icons.php:82
+#: theme_config/tt_icons.php:83
+#@ cre8or
+msgid "snail, mail, inbox"
+msgstr ""
+
+#: theme_config/tt_icons.php:84
+#: theme_config/tt_icons.php:362
+#: theme_config/tt_icons.php:363
+#@ cre8or
+msgid "snail, mail"
+msgstr ""
+
+#: theme_config/tt_icons.php:85
+#: theme_config/tt_icons.php:86
+#: theme_config/tt_icons.php:88
+#@ cre8or
+msgid "mail"
+msgstr ""
+
+#: theme_config/tt_icons.php:87
+#@ cre8or
+msgid "mail, undo"
+msgstr ""
+
+#: theme_config/tt_icons.php:89
+#@ cre8or
+msgid "mail, redo"
+msgstr ""
+
+#: theme_config/tt_icons.php:90
+#@ cre8or
+msgid "outbound"
+msgstr ""
+
+#: theme_config/tt_icons.php:91
+#@ cre8or
+msgid "outbound, mail, letter, send"
+msgstr ""
+
+#: theme_config/tt_icons.php:92
+#@ cre8or
+msgid "chain, anchor, href, attach"
+msgstr ""
+
+#: theme_config/tt_icons.php:93
+#@ cre8or
+msgid "attach"
+msgstr ""
+
+#: theme_config/tt_icons.php:94
+#@ cre8or
+msgid "write, compose, type"
+msgstr ""
+
+#: theme_config/tt_icons.php:95
+#@ cre8or
+msgid "store, organize"
+msgstr ""
+
+#: theme_config/tt_icons.php:96
+#@ cre8or
+msgid "health"
+msgstr ""
+
+#: theme_config/tt_icons.php:97
+#: theme_config/tt_icons.php:326
+#: theme_config/tt_icons.php:327
+#@ cre8or
+msgid "@"
+msgstr ""
+
+#: theme_config/tt_icons.php:98
+#@ cre8or
+msgid "hashtag, #"
+msgstr ""
+
+#: theme_config/tt_icons.php:99
+#@ cre8or
+msgid "chat, quotation"
+msgstr ""
+
+#: theme_config/tt_icons.php:100
+#: theme_config/tt_icons.php:302
+#: theme_config/tt_icons.php:303
+#: theme_config/tt_icons.php:304
+#: theme_config/tt_icons.php:305
+#@ cre8or
+msgid "storage"
+msgstr ""
+
+#: theme_config/tt_icons.php:101
+#@ cre8or
+msgid "storage, cloud"
+msgstr ""
+
+#: theme_config/tt_icons.php:102
+#@ cre8or
+msgid "circles"
+msgstr ""
+
+#: theme_config/tt_icons.php:103
+#: theme_config/tt_icons.php:296
+#: theme_config/tt_icons.php:297
+#@ cre8or
+msgid "menu"
+msgstr ""
+
+#: theme_config/tt_icons.php:104
+#: theme_config/tt_icons.php:390
+#: theme_config/tt_icons.php:391
+#@ cre8or
+msgid "date, time, month, year"
+msgstr ""
+
+#: theme_config/tt_icons.php:105
+#@ cre8or
+msgid "time, watch, hours, minutes, seconds"
+msgstr ""
+
+#: theme_config/tt_icons.php:106
+#@ cre8or
+msgid "location, directions, navigation"
+msgstr ""
+
+#: theme_config/tt_icons.php:107
+#: theme_config/tt_icons.php:108
+#@ cre8or
+msgid "gps, navigation"
+msgstr ""
+
+#: theme_config/tt_icons.php:109
+#@ cre8or
+msgid "gps, location pin"
+msgstr ""
+
+#: theme_config/tt_icons.php:110
+#: theme_config/tt_icons.php:111
+#@ cre8or
+msgid "gps, navigation, pin"
+msgstr ""
+
+#: theme_config/tt_icons.php:112
+#: theme_config/tt_icons.php:113
+#: theme_config/tt_icons.php:114
+#@ cre8or
+msgid "padlock, security"
+msgstr ""
+
+#: theme_config/tt_icons.php:115
+#@ cre8or
+msgid "access"
+msgstr ""
+
+#: theme_config/tt_icons.php:116
+#: theme_config/tt_icons.php:117
+#: theme_config/tt_icons.php:118
+#: theme_config/tt_icons.php:119
+#: theme_config/tt_icons.php:122
+#@ cre8or
+msgid "stats"
+msgstr ""
+
+#: theme_config/tt_icons.php:120
+#@ cre8or
+msgid "data"
+msgstr ""
+
+#: theme_config/tt_icons.php:121
+#@ cre8or
+msgid "data, stats"
+msgstr ""
+
+#: theme_config/tt_icons.php:123
+#: theme_config/tt_icons.php:124
+#: theme_config/tt_icons.php:125
+#: theme_config/tt_icons.php:126
+#: theme_config/tt_icons.php:127
+#: theme_config/tt_icons.php:128
+#: theme_config/tt_icons.php:334
+#: theme_config/tt_icons.php:335
+#: theme_config/tt_icons.php:336
+#: theme_config/tt_icons.php:337
+#@ cre8or
+msgid "talk"
+msgstr ""
+
+#: theme_config/tt_icons.php:129
+#: theme_config/tt_icons.php:457
+#: theme_config/tt_icons.php:458
+#@ cre8or
+msgid "users, staff, head, human"
+msgstr ""
+
+#: theme_config/tt_icons.php:130
+#@ cre8or
+msgid "users, staff, head, human, member, new"
+msgstr ""
+
+#: theme_config/tt_icons.php:131
+#@ cre8or
+msgid "people, human, users, staff"
+msgstr ""
+
+#: theme_config/tt_icons.php:132
+#@ cre8or
+msgid "female, lady, girl, dudette"
+msgstr ""
+
+#: theme_config/tt_icons.php:133
+#: theme_config/tt_icons.php:135
+#@ cre8or
+msgid "male, guy, boy, dude"
+msgstr ""
+
+#: theme_config/tt_icons.php:134
+#@ cre8or
+msgid "lady, girl, dudette"
+msgstr ""
+
+#: theme_config/tt_icons.php:137
+#: theme_config/tt_icons.php:138
+#: theme_config/tt_icons.php:139
+#: theme_config/tt_icons.php:140
+#: theme_config/tt_icons.php:141
+#: theme_config/tt_icons.php:142
+#: theme_config/tt_icons.php:143
+#: theme_config/tt_icons.php:145
+#: theme_config/tt_icons.php:146
+#@ cre8or
+msgid "food, drink, eat"
+msgstr ""
+
+#: theme_config/tt_icons.php:144
+#@ cre8or
+msgid "food, drink, eat, caffeine"
+msgstr ""
+
+#: theme_config/tt_icons.php:147
+#@ cre8or
+msgid "on, off"
+msgstr ""
+
+#: theme_config/tt_icons.php:148
+#@ cre8or
+msgid "computer"
+msgstr ""
+
+#: theme_config/tt_icons.php:154
+#@ cre8or
+msgid "internet, connection"
+msgstr ""
+
+#: theme_config/tt_icons.php:155
+#@ cre8or
+msgid "connection, cloud"
+msgstr ""
+
+#: theme_config/tt_icons.php:156
+#@ cre8or
+msgid "math, arithmatic, numbers, addition, subtraction"
+msgstr ""
+
+#: theme_config/tt_icons.php:157
+#: theme_config/tt_icons.php:163
+#: theme_config/tt_icons.php:164
+#@ cre8or
+msgid "photo"
+msgstr ""
+
+#: theme_config/tt_icons.php:158
+#: theme_config/tt_icons.php:159
+#@ cre8or
+msgid "view, see, creeper"
+msgstr ""
+
+#: theme_config/tt_icons.php:160
+#@ cre8or
+msgid "lightning, weather, whether"
+msgstr ""
+
+#: theme_config/tt_icons.php:162
+#@ cre8or
+msgid "reader"
+msgstr ""
+
+#: theme_config/tt_icons.php:165
+#: theme_config/tt_icons.php:166
+#: theme_config/tt_icons.php:167
+#: theme_config/tt_icons.php:168
+#@ cre8or
+msgid "images, levels, light, dark, settings"
+msgstr ""
+
+#: theme_config/tt_icons.php:169
+#: theme_config/tt_icons.php:170
+#: theme_config/tt_icons.php:171
+#@ cre8or
+msgid "images, art, create, color"
+msgstr ""
+
+#: theme_config/tt_icons.php:172
+#@ cre8or
+msgid "thunderbolt, screen"
+msgstr ""
+
+#: theme_config/tt_icons.php:173
+#@ cre8or
+msgid "macbook, apple, osx"
+msgstr ""
+
+#: theme_config/tt_icons.php:174
+#@ cre8or
+msgid "tablet, mobile, apple, retina, device"
+msgstr ""
+
+#: theme_config/tt_icons.php:175
+#@ cre8or
+msgid "smartphone, mobile, apple, retina, device"
+msgstr ""
+
+#: theme_config/tt_icons.php:176
+#@ cre8or
+msgid "music, player, apple, retina, device"
+msgstr ""
+
+#: theme_config/tt_icons.php:177
+#: theme_config/tt_icons.php:439
+#: theme_config/tt_icons.php:440
+#@ cre8or
+msgid "paper"
+msgstr ""
+
+#: theme_config/tt_icons.php:178
+#@ cre8or
+msgid "digital, computer"
+msgstr ""
+
+#: theme_config/tt_icons.php:179
+#@ cre8or
+msgid "digital, computer, electricity"
+msgstr ""
+
+#: theme_config/tt_icons.php:180
+#@ cre8or
+msgid "develop, program, hacker, error"
+msgstr ""
+
+#: theme_config/tt_icons.php:181
+#: theme_config/tt_icons.php:182
+#: theme_config/tt_icons.php:183
+#@ cre8or
+msgid "develop, program, hacker"
+msgstr ""
+
+#: theme_config/tt_icons.php:184
+#: theme_config/tt_icons.php:185
+#: theme_config/tt_icons.php:186
+#: theme_config/tt_icons.php:187
+#@ cre8or
+msgid "develop, program, hacker, github"
+msgstr ""
+
+#: theme_config/tt_icons.php:188
+#: theme_config/tt_icons.php:189
+#: theme_config/tt_icons.php:190
+#@ cre8or
+msgid "fun, games"
+msgstr ""
+
+#: theme_config/tt_icons.php:191
+#: theme_config/tt_icons.php:192
+#@ cre8or
+msgid "movie, film, television"
+msgstr ""
+
+#: theme_config/tt_icons.php:193
+#@ cre8or
+msgid "film, cut, action"
+msgstr ""
+
+#: theme_config/tt_icons.php:194
+#@ cre8or
+msgid "cd, vinyl"
+msgstr ""
+
+#: theme_config/tt_icons.php:195
+#@ cre8or
+msgid "music, earbuds, beats"
+msgstr ""
+
+#: theme_config/tt_icons.php:196
+#@ cre8or
+msgid "songs"
+msgstr ""
+
+#: theme_config/tt_icons.php:197
+#@ cre8or
+msgid "music, sound, speaker"
+msgstr ""
+
+#: theme_config/tt_icons.php:198
+#@ cre8or
+msgid "sound, speaker, loud, amplify"
+msgstr ""
+
+#: theme_config/tt_icons.php:199
+#: theme_config/tt_icons.php:200
+#: theme_config/tt_icons.php:201
+#@ cre8or
+msgid "sound, talk, speaker"
+msgstr ""
+
+#: theme_config/tt_icons.php:202
+#@ cre8or
+msgid "sound, noise"
+msgstr ""
+
+#: theme_config/tt_icons.php:203
+#: theme_config/tt_icons.php:204
+#: theme_config/tt_icons.php:205
+#@ cre8or
+msgid "sound"
+msgstr ""
+
+#: theme_config/tt_icons.php:206
+#@ cre8or
+msgid "options, toggles, sound, mixer"
+msgstr ""
+
+#: theme_config/tt_icons.php:207
+#: theme_config/tt_icons.php:472
+#: theme_config/tt_icons.php:473
+#@ cre8or
+msgid "music, watch, arrow, right"
+msgstr ""
+
+#: theme_config/tt_icons.php:208
+#: theme_config/tt_icons.php:474
+#: theme_config/tt_icons.php:475
+#@ cre8or
+msgid "music, break, hold, freeze"
+msgstr ""
+
+#: theme_config/tt_icons.php:209
+#@ cre8or
+msgid "music, square, hold, freeze"
+msgstr ""
+
+#: theme_config/tt_icons.php:210
+#@ cre8or
+msgid "music, circle"
+msgstr ""
+
+#: theme_config/tt_icons.php:211
+#: theme_config/tt_icons.php:484
+#: theme_config/tt_icons.php:485
+#: theme_config/tt_icons.php:486
+#: theme_config/tt_icons.php:487
+#@ cre8or
+msgid "music, next"
+msgstr ""
+
+#: theme_config/tt_icons.php:212
+#: theme_config/tt_icons.php:482
+#: theme_config/tt_icons.php:483
+#@ cre8or
+msgid "music, previous"
+msgstr ""
+
+#: theme_config/tt_icons.php:213
+#@ cre8or
+msgid "music, dvd, remove"
+msgstr ""
+
+#: theme_config/tt_icons.php:214
+#@ cre8or
+msgid "shopping, price, cart, money, container, $"
+msgstr ""
+
+#: theme_config/tt_icons.php:215
+#@ cre8or
+msgid "credit, price, debit, money, shopping, cash, dollars, $"
+msgstr ""
+
+#: theme_config/tt_icons.php:216
+#@ cre8or
+msgid "credit, price, debit, money, shopping, dollars, $"
+msgstr ""
+
+#: theme_config/tt_icons.php:217
+#: theme_config/tt_icons.php:218
+#@ cre8or
+msgid "credit, debit, money, shopping, cash, dollars, $"
+msgstr ""
+
+#: theme_config/tt_icons.php:219
+#@ cre8or
+msgid "like, fun, yes"
+msgstr ""
+
+#: theme_config/tt_icons.php:220
+#@ cre8or
+msgid "dislike, boring, no"
+msgstr ""
+
+#: theme_config/tt_icons.php:221
+#: theme_config/tt_icons.php:222
+#@ cre8or
+msgid "good, like, fun, yes"
+msgstr ""
+
+#: theme_config/tt_icons.php:223
+#: theme_config/tt_icons.php:224
+#@ cre8or
+msgid "cry, bad, no"
+msgstr ""
+
+#: theme_config/tt_icons.php:225
+#: theme_config/tt_icons.php:226
+#: theme_config/tt_icons.php:227
+#@ cre8or
+msgid "tie, shirt, dress, clothing"
+msgstr ""
+
+#: theme_config/tt_icons.php:228
+#: theme_config/tt_icons.php:229
+#@ cre8or
+msgid "competition, compete, win, lose, award"
+msgstr ""
+
+#: theme_config/tt_icons.php:230
+#: theme_config/tt_icons.php:231
+#@ cre8or
+msgid "competition, compete, win, lose, award, trophy"
+msgstr ""
+
+#: theme_config/tt_icons.php:232
+#@ cre8or
+msgid "graduate, education, school, tassle"
+msgstr ""
+
+#: theme_config/tt_icons.php:233
+#@ cre8or
+msgid "sticky, attraction"
+msgstr ""
+
+#: theme_config/tt_icons.php:234
+#@ cre8or
+msgid "mixture, potion, flask"
+msgstr ""
+
+#: theme_config/tt_icons.php:235
+#@ cre8or
+msgid "mixture, potion, beaker, potion"
+msgstr ""
+
+#: theme_config/tt_icons.php:236
+#@ cre8or
+msgid "birth, twitter, bird, baby"
+msgstr ""
+
+#: theme_config/tt_icons.php:237
+#@ cre8or
+msgid "nature, globe, home, planet"
+msgstr ""
+
+#: theme_config/tt_icons.php:238
+#@ cre8or
+msgid "nature, globe, home, planet, space"
+msgstr ""
+
+#: theme_config/tt_icons.php:239
+#@ cre8or
+msgid "idea, new, aha!"
+msgstr ""
+
+#: theme_config/tt_icons.php:240
+#@ cre8or
+msgid "box, square, container"
+msgstr ""
+
+#: theme_config/tt_icons.php:241
+#@ cre8or
+msgid "green, recycle, plant, nature"
+msgstr ""
+
+#: theme_config/tt_icons.php:242
+#@ cre8or
+msgid "nature, clean, recycle, fresh, wet, rain"
+msgstr ""
+
+#: theme_config/tt_icons.php:243
+#@ cre8or
+msgid "fire, hot, heat"
+msgstr ""
+
+#: theme_config/tt_icons.php:244
+#: theme_config/tt_icons.php:245
+#@ cre8or
+msgid "hot, heat"
+msgstr ""
+
+#: theme_config/tt_icons.php:246
+#@ cre8or
+msgid "wet, rain, dry, shelter"
+msgstr ""
+
+#: theme_config/tt_icons.php:247
+#@ cre8or
+msgid "danger, warning, hazard"
+msgstr ""
+
+#: theme_config/tt_icons.php:248
+#@ cre8or
+msgid "danger, warning, cigarette, cancer"
+msgstr ""
+
+#: theme_config/tt_icons.php:249
+#@ cre8or
+msgid "hot, cold, heat, temperature, mercury"
+msgstr ""
+
+#: theme_config/tt_icons.php:250
+#@ cre8or
+msgid "travel, accelerate"
+msgstr ""
+
+#: theme_config/tt_icons.php:251
+#@ cre8or
+msgid "navigation, car, drive, transportation, tesla, sexy"
+msgstr ""
+
+#: theme_config/tt_icons.php:252
+#@ cre8or
+msgid "fly, jet"
+msgstr ""
+
+#: theme_config/tt_icons.php:253
+#@ cre8or
+msgid "fly, plane"
+msgstr ""
+
+#: theme_config/tt_icons.php:254
+#: theme_config/tt_icons.php:255
+#: theme_config/tt_icons.php:256
+#: theme_config/tt_icons.php:257
+#@ cre8or
+msgid "spinner, waiting, refresh"
+msgstr ""
+
+#: theme_config/tt_icons.php:258
+#@ cre8or
+msgid "badass, framework, sexy"
+msgstr ""
+
+#: theme_config/tt_icons.php:259
+#@ cre8or
+msgid "chevron, left"
+msgstr ""
+
+#: theme_config/tt_icons.php:260
+#@ cre8or
+msgid "chevron, right"
+msgstr ""
+
+#: theme_config/tt_icons.php:261
+#: theme_config/tt_icons.php:262
+#: theme_config/tt_icons.php:263
+#: theme_config/tt_icons.php:264
+#: theme_config/tt_icons.php:265
+#: theme_config/tt_icons.php:266
+#: theme_config/tt_icons.php:267
+#: theme_config/tt_icons.php:268
+#@ cre8or
+msgid "chevron"
+msgstr ""
+
+#: theme_config/tt_icons.php:269
+#@ cre8or
+msgid "checkmark, radio, dot, on, selected, button"
+msgstr ""
+
+#: theme_config/tt_icons.php:270
+#@ cre8or
+msgid "checkmark, radio, dot, off, button"
+msgstr ""
+
+#: theme_config/tt_icons.php:271
+#: theme_config/tt_icons.php:272
+#: theme_config/tt_icons.php:273
+#@ cre8or
+msgid "success, confirmed, on, finished, complete"
+msgstr ""
+
+#: theme_config/tt_icons.php:277
+#: theme_config/tt_icons.php:278
+#: theme_config/tt_icons.php:279
+#@ cre8or
+msgid "delete, remove, trash, end, stop, x"
+msgstr ""
+
+#: theme_config/tt_icons.php:283
+#: theme_config/tt_icons.php:284
+#: theme_config/tt_icons.php:285
+#@ cre8or
+msgid "help, question"
+msgstr ""
+
+#: theme_config/tt_icons.php:286
+#: theme_config/tt_icons.php:287
+#: theme_config/tt_icons.php:288
+#@ cre8or
+msgid "question, information, ?"
+msgstr ""
+
+#: theme_config/tt_icons.php:289
+#: theme_config/tt_icons.php:290
+#@ cre8or
+msgid "find, seek, look, magnifying glass"
+msgstr ""
+
+#: theme_config/tt_icons.php:291
+#: theme_config/tt_icons.php:292
+#: theme_config/tt_icons.php:293
+#@ cre8or
+msgid "favorite, rate"
+msgstr ""
+
+#: theme_config/tt_icons.php:300
+#: theme_config/tt_icons.php:301
+#@ cre8or
+msgid "storage, weather, whether"
+msgstr ""
+
+#: theme_config/tt_icons.php:306
+#: theme_config/tt_icons.php:307
+#@ cre8or
+msgid "share, import"
+msgstr ""
+
+#: theme_config/tt_icons.php:308
+#: theme_config/tt_icons.php:309
+#@ cre8or
+msgid "save, export"
+msgstr ""
+
+#: theme_config/tt_icons.php:310
+#: theme_config/tt_icons.php:311
+#: theme_config/tt_icons.php:314
+#: theme_config/tt_icons.php:315
+#@ cre8or
+msgid "reload, renew, reset"
+msgstr ""
+
+#: theme_config/tt_icons.php:313
+#@ cre8or
+msgid "renew, reset"
+msgstr ""
+
+#: theme_config/tt_icons.php:318
+#: theme_config/tt_icons.php:319
+#@ cre8or
+msgid "favorite, read, literature"
+msgstr ""
+
+#: theme_config/tt_icons.php:320
+#: theme_config/tt_icons.php:321
+#@ cre8or
+msgid "marker, favorite"
+msgstr ""
+
+#: theme_config/tt_icons.php:322
+#: theme_config/tt_icons.php:323
+#@ cre8or
+msgid "steve, reading, look, see"
+msgstr ""
+
+#: theme_config/tt_icons.php:324
+#: theme_config/tt_icons.php:325
+#@ cre8or
+msgid "square"
+msgstr ""
+
+#: theme_config/tt_icons.php:328
+#: theme_config/tt_icons.php:329
+#: theme_config/tt_icons.php:330
+#: theme_config/tt_icons.php:331
+#: theme_config/tt_icons.php:332
+#: theme_config/tt_icons.php:333
+#@ cre8or
+msgid "shopping, money, items, commerce, $"
+msgstr ""
+
+#: theme_config/tt_icons.php:338
+#: theme_config/tt_icons.php:339
+#@ cre8or
+msgid "settings, gear, options"
+msgstr ""
+
+#: theme_config/tt_icons.php:340
+#: theme_config/tt_icons.php:341
+#: theme_config/tt_icons.php:342
+#: theme_config/tt_icons.php:343
+#: theme_config/tt_icons.php:348
+#: theme_config/tt_icons.php:349
+#@ cre8or
+msgid "cog, settings, options"
+msgstr ""
+
+#: theme_config/tt_icons.php:346
+#: theme_config/tt_icons.php:347
+#@ cre8or
+msgid "metrics, track, data"
+msgstr ""
+
+#: theme_config/tt_icons.php:350
+#: theme_config/tt_icons.php:351
+#@ cre8or
+msgid "live, hot, rate"
+msgstr ""
+
+#: theme_config/tt_icons.php:352
+#: theme_config/tt_icons.php:353
+#: theme_config/tt_icons.php:354
+#: theme_config/tt_icons.php:355
+#@ cre8or
+msgid "archive"
+msgstr ""
+
+#: theme_config/tt_icons.php:356
+#: theme_config/tt_icons.php:357
+#@ cre8or
+msgid "write, type, create"
+msgstr ""
+
+#: theme_config/tt_icons.php:358
+#: theme_config/tt_icons.php:359
+#@ cre8or
+msgid "delete, remove, dispose, waste, basket, dump, kill"
+msgstr ""
+
+#: theme_config/tt_icons.php:360
+#: theme_config/tt_icons.php:361
+#@ cre8or
+msgid "duplicate, paper"
+msgstr ""
+
+#: theme_config/tt_icons.php:364
+#: theme_config/tt_icons.php:365
+#@ cre8or
+msgid "reply"
+msgstr ""
+
+#: theme_config/tt_icons.php:366
+#: theme_config/tt_icons.php:367
+#@ cre8or
+msgid "forward"
+msgstr ""
+
+#: theme_config/tt_icons.php:368
+#: theme_config/tt_icons.php:369
+#@ cre8or
+msgid "send"
+msgstr ""
+
+#: theme_config/tt_icons.php:370
+#: theme_config/tt_icons.php:371
+#@ cre8or
+msgid "file"
+msgstr ""
+
+#: theme_config/tt_icons.php:372
+#: theme_config/tt_icons.php:373
+#@ cre8or
+msgid "feed, paper"
+msgstr ""
+
+#: theme_config/tt_icons.php:374
+#: theme_config/tt_icons.php:375
+#@ cre8or
+msgid "todo, feed, paper"
+msgstr ""
+
+#: theme_config/tt_icons.php:376
+#: theme_config/tt_icons.php:377
+#@ cre8or
+msgid "globe, earth"
+msgstr ""
+
+#: theme_config/tt_icons.php:378
+#: theme_config/tt_icons.php:379
+#@ cre8or
+msgid "wake, ring"
+msgstr ""
+
+#: theme_config/tt_icons.php:380
+#: theme_config/tt_icons.php:381
+#@ cre8or
+msgid "speed, drive, level"
+msgstr ""
+
+#: theme_config/tt_icons.php:382
+#: theme_config/tt_icons.php:383
+#@ cre8or
+msgid "time, speed"
+msgstr ""
+
+#: theme_config/tt_icons.php:384
+#: theme_config/tt_icons.php:385
+#@ cre8or
+msgid "cooking, alarm, buzz"
+msgstr ""
+
+#: theme_config/tt_icons.php:386
+#: theme_config/tt_icons.php:387
+#@ cre8or
+msgid "time, date, hours, minutes, seconds, watch"
+msgstr ""
+
+#: theme_config/tt_icons.php:388
+#: theme_config/tt_icons.php:389
+#@ cre8or
+msgid "clock, watch, hour, minute, second"
+msgstr ""
+
+#: theme_config/tt_icons.php:392
+#: theme_config/tt_icons.php:393
+#@ cre8or
+msgid "images, stills, square"
+msgstr ""
+
+#: theme_config/tt_icons.php:394
+#: theme_config/tt_icons.php:395
+#@ cre8or
+msgid "square, boxes, slides"
+msgstr ""
+
+#: theme_config/tt_icons.php:396
+#: theme_config/tt_icons.php:397
+#: theme_config/tt_icons.php:398
+#: theme_config/tt_icons.php:399
+#@ cre8or
+msgid "picture"
+msgstr ""
+
+#: theme_config/tt_icons.php:400
+#: theme_config/tt_icons.php:401
+#@ cre8or
+msgid "view, see, exposed, look"
+msgstr ""
+
+#: theme_config/tt_icons.php:402
+#: theme_config/tt_icons.php:403
+#@ cre8or
+msgid "flash, lightning"
+msgstr ""
+
+#: theme_config/tt_icons.php:404
+#: theme_config/tt_icons.php:405
+#@ cre8or
+msgid "camera, picture, edit, magic"
+msgstr ""
+
+#: theme_config/tt_icons.php:406
+#: theme_config/tt_icons.php:407
+#: theme_config/tt_icons.php:408
+#: theme_config/tt_icons.php:409
+#@ cre8or
+msgid "camera, picture"
+msgstr ""
+
+#: theme_config/tt_icons.php:410
+#: theme_config/tt_icons.php:411
+#@ cre8or
+msgid "camera, picture, edit"
+msgstr ""
+
+#: theme_config/tt_icons.php:412
+#: theme_config/tt_icons.php:413
+#@ cre8or
+msgid "reader, camera"
+msgstr ""
+
+#: theme_config/tt_icons.php:414
+#: theme_config/tt_icons.php:415
+#@ cre8or
+msgid "organize, folder"
+msgstr ""
+
+#: theme_config/tt_icons.php:416
+#: theme_config/tt_icons.php:417
+#: theme_config/tt_icons.php:418
+#: theme_config/tt_icons.php:419
+#@ cre8or
+msgid "health, case, first aid, sick, disease"
+msgstr ""
+
+#: theme_config/tt_icons.php:420
+#: theme_config/tt_icons.php:421
+#@ cre8or
+msgid "forever, loop"
+msgstr ""
+
+#: theme_config/tt_icons.php:422
+#: theme_config/tt_icons.php:423
+#@ cre8or
+msgid "math, arithmatic"
+msgstr ""
+
+#: theme_config/tt_icons.php:424
+#: theme_config/tt_icons.php:425
+#@ cre8or
+msgid "type, grid, circle"
+msgstr ""
+
+#: theme_config/tt_icons.php:426
+#: theme_config/tt_icons.php:427
+#@ cre8or
+msgid "oldschool, call"
+msgstr ""
+
+#: theme_config/tt_icons.php:429
+#: theme_config/tt_icons.php:430
+#@ cre8or
+msgid "navigation, map, gps, pin"
+msgstr ""
+
+#: theme_config/tt_icons.php:431
+#: theme_config/tt_icons.php:432
+#@ cre8or
+msgid "location, map, gps, pin"
+msgstr ""
+
+#: theme_config/tt_icons.php:433
+#: theme_config/tt_icons.php:434
+#: theme_config/tt_icons.php:435
+#: theme_config/tt_icons.php:436
+#@ cre8or
+msgid "security, padlock, safe"
+msgstr ""
+
+#: theme_config/tt_icons.php:437
+#: theme_config/tt_icons.php:438
+#@ cre8or
+msgid "thunderbolt, display, screen"
+msgstr ""
+
+#: theme_config/tt_icons.php:441
+#: theme_config/tt_icons.php:442
+#: theme_config/tt_icons.php:443
+#: theme_config/tt_icons.php:444
+#@ cre8or
+msgid "gaming, nintendo, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:445
+#: theme_config/tt_icons.php:446
+#@ cre8or
+msgid "nfl, games, sports, fun, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:447
+#: theme_config/tt_icons.php:448
+#@ cre8or
+msgid "mlb, games, sports, fun, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:449
+#: theme_config/tt_icons.php:450
+#@ cre8or
+msgid "nba, games, sports, fun, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:451
+#: theme_config/tt_icons.php:452
+#@ cre8or
+msgid "games, sports, fun, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:453
+#: theme_config/tt_icons.php:454
+#@ cre8or
+msgid "mls, soccer, games, sports, fun, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:455
+#: theme_config/tt_icons.php:456
+#@ cre8or
+msgid "person, users, staff, head, human"
+msgstr ""
+
+#: theme_config/tt_icons.php:459
+#: theme_config/tt_icons.php:460
+#@ cre8or
+msgid "users, staff, head, human, new, invite"
+msgstr ""
+
+#: theme_config/tt_icons.php:461
+#: theme_config/tt_icons.php:462
+#@ cre8or
+msgid "stalker, person, users, head, human"
+msgstr ""
+
+#: theme_config/tt_icons.php:463
+#: theme_config/tt_icons.php:464
+#@ cre8or
+msgid "sound, noise, listening, play"
+msgstr ""
+
+#: theme_config/tt_icons.php:465
+#: theme_config/tt_icons.php:466
+#@ cre8or
+msgid "right, noise, alarm, sound, music"
+msgstr ""
+
+#: theme_config/tt_icons.php:467
+#: theme_config/tt_icons.php:468
+#: theme_config/tt_icons.php:469
+#@ cre8or
+msgid "sound, noise, speaker, talk"
+msgstr ""
+
+#: theme_config/tt_icons.php:470
+#: theme_config/tt_icons.php:471
+#@ cre8or
+msgid "sound, noise, listen, music"
+msgstr ""
+
+#: theme_config/tt_icons.php:476
+#: theme_config/tt_icons.php:477
+#@ cre8or
+msgid "film, tape, voicemail"
+msgstr ""
+
+#: theme_config/tt_icons.php:478
+#: theme_config/tt_icons.php:479
+#@ cre8or
+msgid "next, skip, jump"
+msgstr ""
+
+#: theme_config/tt_icons.php:480
+#: theme_config/tt_icons.php:481
+#@ cre8or
+msgid "music, previous, back"
+msgstr ""
+
+#: theme_config/tt_icons.php:488
+#: theme_config/tt_icons.php:489
+#: theme_config/tt_icons.php:490
+#: theme_config/tt_icons.php:491
+#@ cre8or
+msgid "film, movie, camera"
+msgstr ""
+
+#: theme_config/tt_icons.php:492
+#: theme_config/tt_icons.php:493
+#@ cre8or
+msgid "options, mixer, liquid"
+msgstr ""
+
+#: theme_config/tt_icons.php:494
+#: theme_config/tt_icons.php:495
+#@ cre8or
+msgid "idea, new, bright, aha!"
+msgstr ""
+
+#: theme_config/tt_icons.php:496
+#: theme_config/tt_icons.php:497
+#@ cre8or
+msgid "alcohol, drink, food, glass, drunk, cheers"
+msgstr ""
+
+#: theme_config/tt_icons.php:498
+#: theme_config/tt_icons.php:499
+#@ cre8or
+msgid "alcohol, drink, food, beer, drunk, cheers"
+msgstr ""
+
+#: theme_config/tt_icons.php:500
+#: theme_config/tt_icons.php:501
+#@ cre8or
+msgid "health, carrot, food"
+msgstr ""
+
+#: theme_config/tt_icons.php:502
+#: theme_config/tt_icons.php:503
+#@ cre8or
+msgid "nature, spring, leaf, garden"
+msgstr ""
+
+#: theme_config/tt_icons.php:504
+#: theme_config/tt_icons.php:505
+#@ cre8or
+msgid "nature, spring, leaf, garden, flower"
+msgstr ""
+
+#: theme_config/tt_icons.php:506
+#: theme_config/tt_icons.php:507
+#@ cre8or
+msgid "nature, animal, pet, outdoor, track"
+msgstr ""
+
+#: theme_config/tt_icons.php:508
+#: theme_config/tt_icons.php:509
+#@ cre8or
+msgid "fire, hot, burn"
+msgstr ""
+
+#: theme_config/tt_icons.php:510
+#: theme_config/tt_icons.php:511
+#@ cre8or
+msgid "weather, whether, light, sky"
+msgstr ""
+
+#: theme_config/tt_icons.php:512
+#: theme_config/tt_icons.php:513
+#@ cre8or
+msgid "light, weather, whether, cloudy"
+msgstr ""
+
+#: theme_config/tt_icons.php:514
+#: theme_config/tt_icons.php:515
+#: theme_config/tt_icons.php:523
+#: theme_config/tt_icons.php:524
+#@ cre8or
+msgid "weather, whether, overcast"
+msgstr ""
+
+#: theme_config/tt_icons.php:516
+#: theme_config/tt_icons.php:517
+#@ cre8or
+msgid "whether, weather, water, cloud"
+msgstr ""
+
+#: theme_config/tt_icons.php:518
+#: theme_config/tt_icons.php:519
+#@ cre8or
+msgid "whether, weather, sky, lightning, rain, cloudy, overcast, storm"
+msgstr ""
+
+#: theme_config/tt_icons.php:520
+#@ cre8or
+msgid "cold, weather, whether, overcast"
+msgstr ""
+
+#: theme_config/tt_icons.php:521
+#: theme_config/tt_icons.php:522
+#@ cre8or
+msgid "sky, night, dark"
+msgstr ""
+
+#: theme_config/tt_icons.php:525
+#: theme_config/tt_icons.php:526
+#: theme_config/tt_icons.php:527
+#: theme_config/tt_icons.php:528
+#: theme_config/tt_icons.php:529
+#: theme_config/tt_icons.php:530
+#: theme_config/tt_icons.php:531
+#: theme_config/tt_icons.php:532
+#: theme_config/tt_icons.php:533
+#: theme_config/tt_icons.php:534
+#: theme_config/tt_icons.php:535
+#: theme_config/tt_icons.php:536
+#@ cre8or
+msgid "chevron, navigation"
+msgstr ""
+
+#: theme_config/tt_icons.php:537
+#: theme_config/tt_icons.php:538
+#@ cre8or
+msgid "plus, include, invite"
+msgstr ""
+
+#: theme_config/tt_icons.php:539
+#: theme_config/tt_icons.php:540
+#@ cre8or
+msgid "minus, subtract, delete"
+msgstr ""
+
+#: theme_config/tt_icons.php:541
+#: theme_config/tt_icons.php:542
+#@ cre8or
+msgid "delete, remove"
+msgstr ""
+
+#: theme_config/tt_icons.php:553
+#: theme_config/tt_icons.php:554
+#@ cre8or
+msgid "options, menu"
+msgstr ""
+
+#: theme_config/tt_icons.php:557
+#@ cre8or
+msgid "internet,connection, bars"
+msgstr ""
+
+#: theme_config/tt_icons.php:558
+#@ cre8or
+msgid "telephone"
+msgstr ""
+
+#: theme_config/tt_icons.php:560
+#@ cre8or
+msgid "options"
+msgstr ""
+
+#: theme_config/tt_icons.php:561
+#@ cre8or
+msgid "settings, mixer"
+msgstr ""
+
+#: theme_config/tt_icons.php:571
+#: theme_config/tt_icons.php:572
+#: theme_config/tt_icons.php:573
+#: theme_config/tt_icons.php:574
+#: theme_config/tt_icons.php:575
+#@ cre8or
+msgid "favorite, like, rate"
+msgstr ""
+
+#: theme_config/tt_icons.php:576
+#: theme_config/tt_icons.php:577
+#: theme_config/tt_icons.php:578
+#@ cre8or
+msgid "clock"
+msgstr ""
+
+#: theme_config/tt_icons.php:587
+#@ cre8or
+msgid "move, bike, transportation, maps"
+msgstr ""
+
+#: theme_config/tt_icons.php:595
+#@ cre8or
+msgid "wine, drink, food, dinner"
+msgstr ""
+
+#: theme_config/tt_icons.php:622
+#: theme_config/tt_icons.php:623
+#@ cre8or
+msgid "talk, text"
+msgstr ""
+
+#: theme_config/tt_icons.php:635
+#@ cre8or
+msgid "recorder, speak, noise, music, sound"
+msgstr ""
+
+#: theme_config/tt_icons.php:636
+#@ cre8or
+msgid "recorder, speak, noise, music, sound, mute"
+msgstr ""
+
+#: theme_config/tt_icons.php:644
+#@ cre8or
+msgid "stop"
+msgstr ""
+
+#: theme_config/tt_icons.php:653
+#: theme_config/tt_icons.php:654
+#: theme_config/tt_icons.php:657
+#: theme_config/tt_icons.php:658
+#: theme_config/tt_icons.php:659
+#: theme_config/tt_icons.php:660
+#@ cre8or
+msgid "follow, post, share"
+msgstr ""
+
+#: theme_config/tt_icons.php:655
+#: theme_config/tt_icons.php:656
+#@ cre8or
+msgid "like, post, share"
+msgstr ""
+
+#: theme_config/tt_icons.php:661
+#: theme_config/tt_icons.php:662
+#@ cre8or
+msgid "design"
+msgstr ""
+
+#: theme_config/tt_icons.php:663
+#@ cre8or
+msgid "code, github, fork, merge, clone"
+msgstr ""
+
+#: theme_config/tt_icons.php:664
+#: theme_config/tt_icons.php:665
+#@ cre8or
+msgid "code, fork, merge, clone"
+msgstr ""
+
+#: theme_config/tt_icons.php:666
+#: theme_config/tt_icons.php:667
+#@ cre8or
+msgid "photo, camera, facebook"
+msgstr ""
+
+#: theme_config/tt_icons.php:668
+#: theme_config/tt_icons.php:669
+#@ cre8or
+msgid "text, sharing, private, facebook"
+msgstr ""
+
+#: theme_config/tt_icons.php:670
+#: theme_config/tt_icons.php:671
+#@ cre8or
+msgid "photos, app"
+msgstr ""
+
+#: theme_config/tt_icons.php:672
+#: theme_config/tt_icons.php:673
+#@ cre8or
+msgid "checkin"
+msgstr ""
+
+#: theme_config/tt_icons.php:674
+#: theme_config/tt_icons.php:675
+#@ cre8or
+msgid "social"
+msgstr ""
+
+#: theme_config/tt_icons.php:676
+#: theme_config/tt_icons.php:677
+#: theme_config/tt_icons.php:678
+#: theme_config/tt_icons.php:679
+#: theme_config/tt_icons.php:680
+#: theme_config/tt_icons.php:681
+#@ cre8or
+msgid "blogging"
+msgstr ""
+
+#: theme_config/tt_icons.php:682
+#: theme_config/tt_icons.php:683
+#@ cre8or
+msgid "news, upvotes, karma"
+msgstr ""
+
+#: theme_config/tt_icons.php:684
+#: theme_config/tt_icons.php:685
+#@ cre8or
+msgid "discuss, upvotes, karma"
+msgstr ""
+
+#: theme_config/tt_icons.php:686
+#: theme_config/tt_icons.php:687
+#@ cre8or
+msgid "design, post"
+msgstr ""
+
+#: theme_config/tt_icons.php:690
+#: theme_config/tt_icons.php:691
+#@ cre8or
+msgid "share"
+msgstr ""
+
+#: theme_config/tt_icons.php:692
+#: theme_config/tt_icons.php:693
+#@ cre8or
+msgid "call"
+msgstr ""
+
+#: theme_config/tt_icons.php:694
+#: theme_config/tt_icons.php:695
+#@ cre8or
+msgid "connect"
+msgstr ""
+
+#: theme_config/tt_icons.php:696
+#: theme_config/tt_icons.php:697
+#: theme_config/tt_icons.php:700
+#: theme_config/tt_icons.php:701
+#@ cre8or
+msgid "video, watch, share, view"
+msgstr ""
+
+#: theme_config/tt_icons.php:698
+#: theme_config/tt_icons.php:699
+#@ cre8or
+msgid "gaming, games, live, streaming, video, watch, share, view"
+msgstr ""
+
+#: theme_config/tt_icons.php:702
+#: theme_config/tt_icons.php:703
+#@ cre8or
+msgid "upload"
+msgstr ""
+
+#: theme_config/tt_icons.php:704
+#: theme_config/tt_icons.php:705
+#@ cre8or
+msgid "mac, mobile"
+msgstr ""
+
+#: theme_config/tt_icons.php:706
+#: theme_config/tt_icons.php:707
+#@ cre8or
+msgid "mobile"
+msgstr ""
+
+#: theme_config/tt_icons.php:708
+#: theme_config/tt_icons.php:709
+#@ cre8or
+msgid "pc"
+msgstr ""
+
+#: theme_config/tt_icons.php:710
+#: theme_config/tt_icons.php:711
+#: theme_config/tt_icons.php:712
+#: theme_config/tt_icons.php:713
+#: theme_config/tt_icons.php:714
+#: theme_config/tt_icons.php:715
+#@ cre8or
+msgid "code, html, css, js, developer"
+msgstr ""
+
+#: theme_config/tt_icons.php:716
+#: theme_config/tt_icons.php:717
+#: theme_config/tt_icons.php:721
+#: theme_config/tt_icons.php:722
+#@ cre8or
+msgid "code, mobile, js, angularjs, ionic"
+msgstr ""
+
+#: theme_config/tt_icons.php:718
+#@ cre8or
+msgid "code, js, javascript, developer"
+msgstr ""
+
+#: theme_config/tt_icons.php:719
+#@ cre8or
+msgid "code, css"
+msgstr ""
+
+#: theme_config/tt_icons.php:720
+#@ cre8or
+msgid "code"
+msgstr ""
+
+#: theme_config/tt_icons.php:723
+#: theme_config/tt_icons.php:724
+#@ cre8or
+msgid "testing, js, developer"
+msgstr ""
+
+#: theme_config/tt_icons.php:725
+#@ cre8or
+msgid "code, testing, text, developer"
+msgstr ""
+
+#: theme_config/tt_icons.php:726
+#@ cre8or
+msgid "code, linux, opensource"
+msgstr ""
+
+#: theme_config/tt_icons.php:727
+#@ cre8or
+msgid "code, opensource, unix"
+msgstr ""
+
+#: theme_config/tt_icons.php:728
+#: theme_config/tt_icons.php:729
+#@ cre8or
+msgid "currency, trade, money, cash"
+msgstr ""
+
+#: theme_config/tt_icons.php:730
+#: theme_config/tt_icons.php:731
+#@ cre8or
+msgid "currency, trade, money"
+msgstr ""
+
+#: theme_config/tt_icons.php:732
+#: theme_config/tt_icons.php:733
+#@ cre8or
+msgid "currency, trade, money, japanese"
+msgstr ""
+
+#: theme_config/tt_icons.php:734
+#: theme_config/tt_icons.php:735
+#@ cre8or
+msgid "currency, trade, money, europe"
+msgstr ""
+
+#: widgets/instagram.php:13
+#@ cre8or
+msgid "Custom widget - Instagram feed."
+msgstr ""
+
+#: widgets/instagram.php:22
+#@ cre8or
+msgid "Instagram Feed"
+msgstr ""
+
+#: widgets/instagram.php:33
+#: widgets/recent-posts.php:32
+#@ cre8or
+msgid "Title:"
+msgstr ""
+
+#: widgets/instagram.php:39
+#@ cre8or
+msgid "Instagram username:"
+msgstr ""
+
+#: widgets/instagram.php:45
+#: widgets/recent-posts.php:38
+#@ cre8or
+msgid "Number of posts to show: "
+msgstr ""
+
+#: widgets/recent-posts.php:13
+#@ cre8or
+msgid "Custom widget - recent posts."
+msgstr ""
+
+#: widgets/recent-posts.php:22
+#@ cre8or
+msgid "Recent Posts"
+msgstr ""
+
