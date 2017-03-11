@@ -1564,7 +1564,7 @@ function wp_head_product_meta()
         echo '<meta property="og:image" content="' . wp_get_attachment_url(get_post_thumbnail_id()) . '" />';
     } else echo '<meta property="og:image" content="http://samonenkoart.com/wp-content/uploads/2016/03/samonenko_art_logo_pack_transparent_02.png" />';
 
-    echo '<script defer src="https://vk.com/js/api/openapi.js?136" type="text/javascript"></script>';
+    echo '<script src="https://vk.com/js/api/openapi.js?136" type="text/javascript"></script>';
 
     global $aiosp;
     echo '<meta property="og:title" content="'. ($aiosp->get_aioseop_title(null) != "" ? $aiosp->get_aioseop_title(null) : get_the_title()) .'"/>';
