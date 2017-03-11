@@ -32,7 +32,7 @@
 </head>
 <body <?php body_class(); ?> <?php echo apply_filters('body_gradient', 'data-animated-bg="#f8f8f8:20-#eeeeee"'); ?>>
 
-<script type="text/javascript">
+<script async type="text/javascript">
     VK.init({
         apiId: "5805653",
         onlyWidgets: true
