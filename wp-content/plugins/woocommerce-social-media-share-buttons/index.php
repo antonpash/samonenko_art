@@ -606,7 +606,7 @@ function toastie_wc_smsb_social_init() {
     <?php
 }
 function toastie_wc_smsb_my_enqueue() {
-    wp_enqueue_script('smsb_script', plugin_dir_url(__FILE__) . 'smsb_script.js', array(), '1.0.0', true);
+    wp_enqueue_script('smsb_script', plugin_dir_url(__FILE__) . 'smsb_script.min.js', array(), '1.0.0', true);
 }
 add_action('wp_print_scripts', 'toastie_wc_smsb_my_enqueue');
 ?>

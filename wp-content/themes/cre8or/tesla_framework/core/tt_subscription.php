@@ -26,7 +26,7 @@ if(!class_exists('TT_Subscription')){
 		}
 
 		public static function enqueue_scripts(){
-			wp_enqueue_script('subscription', TT_FW . '/static/js/subscription.js', '', false, true);
+			wp_enqueue_script('subscription', TT_FW . '/static/js/subscription.min.js', '', false, true);
 			self::$config['subscription_nonce'] = wp_create_nonce('tt-subscription-nonce');
 			wp_localize_script( 'subscription', 'ttSubscrConfig', self::$config );
 		}

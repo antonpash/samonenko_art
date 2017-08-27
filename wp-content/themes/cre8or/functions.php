@@ -157,15 +157,15 @@ if (!class_exists('Cre8or')) {
         public function request_js()
         {
             $default_js = array(
-                'tween-max' => TT_THEME_URI . '/js/lib/TweenMax.js',
-                'attr-plugin' => TT_THEME_URI . '/js/lib/AttrPlugin.js',
-                'snap-svg' => TT_THEME_URI . '/js/lib/snap.svg.js',
-                'image-loaded' => TT_THEME_URI . '/js/lib/imageloaded.js',
-                'isotope' => TT_THEME_URI . '/js/lib/isotope.js',
-                'flickity' => TT_THEME_URI . '/js/lib/flickity.js',
-                'modernizr' => TT_THEME_URI . '/js/lib/modernizr.js',
-                'fitvids' => TT_THEME_URI . '/js/lib/fitvids.js',
-                'options' => TT_THEME_URI . '/js/options.js'
+                'tween-max' => TT_THEME_URI . '/js/lib/TweenMax.min.js',
+                'attr-plugin' => TT_THEME_URI . '/js/lib/AttrPlugin.min.js',
+                'snap-svg' => TT_THEME_URI . '/js/lib/snap.svg.min.js',
+                'image-loaded' => TT_THEME_URI . '/js/lib/imageloaded.min.js',
+                'isotope' => TT_THEME_URI . '/js/lib/isotope.min.js',
+                'flickity' => TT_THEME_URI . '/js/lib/flickity.min.js',
+                'modernizr' => TT_THEME_URI . '/js/lib/modernizr.min.js',
+                'fitvids' => TT_THEME_URI . '/js/lib/fitvids.min.js',
+                'options' => TT_THEME_URI . '/js/options.min.js'
             );
 
             $register_scripts = array(

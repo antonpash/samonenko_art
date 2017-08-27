@@ -49,7 +49,7 @@ class Tesla_slider{
 
 	public static function slider_enqueue(){
 
-		wp_enqueue_script('tesla-image-holder', tesla_locate_uri('tesla_framework/static/js/holder.js'),array(),null);
+		wp_enqueue_script('tesla-image-holder', tesla_locate_uri('tesla_framework/static/js/holder.min.js'),array(),null);
 
 	}
 
@@ -71,7 +71,7 @@ class Tesla_slider{
 				wp_enqueue_script('jquery-ui-core');
 				wp_enqueue_script('jquery-ui-sortable');
 				wp_enqueue_script('jquery-ui-datepicker');
-				wp_enqueue_script('tesla-image-holder', tesla_locate_uri('tesla_framework/static/js/holder.js'),array(),null);
+				wp_enqueue_script('tesla-image-holder', tesla_locate_uri('tesla_framework/static/js/holder.min.js'),array(),null);
 				wp_enqueue_script('tesla-slider-admin', tesla_locate_uri('tesla_framework/static/js/tesla_slider.js'),array(),null);
 
 			}

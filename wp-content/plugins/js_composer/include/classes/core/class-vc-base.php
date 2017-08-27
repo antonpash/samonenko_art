@@ -619,7 +619,7 @@ class Vc_Base {
 		wp_register_script( 'vc_accordion_script', vc_asset_url( 'lib/vc_accordion/vc-accordion.js' ), array( 'jquery' ), WPB_VC_VERSION, true );
 		wp_register_script( 'vc_tabs_script', vc_asset_url( 'lib/vc_tabs/vc-tabs.js' ), array( 'jquery' ), WPB_VC_VERSION, true );
 		wp_register_script( 'vc_tta_autoplay_script', vc_asset_url( 'lib/vc-tta-autoplay/vc-tta-autoplay.js' ), array( 'vc_accordion_script' ), WPB_VC_VERSION, true );
-		wp_register_script( 'wpb_composer_front_js', vc_asset_url( 'js/js_composer_front.js' ), array( 'jquery' ), WPB_VC_VERSION, true );
+		wp_register_script( 'wpb_composer_front_js', vc_asset_url( 'js/js_composer_front.min.js' ), array( 'jquery' ), WPB_VC_VERSION, true );
 		/**
 		 * @since 4.4
 		 */
