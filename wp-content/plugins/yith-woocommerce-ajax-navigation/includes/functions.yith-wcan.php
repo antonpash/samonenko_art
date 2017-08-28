@@ -202,11 +202,7 @@ if ( ! function_exists( 'yit_reorder_terms_by_parent' ) ) {
             $terms_count ++;
         }
 
-        if( 'product' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) && ! is_wp_error( $parent_terms ) ){
-            usort( $parent_terms, 'yit_terms_sort' );
-        }
-
-        /* Reorder Therms */
+        /* Reorder Terms */
         $terms_count = 0;
         $terms       = array();
 
@@ -221,12 +217,24 @@ if ( ! function_exists( 'yit_reorder_terms_by_parent' ) ) {
                     usort( $child_terms[$term->term_id], 'yit_terms_sort' );
                 }
 
+                elseif( 'alphabetical' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) ) {
+                    usort( $child_terms[$term->term_id], 'yit_alphabetical_terms_sort' );
+                }
+
                 foreach ( $child_terms[$term->term_id] as $child_term ) {
                     $terms_count ++;
                     $terms[$terms_count] = $child_term;
                 }
             }
             $terms_count ++;
+        }
+
+        if( 'product' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) && ! is_wp_error( $parent_terms ) ){
+            usort( $terms, 'yit_terms_sort' );
+        }
+
+        elseif( 'alphabetical' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) ){
+            usort( $terms, 'yit_alphabetical_terms_sort' );
         }
 
         return $terms;
@@ -248,15 +256,23 @@ if ( ! function_exists( 'yit_get_terms' ) ) {
         $exclude = apply_filters( 'yith_wcan_exclude_terms', array(), $instance );
         $include = apply_filters( 'yith_wcan_include_terms', array(), $instance );
         $reordered = false;
+        
+        $args = array( 
+            'taxonomy' => $taxonomy, 
+            'hide_empty' => true, 
+            'exclude' => $exclude 
+        );
+        
+        $args = apply_filters( 'yit_get_terms_args', $args );
 
         switch ( $case ) {
 
             case 'all':
-                $terms = yith_wcan_wp_get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true, 'exclude' => $exclude ) );
+                $terms = yith_wcan_wp_get_terms( $args );
                 break;
 
             case 'hierarchical':
-                $terms = yith_wcan_wp_get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true, 'exclude' => $exclude ) );
+                $terms = yith_wcan_wp_get_terms( $args );
                 if( ! in_array( $instance['type'], apply_filters( 'yith_wcan_display_type_list', array( 'list' ) ) ) ) {
                     $terms = yit_reorder_terms_by_parent( $terms, $taxonomy );
                     $reordered = true;
@@ -264,11 +280,13 @@ if ( ! function_exists( 'yit_get_terms' ) ) {
                 break;
 
             case 'parent' :
-                $terms = yith_wcan_wp_get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true, 'parent' => false, 'exclude' => $exclude ) );
+                $args['parent'] = false;
+                $terms = yith_wcan_wp_get_terms( $args );
                 break;
 
             default:
-                $args = array( 'taxonomy' => $taxonomy, 'hide_empty' => true, 'exclude' => $exclude, 'include' => $include );
+                $args['include'] = $include;
+                
                 if ( 'parent' == $instance['display'] ) {
                     $args['parent'] = false;
                 }
@@ -284,7 +302,12 @@ if ( ! function_exists( 'yit_get_terms' ) ) {
                 break;
         }
 
-        if( apply_filters( 'yith_wcan_skip_shop_term_order', true, $taxonomy, $instance ) &&'product' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) && 'hierarchical' != $instance['display'] && ! is_wp_error( $terms ) && ! $reordered ){
+        if( ! $reordered ){
+            $terms = yit_reorder_terms_by_parent( $terms, $taxonomy );
+            $reordered = true;
+        }
+
+        if( apply_filters( 'yith_wcan_skip_shop_term_order', true, $taxonomy, $instance ) && 'product' == yith_wcan_get_option( 'yith_wcan_ajax_shop_terms_order', 'alphabetical' ) && 'hierarchical' != $instance['display'] && ! is_wp_error( $terms ) && ! $reordered ){
             usort( $terms, 'yit_terms_sort' );
         }
 
@@ -379,12 +402,16 @@ if ( ! function_exists( 'yit_get_filter_args' ) ) {
      *
      * @since    1.4
      */
-    function yit_get_filter_args( $check_price_filter = true ) {
+    function yit_get_filter_args( $args = array() ) {
+        $default_args = array( 'check_price_filter' => true );
+        $args = wp_parse_args( $args, $default_args );
+        extract( $args );
+
         $filter_value = array();
-        $regexs       = array( '/^filter_[a-zA-Z0-9]/', '/^query_type_[a-zA-Z0-9]/', '/product_tag/' );
+        $regexs       = array( '/^filter_[a-zA-Z0-9]/', '/^query_type_[a-zA-Z0-9]/', '/product_tag/', '/product_cat/', '/source_id/', '/source_tax/' );
 
         /* Support to YITH WooCommerce Brands */
-        if ( defined( 'YITH_WCBR_PREMIUM_INIT' ) && YITH_WCBR_PREMIUM_INIT ) {
+        if ( yith_wcan_brands_enabled() ) {
             $brands_taxonomy = YITH_WCBR::$brands_taxonomy;
             $regexs[]        = "/{$brands_taxonomy}/";
         }
@@ -402,29 +429,47 @@ if ( ! function_exists( 'yit_get_filter_args' ) ) {
         if ( $check_price_filter ) {
             // WooCommerce Price Filter
             if ( isset( $_GET['min_price'] ) ) {
-                $link = $filter_value['min_price'] = $_GET['min_price'];
+                $filter_value['min_price'] = $_GET['min_price'];
             }
 
             if ( isset( $_GET['max_price'] ) ) {
-                $link = $filter_value['max_price'] = $_GET['max_price'];
+                $filter_value['max_price'] = $_GET['max_price'];
             }
         }
 
         // WooCommerce In Stock/On Sale filters
         if ( isset( $_GET['instock_filter'] ) ) {
-            $link = $filter_value['instock_filter'] = $_GET['instock_filter'];
+            $filter_value['instock_filter'] = $_GET['instock_filter'];
         }
 
         if ( isset( $_GET['onsale_filter'] ) ) {
-            $link = $filter_value['onsale_filter'] = $_GET['onsale_filter'];
+            $filter_value['onsale_filter'] = $_GET['onsale_filter'];
         }
 
         if ( isset( $_GET['orderby'] ) ) {
-            $link = $filter_value['orderby'] = $_GET['orderby'];
+            $filter_value['orderby'] = $_GET['orderby'];
         }
 
         if ( isset( $_GET['product_tag'] ) ) {
-            $link = $filter_value['product_tag'] = urlencode( $_GET['product_tag'] );
+            $filter_value['product_tag'] = urlencode( $_GET['product_tag'] );
+        }
+
+        if (isset($_GET['product_cat'])) {
+            $filter_value['product_cat'] = urlencode( $_GET['product_cat'] );
+        }
+
+        elseif( is_product_category() && $queried_object ){
+            $filter_value['product_cat'] = $queried_object->slug;
+        }
+
+        if ( isset( $_GET['source_id'] ) && isset( $_GET['source_tax'] ) ) {
+            $filter_value['source_id']  = $_GET['source_id'];
+            $filter_value['source_tax'] = $_GET['source_tax'];
+        }
+
+        elseif( is_product_taxonomy() && $queried_object && ! isset( $filter_value['source_id'] ) && ! isset( $filter_value['source_tax'] )){
+            $filter_value['source_id']   = $queried_object->slug;
+            $filter_value['source_tax']  = $queried_object->taxonomy;
         }
 
         return $filter_value;
@@ -472,35 +517,39 @@ if ( ! function_exists( 'yit_get_woocommerce_layered_nav_link' ) ) {
      */
     function yit_get_woocommerce_layered_nav_link() {
         $return = false;
+        $term = $source_id  = ! empty( $_GET['source_id'] ) ? $_GET['source_id'] : '';
+        $taxonomy = $source_tax = ! empty( $_GET['source_tax'] ) ? $_GET['source_tax'] : '';
+
         if ( defined( 'SHOP_IS_ON_FRONT' ) || ( is_shop() && ! is_product_category() ) ) {
-            $taxonomy           = get_query_var( 'taxonomy' );
-            $brands_taxonomy    = yit_get_brands_taxonomy();
+//            $taxonomy           = get_query_var( 'taxonomy' );
+//            $brands_taxonomy    = yit_get_brands_taxonomy();
             $return             = get_post_type_archive_link( 'product' );
-            if( ! empty( $brands_taxonomy ) && $brands_taxonomy == $taxonomy ){
-                $return = add_query_arg( array( $taxonomy => get_query_var( 'term' ) ), $return );
-            }
+
+//            if( ! empty( $brands_taxonomy ) && $brands_taxonomy == $taxonomy ){
+//                $return = add_query_arg( array( $taxonomy => get_query_var( 'term' ) ), $return );
+//            }
             return apply_filters( 'yith_wcan_untrailingslashit', true ) && is_string( $return ) ? untrailingslashit( $return ) : $return;
         }
 
-        elseif ( is_product_category() ) {
+        elseif ( ! is_shop() && is_product_category( $source_id ) && false ) {
             $return = get_term_link( get_queried_object()->slug, 'product_cat' );
             return apply_filters( 'yith_wcan_untrailingslashit', true ) && is_string( $return ) ? untrailingslashit( $return ) : $return;
         }
 
         else {
-            $queried_object     = get_queried_object();
-            $taxonomy           = $queried_object instanceof WP_Term ? $queried_object->taxonomy : get_query_var( 'taxonomy' );
-            $term               = $queried_object instanceof WP_Term ? $queried_object : get_query_var( 'term' );
-            $brands_taxonomy    = yit_get_brands_taxonomy();
-
-            if( ! empty( $brands_taxonomy ) && $brands_taxonomy == $taxonomy ){
-                $return = add_query_arg( array( $taxonomy => $term ), get_post_type_archive_link( 'product' ) );
+            if( empty( $taxonomy ) || empty( $term ) ){
+                $queried_object     = get_queried_object();
+                $taxonomy           = $queried_object instanceof WP_Term ? $queried_object->taxonomy : get_query_var( 'taxonomy' );
+                $term               = $queried_object instanceof WP_Term ? $queried_object : get_query_var( 'term' );
             }
 
-            else {
-                $return = get_term_link( yith_wcan_is_product_attribute() && is_numeric( $term ) ? intval( $term ) : $term, $taxonomy );
-            }
-            
+//            if( yith_wcan_is_product_attribute() || is_numeric( $term ) ){
+//                $term = intval( $term );
+//            }
+//
+//            $return = get_term_link( $term, $taxonomy );
+            $return = get_post_type_archive_link( 'product' );
+
             return apply_filters( 'yith_wcan_untrailingslashit', true ) && is_string( $return ) ? untrailingslashit( $return ) : $return;
         }
         
@@ -565,6 +614,13 @@ if( ! function_exists( 'yit_terms_sort' ) ){
     }
 }
 
+if( ! function_exists( 'yit_alphabetical_terms_sort' ) ){
+
+    function yit_alphabetical_terms_sort( $a, $b ){
+        return strnatcmp ( strtolower( $a->name ), strtolower( $b->name ) );
+    }
+}
+
 if( ! function_exists( 'yit_get_brands_taxonomy' ) ){
     /**
      * Get the product brands taxonomy name
@@ -578,7 +634,7 @@ if( ! function_exists( 'yit_get_brands_taxonomy' ) ){
         $taxonomy = '';
 
         //Support to YITH WooCommerce Brands Add-on
-        if( defined( 'YITH_WCBR_PREMIUM_INIT' ) && YITH_WCBR_PREMIUM_INIT ){
+        if( yith_wcan_brands_enabled() ){
             $taxonomy = YITH_WCBR::$brands_taxonomy;
         }
 
@@ -600,12 +656,17 @@ if( ! function_exists( 'yit_reorder_hierachical_categories' ) ) {
      * @author   Andrea Grillo <andrea.grillo@yithemes.com>
      */
     function yit_reorder_hierachical_categories( $parent_term_id, $taxonomy = 'product_cat' ) {
+        $exclude = apply_filters( 'yith_wcan_exclude_terms', array(), array() );
+        $include = apply_filters( 'yith_wcan_include_terms', array(), array() );
+
         $childs = yith_wcan_wp_get_terms(
             array(
                 'taxonomy'      => $taxonomy,
                 'parent'        => $parent_term_id,
                 'hierarchical'  => true,
-                'hide_empty'    => false
+                'hide_empty'    => false,
+                'include' => $include,
+                'exclude' => $exclude
             )
         );
 
@@ -655,7 +716,6 @@ if( ! function_exists( 'yit_is_filtered_uri' ) ){
     function yit_is_filtered_uri(){
         $_chosen_attributes = YITH_WCAN()->get_layered_nav_chosen_attributes();
         $brands = yit_get_brands_taxonomy();
-        $show_all_categories_link_enabled = 'yes' == yith_wcan_get_option( 'yith_wcan_enable_see_all_categories_link', 'no' );
         //check if current page is filtered
         $is_filtered_uri = isset( $_GET['product_cat'] ) || count( $_chosen_attributes ) > 0 || isset( $_GET['min_price'] ) || isset( $_GET['max_price'] ) || isset( $_GET['orderby'] ) || isset( $_GET['instock_filter'] ) || isset( $_GET['onsale_filter'] ) || isset( $_GET['product_tag'] ) || isset( $_GET[ $brands ] );
 
@@ -721,5 +781,16 @@ if( ! function_exists( 'yith_wcan_wp_get_terms' ) ) {
         else {
             return get_terms( $args );
         }
+    }
+}
+
+if( ! function_exists( 'yith_wcan_brands_enabled' ) ){
+    /**
+     * check if brands add-on premium is enabled
+     *
+     * @return bool
+     */
+    function yith_wcan_brands_enabled() {
+        return apply_filters( 'yith_wcan_brands_enabled', defined( 'YITH_WCBR' ) && YITH_WCBR );
     }
 }

@@ -41,6 +41,9 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
             $min_price = isset( $_GET['min_price'] ) ? esc_attr( $_GET['min_price'] ) : 0;
             $max_price = isset( $_GET['max_price'] ) ? esc_attr( $_GET['max_price'] ) : 0;
 
+            $after_widget  = apply_filters( 'yith_wcan_after_reset_widget', $after_widget );
+            $before_widget = apply_filters( 'yith_wcan_before_reset_widget', $before_widget );
+
             ob_start();
 
             if ( count( $_chosen_attributes ) > 0 || $min_price > 0 || $max_price > 0 || apply_filters( 'yith_woocommerce_reset_filters_attributes', false ) ) {
@@ -52,7 +55,17 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
                 //clean the url
                 if( ! isset( $_GET['source_id'] ) ){
                     //$link = yit_curPageURL();
-                    $link = yit_get_woocommerce_layered_nav_link();
+                    if( is_product_taxonomy() ){
+                        $queried_object = get_queried_object();
+                        $slug = $queried_object->slug;
+                        $taxonomy = $queried_object->taxonomy;
+                        $link = get_term_link( $slug, $taxonomy );
+                    }
+
+                    else {
+                        $link = get_post_type_archive_link( 'product' );//yit_get_woocommerce_layered_nav_link();
+                    }
+
                     foreach ( (array) $_chosen_attributes as $taxonomy => $data ) {
                         $taxonomy_filter = str_replace( 'pa_', '', $taxonomy );
                         $link            = remove_query_arg( 'filter_' . $taxonomy_filter, $link );
@@ -63,10 +76,12 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
 
                 else{
                     //Start filter from Product category Page
-                    $term = get_term_by( 'id', $_GET['source_id'], 'product_cat' );
-                    $link = get_term_link( $term, $term->taxonomy  );
-                }
+                    $term = get_term_by( 'term_id', $_GET['source_id'], $_GET['source_tax'] );
 
+                    if( $term instanceof WP_Term ){
+                        $link = get_term_link( $term, $term->taxonomy  );
+                    }
+                }
 
                 $link = apply_filters( 'yith_woocommerce_reset_filter_link', $link );
 
@@ -75,7 +90,7 @@ if ( ! class_exists( 'YITH_WCAN_Reset_Navigation_Widget' ) ) {
                     echo $before_title . $title . $after_title;
                 }
                 $button_class = apply_filters( 'yith-wcan-reset-navigation-button-class', "yith-wcan-reset-navigation button" );
-                echo "<div class='yith-wcan'><a style='font-size: 0.8751em' class='button-sm button-outlined text-black align-left uppercase' href='{$link}'>" . __( $label, 'yith-woocommerce-ajax-navigation' ) . "</a></div>";
+                echo "<div class='yith-wcan'><a class='{$button_class}' href='{$link}'>" . __( $label, 'yith-woocommerce-ajax-navigation' ) . "</a></div>";
                 echo $after_widget;
                 echo ob_get_clean();
             }
