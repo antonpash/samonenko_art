@@ -97,6 +97,7 @@
 
           $('.vc_tta-tabs-container .sidebar-inner').children().each(function () {
             height += $(this).height();
+            console.log($(this).height());
           });
 
           $('.vc_tta-tabs-container').css({

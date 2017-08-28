@@ -1818,3 +1818,8 @@ function save_taxonomy_custom_meta( $term_id ) {
 }
 add_action( 'edited_product_cat', 'save_taxonomy_custom_meta', 10, 2 );
 add_action( 'create_product_cat', 'save_taxonomy_custom_meta', 10, 2 );
+
+function add_theme_scripts() {
+    wp_enqueue_script( 'custom_scripts', get_template_directory_uri() . '/scripts.js', array ( 'jquery' ));
+}
+add_action( 'wp_enqueue_scripts', 'add_theme_scripts' );

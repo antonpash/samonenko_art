@@ -228,3 +228,23 @@ p.portfolio-price{
 .breadcrumb div, .woocommerce-breadcrumb div{
     display: inline;
 }
+
+.yith-wcan-select-wrapper{
+    display: none;
+    margin: -16px 0 0;
+    padding: 0;
+}
+
+.yit-wcan-select-open.active ~ .yith-wcan-select-wrapper{
+    display: block;
+}
+
+.yith-wcan-select-wrapper li{
+    padding: 5px 8px !important;
+    border-top: none !important;
+}
+
+.yith-wcan-select-wrapper ul.yith-wcan-select.yith-wcan li:hover, .woocommerce-page .widget_layered_nav .yith-wcan-select-wrapper ul li.chosen{
+    box-shadow: none;
+    border-top: none;
+}
