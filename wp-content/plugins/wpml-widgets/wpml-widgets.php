@@ -66,12 +66,12 @@ class WPML_Widgets {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		endif;
 
-		if ( ! in_array( 'sitepress-multilingual-cms/sitepress.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) :
-			if ( ! is_plugin_active_for_network( 'sitepress-multilingual-cms/sitepress.php' ) ) :
-				add_action( 'admin_notices', array( $this, 'wpml_nag_message' ) );
-				return;
-			endif;
-		endif;
+//		if ( ! in_array( 'sitepress-multilingual-cms/sitepress.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) :
+//			if ( ! is_plugin_active_for_network( 'sitepress-multilingual-cms/sitepress.php' ) ) :
+//				add_action( 'admin_notices', array( $this, 'wpml_nag_message' ) );
+//				return;
+//			endif;
+//		endif;
 
 		// Add dropdown to widgets
 		add_action( 'in_widget_form', array( $this, 'widget_dropdown' ), 10, 3 );
