@@ -379,14 +379,14 @@ if (!class_exists('Cre8or')) {
          *   Generate navigation
          */
 
-        public function theme_navigation($menu_name, $css_class = null, $menu = null)
+        public function theme_navigation($menu_name, $css_class = null, $menu = null, $container = null)
         {
             $defaults = array(
                 'theme_location' => strtolower(str_replace(" ", "_", $menu_name)),
                 'menu' => $menu,
-                'container' => false,
-                'container_class' => '',
-                'container_id' => '',
+                'container' => $container['tag'],
+                'container_class' => $container['class'],
+                'container_id' => $container['id'],
                 'menu_class' => $css_class,
                 'menu_id' => '',
                 'echo' => false,
@@ -553,7 +553,8 @@ if (!class_exists('Cre8or')) {
                     $this->theme_navigation('main_menu', '', 'menu_' . substr(get_locale(), 0, 2))),
                 'header_title' => _go('header_heading') ? sprintf('<h5 class="uppercase text-white">%s</h5>',
                     _go('header_heading')) : '',
-                'header_content' => _go('header_info') ? sprintf('<p>%s</p>', _go('header_info')) : ''
+                'header_content' => _go('header_info') ? sprintf('<p>%s</p>', _go('header_info')) : '',
+                'menu_bottom' => $this->theme_navigation('add_menu', 'menu', 'menu_' . substr(get_locale(), 0, 2), array('tag' => 'div'))
             );
 
             // Hide main header

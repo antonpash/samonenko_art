@@ -15,26 +15,23 @@
                     <h5 style="opacity: 1;" class="uppercase text-white"><?php _e('Social networks', 'cre8or'); ?>:</h5>
                     <ul style="opacity: 1;" class="social-links inline-list">
                         <li><a href="https://vk.com/samonenko_art"><img width="32"
-                                                                        src="<?php echo bloginfo('url'); ?>/wp-content/themes/cre8or/tesla_framework/static/images/social/vkontakte_32.png"/></a>
+                                                                        src="<?php echo TT_THEME_URI; ?>/tesla_framework/static/images/social/vkontakte_32.png"/></a>
                         </li>
                         <li><a href="https://www.facebook.com/SamonenkoArt/"><img width="32"
-                                                                        src="<?php echo bloginfo('url'); ?>/wp-content/themes/cre8or/tesla_framework/static/images/social/facebook_32.png"/></a>
+                                                                        src="<?php echo TT_THEME_URI; ?>/tesla_framework/static/images/social/facebook_32.png"/></a>
                         </li>
                         <li><a href="http://instagram.com/samonenkoolya"><img width="32"
-                                                                              src="<?php echo bloginfo('url'); ?>/wp-content/themes/cre8or/tesla_framework/static/images/social/instagram_32.png"/></a>
+                                                                              src="<?php echo TT_THEME_URI; ?>/tesla_framework/static/images/social/instagram_32.png"/></a>
                         </li>
                         <li><a href="https://www.behance.net/samonenkoolga"><img width="32"
-                                                                                 src="<?php echo bloginfo('url'); ?>/wp-content/themes/cre8or/tesla_framework/static/images/social/behance_32.png"/></a>
+                                                                                 src="<?php echo TT_THEME_URI; ?>/tesla_framework/static/images/social/behance_32.png"/></a>
                         </li>
                     </ul>
                 </section>
 
                 <?php
 
-                echo wp_nav_menu(array(
-                    'menu' => 'bottom',
-
-                ));
+                echo balanceTags($menu_bottom);
 
                 ?>
             </div>
