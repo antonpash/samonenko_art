@@ -242,8 +242,8 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     margin-left: 30px;
 }
 .woocommerce-cart-tab-container .widget_shopping_cart .total{
-    margin-bottom: 0;
-    padding: 0 0 1em;
+    margin-bottom: 0 !important;
+    padding: 0 0 1em !important;
     font-size: 20px;
     text-align: center;
 }
