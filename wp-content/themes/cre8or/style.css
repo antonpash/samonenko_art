@@ -212,6 +212,10 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     padding: 10px 24px 0;
 }
 
+.woocommerce-cart table.cart img{
+    width: 100px;
+}
+
 p.portfolio-price{
     float: left;
     font-size: 24px;
