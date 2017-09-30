@@ -71,8 +71,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 	<?php do_action( 'woocommerce_widget_shopping_cart_before_buttons' ); ?>
 
 	<div class="woocommerce-mini-cart__buttons buttons">
-		<p class="woocommerce-mini-cart__total total"><strong><?php _e( 'Subtotal', 'woocommerce' ); ?>:</strong> <?php echo WC()->cart->get_cart_subtotal(); ?></p>
-
 		<?php echo '<a href="' . esc_url( wc_get_cart_url() ) . '" class="button-xs align-center wc-forward">' . esc_html__( 'View cart', 'woocommerce' ) . '</a>'; ?>
 		<?php echo '<a href="' . esc_url( wc_get_checkout_url() ) . '" class="button-md text-black button-outlined align-center checkout wc-forward">' . esc_html__( 'Checkout', 'woocommerce' ) . '</a>'; ?>
 	</div>
