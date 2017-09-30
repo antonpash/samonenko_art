@@ -215,6 +215,13 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
 .woocommerce-cart table.cart img{
     width: 100px;
 }
+.woocommerce-cart table.cart .button-md{
+    margin-left: auto;
+}
+.woocommerce-cart table.cart .product-thumbnail a{
+    margin: 0 auto;
+    display: block;
+}
 
 p.portfolio-price{
     float: left;
