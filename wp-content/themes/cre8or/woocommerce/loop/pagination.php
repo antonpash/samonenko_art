@@ -17,22 +17,29 @@ if ($wp_query->max_num_pages <= 1) {
     return;
 }
 ?>
-<!--<nav class="woocommerce-pagination">-->
 <div class="col-md-12">
     <?php
-    echo paginate_links(apply_filters('woocommerce_pagination_args', array(
-        'base' => esc_url_raw(str_replace(999999999, '%#%', remove_query_arg('add-to-cart', get_pagenum_link(999999999, false)))),
-        'format' => '',
-        'add_args' => '',
-        'current' => max(1, get_query_var('paged')),
-        'total' => $wp_query->max_num_pages,
-        'prev_text' => '&larr;',
-        'next_text' => '&rarr;',
-        'type' => 'list',
-        'end_size' => 3,
-        'mid_size' => 3,
-        'ul_class' => 'pagination-links inline-list align-center'
-    )));
+    $pagination = paginate_links( apply_filters( 'woocommerce_pagination_args', array(
+        'base'         => esc_url_raw( str_replace( 999999999, '%#%', remove_query_arg( 'add-to-cart', get_pagenum_link( 999999999, false ) ) ) ),
+        'format'       => '',
+        'add_args'     => false,
+        'current'      => max( 1, get_query_var( 'paged' ) ),
+        'total'        => $wp_query->max_num_pages,
+        'prev_text'    => '&larr;',
+        'next_text'    => '&rarr;',
+        'type'         => 'array',
+        'end_size'     => 3,
+        'mid_size'     => 3,
+    ) ) );
     ?>
-    <!--</nav>-->
+
+    <ul class="pagination-links inline-list align-center">
+
+        <?php
+        foreach ($pagination as $page){
+            echo "<li>$page</li>";
+        }
+        ?>
+
+    </ul>
 </div>
