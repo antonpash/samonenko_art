@@ -247,8 +247,8 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     font-size: 20px;
     text-align: center;
 }
-.woocommerce-cart-tab-container .widget_shopping_cart .buttons > a:first-child{
-    margin-top: 0;
+.woocommerce-cart-tab-container .widget_shopping_cart .buttons a:first-child{
+    margin-top: 100px;
 }
 .woocommerce-cart-tab-container .widget_shopping_cart .buttons a{
     margin-right: auto;
