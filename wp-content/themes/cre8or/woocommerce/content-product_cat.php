@@ -42,12 +42,7 @@ $cateID = $cate->term_id;
 
         <span class="vc_tta-title-text">
             <?php
-            /**
-             * woocommerce_shop_loop_subcategory_title hook.
-             *
-             * @hooked woocommerce_template_loop_category_title - 10
-             */
-            do_action('woocommerce_shop_loop_subcategory_title', $category);
+                echo $category->name;
             ?>
         </span>
 
