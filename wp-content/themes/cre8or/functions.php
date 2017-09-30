@@ -1829,3 +1829,24 @@ add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
+
+function woocommerce_get_all_categories(){
+    $product_categories = get_categories( apply_filters( 'woocommerce_product_subcategories_args', array(
+        'parent'       => $parent_id,
+        'menu_order'   => 'ASC',
+        'hide_empty'   => 0,
+        'hierarchical' => 1,
+        'taxonomy'     => 'product_cat',
+        'pad_counts'   => 1,
+    ) ) );
+
+    if ( apply_filters( 'woocommerce_product_subcategories_hide_empty', true ) ) {
+        $product_categories = wp_list_filter( $product_categories, array( 'count' => 0 ), 'NOT' );
+    }
+
+    foreach ( $product_categories as $category ) {
+        wc_get_template( 'content-product_cat.php', array(
+            'category' => $category,
+        ) );
+    }
+}

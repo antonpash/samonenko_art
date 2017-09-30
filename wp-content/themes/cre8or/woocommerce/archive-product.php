@@ -48,7 +48,7 @@ do_action('woocommerce_before_main_content');
             class="vc_general vc_tta vc_tta-tabs vc_tta-color-violet vc_tta-style-classic vc_tta-shape-square vc_tta-spacing-1 vc_tta-o-no-fill vc_tta-tabs-position-left vc_tta-controls-align-left vc_tta-controls-size-sm">
             <div class="vc_tta-tabs-container">
                     <ul class="vc_tta-tabs-list">
-                        <?php woocommerce_product_subcategories(); ?>
+                        <?php woocommerce_get_all_categories(); ?>
                     </ul>
 
                     <?php dynamic_sidebar('sidebar-4'); ?>

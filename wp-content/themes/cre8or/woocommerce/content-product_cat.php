@@ -20,23 +20,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-if ($category->parent != 0) {
-    return;
-}
-
 $cate = get_queried_object();
 $cateID = $cate->term_id;
 ?>
 <li <?php wc_product_cat_class('vc_tta-tab ' . ($category->term_id == $cateID ? 'vc_active' : '')); ?>>
-    <?php
-    /**
-     * woocommerce_before_subcategory hook.
-     *
-     * @hooked woocommerce_template_loop_category_link_open - 10
-     */
-    do_action('woocommerce_before_subcategory', $category);
-
-    ?>
 
     <a href="<?php echo get_term_link($category->slug, 'product_cat'); ?>">
 
