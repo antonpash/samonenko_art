@@ -225,6 +225,15 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     margin: 0 auto;
 }
 
+body .button-outlined.text-black:not(:disabled):hover, body .button-outlined[class*="button-"].bg-black:not(:disabled):hover{
+    color: #ffffff !important;
+    background: #000000 !important;
+}
+
+button:disabled, input[type="submit"]:disabled, [class*="button-"]:disabled{
+    opacity: 0.3;
+}
+
 p.portfolio-price{
     float: left;
     font-size: 24px;
