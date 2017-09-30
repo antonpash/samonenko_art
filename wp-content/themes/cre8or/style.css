@@ -250,7 +250,7 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
 .woocommerce-cart-tab-container .widget_shopping_cart .buttons a{
     margin-right: auto;
 }
-.woocommerce-cart-tab-container .widget_shopping_cart .buttons a:nth-child(1){
+.woocommerce-cart-tab-container .widget_shopping_cart .buttons a:first-child{
     margin-top: 0;
 }
 
