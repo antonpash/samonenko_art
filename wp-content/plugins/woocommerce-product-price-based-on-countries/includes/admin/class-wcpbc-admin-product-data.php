@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * WCPBC_Admin_Product_Data 
  *
  * @class 		WCPBC_Admin_Product_Data
- * @version		1.6.0
+ * @version		1.6.14
  * @author 		oscargare
  * @category	Class
  */
@@ -29,6 +29,8 @@ class WCPBC_Admin_Product_Data {
 		
 		add_action( 'woocommerce_save_product_variation', array( __CLASS__, 'save_product_variation_countries_prices' ), 10, 2 );		
 		
+		add_action( 'woocommerce_variable_product_bulk_edit_actions', array( __CLASS__, 'variable_product_bulk_edit_actions' ) );
+
 		add_action( 'woocommerce_product_quick_edit_save',  array( __CLASS__, 'product_quick_bulk_edit_save' ) );
 		
 		add_action( 'woocommerce_product_bulk_edit_save',  array( __CLASS__, 'product_quick_bulk_edit_save' ), 20 );
@@ -57,7 +59,7 @@ class WCPBC_Admin_Product_Data {
 			$_sale_price_dates = empty($_sale_price_dates) ? 'default' : $_sale_price_dates;							
 							
 			?>
-				<div class="options_group pricing show_if_simple show_if_external wcpbc_pricing">					
+				<div class="options_group pricing show_if_simple show_if_external wcpbc_pricing<?php if ( ! wcpbc_is_pro() ) echo ' hide_if_bundle hide_if_subscription'; ?>">					
 
 					<?php
 						woocommerce_wp_radio(
@@ -79,12 +81,12 @@ class WCPBC_Admin_Product_Data {
 						<?php do_action('wc_price_based_country_before_product_options_pricing', $_id_prefix, $value['currency'] ); ?>
 																		
 						<p class="form-field _regular_price_field">
-							<label><?php echo __( 'Regular Price', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol($value['currency']) . ')'; ?></label>
+							<label><?php echo __( 'Regular price', 'wc-price-based-country' ) . ' (' . get_woocommerce_currency_symbol($value['currency']) . ')'; ?></label>
 							<input type="text" id="<?php echo $_id_prefix . '_regular_price'; ?>" name="<?php echo $_id_prefix . '_regular_price'; ?>" value="<?php echo wc_format_localized_price( $_regular_price ); ?>" class="short wc_input_price" placeholder="" />
 						</p>
 
 						<p class="form-field _sale_price_field">								
-							<label><?php echo __( 'Sale Price', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol($value['currency']) . ')'; ?></label>
+							<label><?php echo __( 'Sale price', 'wc-price-based-country' ) . ' (' . get_woocommerce_currency_symbol($value['currency']) . ')'; ?></label>
 							<input type="text" id="<?php echo $_id_prefix . '_sale_price'; ?>" name="<?php echo $_id_prefix . '_sale_price'; ?>" value="<?php echo wc_format_localized_price( $_sale_price ); ?>" class="short wc_input_price wcpbc_sale_price" />
 						</p>
 	
@@ -115,7 +117,16 @@ class WCPBC_Admin_Product_Data {
 				</div>
 				
 			<?php		
-		}								
+		}
+		if ( ! wcpbc_is_pro() ) {
+			echo '<div class="options_group wcpbc_product_data_ad show_if_bundle show_if_subscription" style="padding: 20px 0;">
+					<div class="inline notice woocommerce-message" style="margin:10px;">
+						<h2 style="padding: 8px 18px;">Upgrade to <strong>Price Based on Country Pro</strong> and get support for Product <span class="hide_if_subscription">Bundle</span><span class="hide_if_bundle">Subscription</span>.</h2>
+						<div style="padding: 8px 12px;"><a target="_blank" class="button button-primary" href="https://www.pricebasedcountry.com/pricing/?utm_source=product-data&utm_medium=banner&utm_campaign=Get_Pro">Upgrade to Price Based on Country Pro now!</a></div>
+					</div>
+				</div>';
+		}
+		
 	}
 
 	
@@ -236,7 +247,7 @@ class WCPBC_Admin_Product_Data {
 			$_sale_price_dates = empty($_sale_price_dates) ? 'default' : $_sale_price_dates;
 			
 			?>
-				<div class="wcpbc_pricing">					
+				<div class="wcpbc_pricing<?php if ( ! wcpbc_is_pro() ) echo ' hide_if_variable-subscription'; ?>">					
 					<p class="form-row form-row-first"><strong><?php echo __( 'Price for', 'wc-price-based-country' )  . ' ' . $value['name'] . ' (' . get_woocommerce_currency_symbol( $value['currency'] ) . ')'; ?></strong></p>
 
 					<div class="form-row form-row-last wcpbc_wrapper_variable_price_method <?php echo '_' . $key . '_variable_price_method_' . $loop . '_field'; ?>">
@@ -263,11 +274,11 @@ class WCPBC_Admin_Product_Data {
 							<?php do_action('wc_price_based_country_before_product_variable_options_pricing', $key, $value['currency'], $loop, $variation ); ?>
 							
 							<p class="form-row form-row-first">
-								<label><?php echo __( 'Regular Price:', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol( $value['currency'] ) . ')'; ?></label>
+								<label><?php echo __( 'Regular price:', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol( $value['currency'] ) . ')'; ?></label>
 								<input type="text" size="5" id="<?php echo '_' . $key . '_variable_regular_price_' . $loop; ?>" name="<?php echo '_' . $key . '_variable_regular_price[' . $loop. ']'; ?>" value="<?php if ( isset( $_regular_price ) ) echo esc_attr( $_regular_price ); ?>" class="wc_input_price" />
 							</p>
 							<p class="form-row form-row-last">
-								<label><?php echo __( 'Sale Price:', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol( $value['currency'] ) . ')'; ?></label>
+								<label><?php echo __( 'Sale price:', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol( $value['currency'] ) . ')'; ?></label>
 								<input type="text" size="5" id="<?php echo '_' . $key . '_variable_sale_price_' . $loop; ?>" name="<?php echo '_' . $key . '_variable_sale_price[' . $loop. ']'; ?>" value="<?php if ( isset( $_sale_price ) ) echo esc_attr( $_sale_price ); ?>" class="wc_input_price wcpbc_sale_price" />
 							</p>						
 														
@@ -308,6 +319,15 @@ class WCPBC_Admin_Product_Data {
 
 			<?php			
 		}
+		
+		if ( ! wcpbc_is_pro() ) {
+			echo '<div class="wcpbc_product_data_ad show_if_variable-subscription" style="padding: 20px 0;clear:both;">					
+				  	<div class="notice woocommerce-message" style="margin:10px;">
+						<h2 style="padding: 8px 18px;">Upgrade to <strong>Price Based on Country Pro</strong> and get support for Product Subscription.</h2>
+						<div style="padding: 8px 12px;"><a target="_blank" class="button button-primary" href="https://www.pricebasedcountry.com/pricing/?utm_source=product-data&utm_medium=banner&utm_campaign=Get_Pro">Upgrade to Price Based on Country Pro now!</a></div>
+					</div>
+				</div>';
+		}
 	}	
 	
 	/**
@@ -326,6 +346,58 @@ class WCPBC_Admin_Product_Data {
 		}		
 	}
 	
+	/**
+	 * Add variable bulk actions options	  	
+	 */
+	public static function variable_product_bulk_edit_actions(){
+
+		if ( wcpbc_is_pro() ) {
+			return;
+		}
+
+		$variable_actions = array(
+			__( 'Set regular prices', 'woocommerce' ),
+			__( 'Increase regular prices (fixed amount or percentage)', 'woocommerce' ),
+			__( 'Decrease regular prices (fixed amount or percentage)', 'woocommerce' ),
+			__( 'Set sale prices', 'woocommerce' ),
+			__( 'Increase sale prices (fixed amount or percentage)', 'woocommerce' ),
+			__( 'Decrease sale prices (fixed amount or percentage)', 'woocommerce' )
+		);
+
+		foreach ( WCPBC()->get_regions() as $zone_id => $zone ) {
+			echo '<optgroup label="'. esc_attr( sprintf( __( '%s Pricing (%s)', 'wc-price-based-country' ), $zone['name'], get_woocommerce_currency_symbol( $zone['currency'] ) ) ) . '">';
+			
+			foreach ($variable_actions as $key => $label ) {
+				echo '<option value="wcpbc_variable_bulk_edit_popup">' . $label . '</option>';
+			}		
+			echo '</optgroup>';
+		}		
+
+		add_action( 'admin_footer', array( __CLASS__, 'variable_bulk_edit_popup' ) );			
+	}
+
+	/**
+	 * Output the variable bulk edit popup
+	 */
+	public static function variable_bulk_edit_popup(){
+		 add_thickbox();
+		 ?>
+		 	<div id="variable-bulk-edit-popup" style="display:none;">
+		 		<h3 style="margin: 1em 0; font-size: 1.3em;"><?php _e( 'Do you want to bulk edit the prices of the variations?', 'wc-price-based-country' ); ?></h3>
+		 		<p><?php _e( sprintf( 'Great news: you can, with %sPrice Based on Country Pro!%s', '<a href="https://www.pricebasedcountry.com/pricing/?utm_source=bulk-edit&utm_medium=banner&utm_campaign=Get_Pro">', '</a>' ), 'wc-price-based-country' ); ?></p>
+		 		<p><?php _e( 'Other benefits of Pro version:', 'wc-price-based-country' ); ?></p>
+		 		<ul>
+		 			<li><span class="dashicons dashicons-yes"></span><span class="feature_text"><?php _e( 'Automatic updates of exchange rates.', 'wc-price-based-country' ); ?></span></li>
+		 			<li><span class="dashicons dashicons-yes"></span><span class="feature_text"><?php _e( 'Currency switcher widget.', 'wc-price-based-country' ); ?></span></li>
+		 			<li><span class="dashicons dashicons-yes"></span><span class="feature_text"><?php _e( 'Support to WooCommerce Subscriptions.', 'wc-price-based-country' ); ?></span></li>
+		 			<li><span class="dashicons dashicons-yes"></span><span class="feature_text"><?php _e( 'Support to WooCommerce Product Add-ons.', 'wc-price-based-country' ); ?></span></li>
+		 			<li><span class="dashicons dashicons-yes"></span><span class="feature_text"><?php _e( 'No ads!', 'wc-price-based-country' ); ?></span></li>
+		 		</ul>
+		 		<a target="_blank" class="button button-primary" href="https://www.pricebasedcountry.com/pricing/?utm_source=bulk-edit&utm_medium=banner&utm_campaign=Get_Pro"><?php _e( 'Upgrade to Price Based on Country Pro now!', 'wc-price-based-country' ); ?></a>
+		 	</div>
+		 <?php
+	}
+
 	/**
 	 * Quick and Bulk product edit.
 	 */
@@ -383,6 +455,12 @@ class WCPBC_Admin_Product_Data {
 				}				
 			}
 		}
+
+		//wcpbc_variable_bluck_edit
+		if ( $bulk_action !== 'wcpbc_variable_bluck_edit' || ! isset( $data['value'] ) || empty( $data['action'] ) || empty( $data['zone_id'] ) || ! array_key_exists( $data['zone_id'], WCPBC()->get_regions() ) ){
+			return;
+		}
+		
 	}
 }
 

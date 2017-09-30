@@ -337,10 +337,8 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
 
                         }
                         else {
-
                             $class = ( $terms_type_list == 'hierarchical' && yit_term_is_child( $term ) ) ? "class='{$is_child_class}'" : '';
                             $link  = add_query_arg( $arg, implode( ',', $current_filter ), $link );
-
                         }
 
                         // Search Arg
@@ -1238,7 +1236,7 @@ if ( ! class_exists( 'YITH_WCAN_Navigation_Widget' ) ) {
                     }
 
                     else {
-                        $to_print = apply_filters( 'yith_wcan_show_no_products_attributes', ! $filter_by_tags_hierarchical && $query_type != 'and' );
+                        $to_print = apply_filters( 'yith_wcan_show_no_products_attributes', ( ! $filter_by_tags_hierarchical && $query_type != 'and' ), $count, $term );
 
                         $to_print && printf( '<li %s><span>%s</span>', $class, $term->name );
                         $li_printed = true;

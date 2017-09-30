@@ -4,10 +4,19 @@ class WCML_Orders{
     private $woocommerce_wpml;
     private $sitepress;
     
-    private $standart_order_notes = array('Order status changed from %s to %s.',
-        'Order item stock reduced successfully.','Item #%s stock reduced from %s to %s.','Item #%s stock increased from %s to %s.','Awaiting BACS payment','Awaiting cheque payment','Payment to be made upon delivery.',
-        'Validation error: PayPal amounts do not match (gross %s).','Validation error: PayPal IPN response from a different email address (%s).','Payment pending: %s',
-        'Payment %s via IPN.','Validation error: PayPal amounts do not match (amt %s).','IPN payment completed','PDT payment completed'
+    private $standard_order_notes = array(
+            'Order status changed from %s to %s.',
+            'Order item stock reduced successfully.',
+            'Item #%s stock reduced from %s to %s.',
+            'Item #%s stock increased from %s to %s.',
+            'Awaiting BACS payment','Awaiting cheque payment',
+            'Payment to be made upon delivery.',
+            'Validation error: PayPal amounts do not match (gross %s).',
+            'Validation error: PayPal IPN response from a different email address (%s).',
+            'Payment pending: %s',
+            'Payment %s via IPN.',
+            'Validation error: PayPal amounts do not match (amt %s).',
+            'IPN payment completed','PDT payment completed'
     );
 
     public function __construct( &$woocommerce_wpml, &$sitepress ){
@@ -31,7 +40,10 @@ class WCML_Orders{
         add_filter('icl_lang_sel_copy_parameters', array($this, 'append_query_parameters'));
 
         add_filter('the_comments', array($this, 'get_filtered_comments'));
-        add_filter('gettext',array($this, 'filtered_woocommerce_new_order_note_data'),10,3);
+
+	    if ( $this->should_attach_new_order_note_data_filter() ) {
+		    add_filter( 'gettext', array( $this, 'filtered_woocommerce_new_order_note_data' ), 10, 3 );
+	    }
 
         add_filter( 'woocommerce_order_get_items', array( $this, 'woocommerce_order_get_items' ), 10, 2 );
 
@@ -44,10 +56,19 @@ class WCML_Orders{
         add_action( 'woocommerce_before_order_itemmeta', array( $this, 'backend_before_order_itemmeta' ), 100, 3 );
         add_action( 'woocommerce_after_order_itemmeta', array( $this, 'backend_after_order_itemmeta' ), 100, 3 );
 
+        add_filter( 'woocommerce_get_item_downloads', array( $this, 'filter_downloadable_product_items' ), 10, 3 );
+        add_filter( 'woocommerce_customer_get_downloadable_products', array( $this, 'filter_customer_get_downloadable_products' ), 10, 3 );
+    }
+
+    public function should_attach_new_order_note_data_filter() {
+	    $admin_language = $this->sitepress->get_user_admin_language( get_current_user_id(), true );
+	    $all_strings_in_english = get_option( 'wpml-st-all-strings-are-in-english' );
+
+	    return 'en' !== $admin_language || ! $all_strings_in_english;
     }
 
     function filtered_woocommerce_new_order_note_data($translations, $text, $domain ){
-        if(in_array($text,$this->standart_order_notes)){
+        if(in_array($text,$this->standard_order_notes)){
 
             $language = $this->woocommerce_wpml->strings->get_string_language( $text, 'woocommerce' );
 
@@ -181,7 +202,13 @@ class WCML_Orders{
                     }
                 }elseif( $item instanceof WC_Order_Item_Shipping ){
                     if( $item->get_method_id() ){
-                        $item->set_method_title( $this->woocommerce_wpml->shipping->translate_shipping_method_title( $item->get_method_title(), $item->get_method_id(), $language_to_filter ) );
+                        $item->set_method_title(
+                                $this->woocommerce_wpml->shipping->translate_shipping_method_title(
+                                    $item->get_method_title(),
+                                    $item->get_method_id(),
+                                    $language_to_filter
+                                )
+                        );
                     }
                 }
             }
@@ -244,7 +271,6 @@ class WCML_Orders{
 
         $taxonomy = substr( $key, 0, 3 ) != 'pa_' ? wc_attribute_taxonomy_name( $key ) : $key;
         $term_id = $woocommerce_wpml->terms->wcml_get_term_id_by_slug( $taxonomy, $value );
-        $translated_term = $woocommerce_wpml->terms->wcml_get_translated_term( $term_id, $taxonomy, $languge );
         $translated_term = $woocommerce_wpml->terms->wcml_get_translated_term( $term_id, $taxonomy, $languge );
 
         if( $translated_term ){
@@ -375,6 +401,41 @@ class WCML_Orders{
             update_post_meta( $object_id, '_order_currency', get_woocommerce_currency() );
         }
 
+    }
+
+
+    public function filter_downloadable_product_items( $files, $item, $object  ){
+
+        $order_language = get_post_meta( WooCommerce_Functions_Wrapper::get_order_id( $object ), 'wpml_language', true );
+
+        if( $item['variation_id'] > 0 ){
+            $item['variation_id'] =  apply_filters( 'translate_object_id', $item['variation_id'], 'product_variation', false, $order_language );
+        }else{
+            $item['product_id'] = apply_filters( 'translate_object_id',  $item['product_id'], 'product', false, $order_language );
+        }
+
+        remove_filter( 'woocommerce_get_item_downloads', array( $this, 'filter_downloadable_product_items' ), 10, 3 );
+
+        $files = WooCommerce_Functions_Wrapper::get_item_downloads( $object, $item );
+
+        add_filter( 'woocommerce_get_item_downloads', array( $this, 'filter_downloadable_product_items' ), 10, 3 );
+
+        return $files;
+    }
+
+    public function filter_customer_get_downloadable_products( $downloads ){
+
+        foreach( $downloads as $key => $download ){
+
+            $translated_id =  apply_filters( 'translate_object_id',  $download['product_id'], get_post_type( $download['product_id'] ), false, $this->sitepress->get_current_language() );
+
+            if( $translated_id ){
+                $downloads[ $key ][ 'product_name' ] = get_the_title( $translated_id );
+            }
+
+        }
+
+        return $downloads;
     }
 
 

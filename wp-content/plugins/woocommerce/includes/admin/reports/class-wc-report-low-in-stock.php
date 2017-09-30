@@ -5,11 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'WC_Report_Stock' ) ) {
-	require_once( 'class-wc-report-stock.php' );
+	require_once( dirname( __FILE__ ) . '/class-wc-report-stock.php' );
 }
 
 /**
- * WC_Report_Low_In_Stock
+ * WC_Report_Low_In_Stock.
  *
  * @author      WooThemes
  * @category    Admin
@@ -19,14 +19,17 @@ if ( ! class_exists( 'WC_Report_Stock' ) ) {
 class WC_Report_Low_In_Stock extends WC_Report_Stock {
 
 	/**
-	 * No items found text
+	 * No items found text.
 	 */
 	public function no_items() {
 		_e( 'No low in stock products found.', 'woocommerce' );
 	}
 
 	/**
-	 * Get Products matching stock criteria
+	 * Get Products matching stock criteria.
+	 *
+	 * @param int $current_page
+	 * @param int $per_page
 	 */
 	public function get_items( $current_page, $per_page ) {
 		global $wpdb;

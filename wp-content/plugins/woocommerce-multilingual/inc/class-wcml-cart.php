@@ -1,28 +1,40 @@
 <?php
 class WCML_Cart
 {
-
+    /** @var woocommerce_wpml */
     private $woocommerce_wpml;
+    /** @var Sitepress */
     private $sitepress;
+    /** @var WooCommerce */
     private $woocommerce;
 
-    public function __construct( &$woocommerce_wpml, &$sitepress, &$woocommerce )
+    /**
+     * WCML_Cart constructor.
+     *
+     * @param woocommerce_wpml $woocommerce_wpml
+     * @param SitePress $sitepress
+     * @param WooCommerce $woocommerce
+     */
+    public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, WooCommerce $woocommerce )
     {
         $this->woocommerce_wpml = $woocommerce_wpml;
         $this->sitepress = $sitepress;
         $this->woocommerce = $woocommerce;
+    }
 
-        if( $this->woocommerce_wpml->settings[ 'cart_sync' ][ 'currency_switch' ] == WCML_CART_CLEAR || $this->woocommerce_wpml->settings[ 'cart_sync' ][ 'lang_switch' ] == WCML_CART_CLEAR ){
+    public function add_hooks(){
+
+        if( $this->is_clean_cart_enabled() ){
+
             $this->enqueue_dialog_ui();
 
             add_action( 'wcml_removed_cart_items', array( $this, 'wcml_removed_cart_items_widget' ) );
             add_action( 'wp_ajax_wcml_cart_clear_removed_items', array( $this, 'wcml_cart_clear_removed_items' ) );
             add_action( 'wp_ajax_nopriv_wcml_cart_clear_removed_items', array( $this, 'wcml_cart_clear_removed_items' ) );
 
-            add_filter( 'wcml_switch_currency_exception', array( $this, 'cart_switching_currency' ), 10, 3 );
+            add_filter( 'wcml_switch_currency_exception', array( $this, 'cart_switching_currency' ), 10, 4 );
             add_action( 'wcml_before_switch_currency', array( $this, 'switching_currency_empty_cart_if_needed' ), 10, 2 );
-        }
-        else{
+        }else{
             //cart widget
             add_action( 'wp_ajax_woocommerce_get_refreshed_fragments', array( $this, 'wcml_refresh_fragments' ), 0 );
             add_action( 'wp_ajax_woocommerce_add_to_cart', array( $this, 'wcml_refresh_fragments' ), 0 );
@@ -31,16 +43,32 @@ class WCML_Cart
 
             //cart
             add_action( 'woocommerce_before_calculate_totals', array( $this, 'woocommerce_calculate_totals' ), 100 );
-            add_action( 'woocommerce_get_cart_item_from_session', array( $this, 'translate_cart_contents' ), 10 );
+            add_action( 'woocommerce_get_cart_item_from_session', array( $this, 'translate_cart_contents' ) );
             add_action( 'woocommerce_cart_loaded_from_session', array( $this, 'translate_cart_subtotal' ) );
             add_action( 'woocommerce_before_checkout_process', array( $this, 'wcml_refresh_cart_total' ) );
 
             add_filter('woocommerce_paypal_args', array($this, 'filter_paypal_args'));
-            add_filter( 'woocommerce_add_to_cart_sold_individually_quantity', array( $this, 'woocommerce_add_to_cart_sold_individually_quantity' ), 10, 3 );
+            add_filter( 'woocommerce_add_to_cart_sold_individually_quantity', array( $this, 'add_to_cart_sold_individually_exception' ), 10, 5 );
 
             $this->localize_flat_rates_shipping_classes();
         }
 
+		add_filter( 'woocommerce_cart_needs_payment', array( $this, 'use_cart_contents_total_for_needs_payment' ), 10, 2 );
+
+    }
+
+    public function is_clean_cart_enabled(){
+
+        $cart_sync_settings = $this->woocommerce_wpml->settings['cart_sync'];
+
+        if(
+            $cart_sync_settings[ 'currency_switch' ] === $this->sitepress->get_wp_api()->constant( 'WCML_CART_CLEAR' ) ||
+            $cart_sync_settings[ 'lang_switch' ] === $this->sitepress->get_wp_api()->constant( 'WCML_CART_CLEAR' )
+        ){
+            return true;
+        }
+
+        return false;
     }
 
     public function enqueue_dialog_ui(){
@@ -129,8 +157,8 @@ class WCML_Cart
 
     public function cart_alert( $dialog_title, $confirmation_message, $switch_to, $stay_in, $switch_to_value, $stay_in_value = false, $language_switch = false ){
         ?>
-        <div id="wcml-cart-dialog-confirm" title="<?php echo $dialog_title ?>">
-            <p><?php echo $confirmation_message; ?></p>
+        <div id="wcml-cart-dialog-confirm" title="<?php echo esc_attr( $dialog_title ) ?>">
+            <p><?php echo esc_html( $confirmation_message ); ?></p>
         </div>
 
         <script type="text/javascript">
@@ -143,28 +171,34 @@ class WCML_Cart
                     modal: true,
                     closeOnEscape: false,
                     dialogClass: "wcml-cart-dialog",
+                    create: function(){
+                        jQuery('#jquery-ui-style-css').attr('disabled', 'disabled');
+                    },
                     open: function(event, ui) {
                         jQuery(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+                    },
+                    close: function(event, ui){
+                        jQuery('#jquery-ui-style-css').removeAttr('disabled');
                     },
                     buttons: {
                         "<?php echo $switch_to; ?>": function() {
                             jQuery( this ).dialog( "close" );
                             <?php if( $language_switch ): ?>
-                                window.location = '<?php echo $switch_to_value; ?>';
+                                window.location = '<?php echo esc_url( $switch_to_value, null, 'redirect' ); ?>';
                             <?php else: ?>
                                 jQuery('.wcml_currency_switcher').parent().find('img').remove();
-                                wcml_load_currency( "<?php echo $switch_to_value; ?>", true );
+                                wcml_load_currency( "<?php echo esc_js( $switch_to_value ); ?>", true );
                             <?php endif; ?>
 
                         },
                         "<?php echo $stay_in; ?>": function() {
                             jQuery( this ).dialog( "close" );
                             <?php if( $language_switch ): ?>
-                                window.location = '<?php echo $stay_in_value; ?>';
+                                window.location = '<?php echo esc_url( $stay_in_value, null, 'redirect' ); ?>';
                             <?php else: ?>
                                 jQuery('.wcml_currency_switcher').parent().find('img').remove();
                                 jQuery('.wcml_currency_switcher').removeAttr('disabled');
-                                jQuery('.wcml_currency_switcher').val( '<?php echo $stay_in_value; ?>' );
+                                jQuery('.wcml_currency_switcher').val( '<?php echo esc_js ( $stay_in_value ); ?>' );
                             <?php endif; ?>
                         }
                     }
@@ -191,7 +225,7 @@ class WCML_Cart
             $tr_product_id = apply_filters( 'translate_object_id', $cart_item[ 'product_id' ], 'product', false, $current_language );
             //translate custom attr labels in cart object
 
-            if( version_compare( WC_VERSION , '2.7', '<' ) && isset( $cart_item[ 'data' ]->product_attributes ) ){
+            if( version_compare( WC_VERSION , '3.0.0', '<' ) && isset( $cart_item[ 'data' ]->product_attributes ) ){
                 foreach( $cart_item[ 'data' ]->product_attributes as $attr_key => $product_attribute ){
                     if( isset( $product_attribute[ 'is_taxonomy' ]) && !$product_attribute[ 'is_taxonomy' ] ){
                         $cart->cart_contents[ $key ][ 'data' ]->product_attributes[ $attr_key ][ 'name' ] = $this->woocommerce_wpml->strings->translated_attribute_label(
@@ -230,13 +264,21 @@ class WCML_Cart
                 if( !is_null( $tr_variation_id ) ){
                     $cart->cart_contents[ $key ][ 'product_id' ] = intval( $tr_product_id );
                     $cart->cart_contents[ $key ][ 'variation_id' ] = intval( $tr_variation_id );
-                    $cart->cart_contents[ $key ][ 'data' ]->id = intval( $tr_product_id );
+                    if( defined('WC_VERSION') && version_compare( WC_VERSION , '2.7', '<' ) ){
+                        $cart->cart_contents[ $key ][ 'data' ]->id = intval( $tr_product_id );
+                    }else{
+                        $cart->cart_contents[ $key ][ 'data' ]->set_id( intval( $tr_product_id ) );
+                    }
                     $cart->cart_contents[ $key ][ 'data' ]->post = get_post( $tr_product_id );
                 }
             }else{
                 if( !is_null( $tr_product_id ) ){
                     $cart->cart_contents[ $key ][ 'product_id' ] = intval( $tr_product_id );
-                    $cart->cart_contents[ $key ][ 'data' ]->id = intval( $tr_product_id );
+                    if( defined('WC_VERSION') && version_compare( WC_VERSION , '2.7', '<' ) ){
+                        $cart->cart_contents[ $key ][ 'data' ]->id = intval( $tr_product_id );
+                    }else{
+                        $cart->cart_contents[ $key ][ 'data' ]->set_id( intval( $tr_product_id ) );
+                    }
                     $cart->cart_contents[ $key ][ 'data' ]->post = get_post( $tr_product_id );
                 }
             }
@@ -320,11 +362,7 @@ class WCML_Cart
             $cart_contents[ $key ][ 'product_id' ],
             $cart_contents[ $key ][ 'variation_id' ],
             $cart_contents[ $key ][ 'variation' ],
-            (array) apply_filters( 'woocommerce_add_cart_item_data',
-                $cart_item_data,
-                $cart_contents[ $key ][ 'product_id' ],
-                $cart_contents[ $key ][ 'variation_id' ]
-            )
+            $cart_item_data
         );
     }
 
@@ -345,13 +383,20 @@ class WCML_Cart
     }
 
     public function translate_cart_contents( $item ) {
+
         // translate the product id and product data
         $item[ 'product_id' ] = apply_filters( 'translate_object_id', $item[ 'product_id' ], 'product', true );
-        if ($item[ 'variation_id' ]) {
-            $item[ 'variation_id' ] = apply_filters( 'translate_object_id',$item[ 'variation_id' ], 'product_variation', true );
+        if( $item[ 'variation_id' ] ) {
+            $item[ 'variation_id' ] = apply_filters( 'translate_object_id', $item[ 'variation_id' ], 'product_variation', true );
         }
-        $product_id = $item[ 'variation_id' ] ? $item[ 'variation_id' ] : $item[ 'product_id' ];
-        $item[ 'data' ]->post->post_title = get_the_title( $product_id );
+
+        $item_product_title = $item[ 'variation_id' ] ? get_the_title( $item[ 'variation_id' ] ) : get_the_title( $item[ 'product_id' ] );
+
+        if( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '3.0.0', '>=' ) ) {
+            $item[ 'data' ]->set_name( $item_product_title );
+        } else {
+	        $item[ 'data' ]->post->post_title = $item_product_title;
+        }
 
         return $item;
     }
@@ -428,18 +473,69 @@ class WCML_Cart
         return $args;
     }
 
-    public function woocommerce_add_to_cart_sold_individually_quantity( $qt, $quantity, $product_id ){
+    public function add_to_cart_sold_individually_exception( $qt, $quantity, $product_id, $variation_id, $cart_item_data ) {
+
+        $post_id = $product_id;
+        if ( $variation_id ) {
+            $post_id = $variation_id;
+        }
 
         //check if product already added to cart in another language
-        $current_product_trid = $this->sitepress->get_element_trid( $product_id, 'post_product' );
+        foreach ( WC()->cart->cart_contents as $cart_item ) {
 
-        foreach( WC()->cart->cart_contents as $cart_item ){
-            $cart_element_trid = $this->sitepress->get_element_trid( $cart_item[ 'product_id' ], 'post_product' );
-            if( $current_product_trid == $cart_element_trid && $cart_item[ 'quantity' ] > 0 ){
-                throw new Exception( sprintf( '<a href="%s" class="button wc-forward">%s</a> %s', wc_get_cart_url(), __( 'View cart', 'woocommerce' ), sprintf( __( 'You cannot add another "%s" to your cart.', 'woocommerce' ), get_the_title( $product_id ) ) ) );
+            if ( $this->sold_individually_product( $cart_item, $cart_item_data, $post_id, $quantity ) ) {
+
+                $this->sold_individually_exception( $post_id );
+
             }
         }
 
         return $qt;
     }
+
+    public function sold_individually_product( $cart_item, $cart_item_data, $post_id, $quantity ){
+
+        $current_product_trid = $this->sitepress->get_element_trid( $post_id, 'post_' . get_post_type( $post_id ) );
+
+        if ( $cart_item['variation_id'] ) {
+            $cart_element_trid = $this->sitepress->get_element_trid( $cart_item['variation_id'], 'post_product_variation' );
+        } else {
+            $cart_element_trid = $this->sitepress->get_element_trid( $cart_item['product_id'], 'post_product' );
+        }
+
+        if ( apply_filters( 'wcml_add_to_cart_sold_individually', true, $cart_item_data, $post_id, $quantity ) &&
+             $current_product_trid == $cart_element_trid &&
+             $cart_item['quantity'] > 0
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function sold_individually_exception( $post_id ){
+
+        $wc_cart_url   = esc_url( wc_get_cart_url() );
+        $message_title = sprintf( esc_html__( 'You cannot add another &quot;%s&quot; to your cart.', 'woocommerce' ), get_the_title( $post_id ) );
+
+        $message = '<a href="' . $wc_cart_url . '" class="button wc-forward">' . esc_html__( 'View Cart', 'woocommerce' ) . '</a>';
+        $message .= ' ' . $message_title;
+
+        throw new Exception( $message );
+
+    }
+
+	/**
+	 * @param bool $needs
+	 * @param WC_Cart $cart
+	 *
+	 * @return bool
+	 */
+	public function use_cart_contents_total_for_needs_payment( $needs, $cart ){
+		if( isset( $cart->cart_contents_total ) && version_compare( WC()->version,'3.2', '<' ) ){
+			$needs = $cart->cart_contents_total > 0;
+		}
+		return $needs;
+	}
+
 }

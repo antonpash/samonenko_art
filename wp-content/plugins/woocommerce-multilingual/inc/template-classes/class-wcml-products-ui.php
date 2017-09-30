@@ -120,16 +120,13 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 	}
 
 	public function get_products_data(){
-		global $iclTranslationManagement;
 
 		$active_languages = $this->sitepress->get_active_languages();
 
 		$products_info = $this->get_product_info_from_self_edit_mode();
-
 		if( !$products_info ){
 			$products_info = $this->get_product_info_for_translators();
 		}
-
 		if( !$products_info ){
 			$products_info = $this->get_products_from_filter();
 		}
@@ -187,7 +184,7 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 			$products[ $key ]->categories_list = $this->get_categories_list( $product->ID, $this->get_cat_url() );
 
 			$prod = wc_get_product( $product->ID );
-			$products[ $key ]->icon_class = Deprecated_WC_Functions::get_product_type( $product->ID );
+			$products[ $key ]->icon_class = WooCommerce_Functions_Wrapper::get_product_type( $product->ID );
 
 			if ( $prod->is_virtual() ) {
 				$products[ $key ]->icon_class = 'virtual';
@@ -210,11 +207,12 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 
 		if ( isset( $_GET[ 'prid' ] ) ) {
 
-			if ( ! $this->woocommerce_wpml->products->is_original_product( $_GET[ 'prid' ] ) ) {
-				$original_language = $this->woocommerce_wpml->products->get_original_product_language( $_GET[ 'prid' ] );
-				$products[]        = get_post( apply_filters( 'translate_object_id', $_GET[ 'prid' ], 'product', true, $original_language ) );
+			$prid = sanitize_text_field( $_GET[ 'prid' ] );
+
+			if ( ! $this->woocommerce_wpml->products->is_original_product( $prid ) ){
+				$products[]        = get_post( $this->woocommerce_wpml->products->get_original_product_id( $prid ) );
 			} else {
-				$products[] = get_post( $_GET[ 'prid' ] );
+				$products[] = get_post( $prid );
 			}
 			$products_count = 1;
 
@@ -390,6 +388,7 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 		$sql .= " LEFT JOIN {$wpdb->prefix}icl_translations AS t ON t.element_id = p.id";
 
 		if(in_array($translation_status,array('not','need_update','in_progress','complete'))){
+
 			foreach($this->sitepress->get_active_languages() as $lang){
 
 				if( $lang['code'] == $slang ) continue;
@@ -417,7 +416,7 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 			$sql .= " AND p.post_status = %s ";
 			$prepare_arg[] = $product_status;
 		}else{
-			$sql .= " AND p.post_status NOT IN ('trash','auto-draft','inherit') ";
+			$sql .= " AND p.post_status NOT IN ( 'trash','auto-draft','inherit' ) ";
 		}
 
 		if($category){
@@ -425,43 +424,57 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 			$prepare_arg[] = $category;
 		}
 
-		if(in_array($translation_status,array('not','need_update','in_progress','complete'))){
+		if ( in_array( $translation_status, array( 'not', 'need_update', 'in_progress', 'complete' ) ) ) {
 			$sql .= " AND (";
-			switch($translation_status){
+			switch ( $translation_status ) {
 				case 'not':
-					$wheres = array();
-					foreach($this->sitepress->get_active_languages() as $lang){
-						if($lang['code'] == $slang) continue;
-						$tbl_alias_suffix = str_replace('-','_',$lang['code']);
-						$sql .= "( p.ID IN ( SELECT iclt_orig.element_id FROM {$wpdb->prefix}icl_translations iclt_orig LEFT JOIN {$wpdb->prefix}icl_translations iclt_{$tbl_alias_suffix}
-                        ON iclt_{$tbl_alias_suffix}.trid=iclt_orig.trid AND iclt_{$tbl_alias_suffix}.language_code='{$lang['code']}' WHERE iclt_orig.source_language_code IS NULL and iclt_{$tbl_alias_suffix}.element_id IS NULL ) ) OR\n";
-					}
+					$sql .= $wpdb->prepare( " t.trid IN ( SELECT trid FROM {$wpdb->prefix}icl_translations iclt  
+					LEFT OUTER JOIN {$wpdb->prefix}icl_translation_status tls ON iclt.translation_id = tls.translation_id 
+					WHERE 
+					element_type = 'post_product' 
+					AND (
+					tls.status IN (0) 
+					OR tls.status IS NULL 
+					AND (
+							SELECT 
+								COUNT(trid) 
+							FROM 
+								{$wpdb->prefix}icl_translations
+							WHERE 
+								trid = t.trid
+							) < %d
+						)
+					) OR\n", count( $this->sitepress->get_active_languages() ) );
 					break;
 				case ( $translation_status == 'need_update' || $translation_status == 'not' ):
-					$wheres = array();
-					foreach($this->sitepress->get_active_languages() as $lang){
-						if($lang['code'] == $slang) continue;
-						$tbl_alias_suffix = str_replace('-','_',$lang['code']);
-						$sql .= "( iclts_{$tbl_alias_suffix}.needs_update = 1 ) OR\n";
+					foreach ( $this->sitepress->get_active_languages() as $lang ) {
+						if ( $lang['code'] == $slang ) {
+							continue;
+						}
+						$tbl_alias_suffix = str_replace( '-', '_', $lang['code'] );
+						$sql              .= "( iclts_{$tbl_alias_suffix}.needs_update = 1 ) OR\n";
 					}
 					break;
 				case 'in_progress':
-					$wheres = array();
-					foreach($this->sitepress->get_active_languages() as $lang){
-						if($lang['code'] == $slang) continue;
-						$tbl_alias_suffix = str_replace('-','_',$lang['code']);
-						$sql .= "( iclts_{$tbl_alias_suffix}.status = ".ICL_TM_IN_PROGRESS.") OR\n";
+					foreach ( $this->sitepress->get_active_languages() as $lang ) {
+						if ( $lang['code'] == $slang ) {
+							continue;
+						}
+						$tbl_alias_suffix = str_replace( '-', '_', $lang['code'] );
+						$sql              .= "( iclts_{$tbl_alias_suffix}.status = " . ICL_TM_IN_PROGRESS . " OR iclts_{$tbl_alias_suffix}.status = " . ICL_TM_WAITING_FOR_TRANSLATOR . ") OR\n";
 					}
 					break;
 				case 'complete':
-					foreach($this->sitepress->get_active_languages() as $lang){
-						if($lang['code'] == $slang) continue;
-						$tbl_alias_suffix = str_replace('-','_',$lang['code']);
-						$sql .= "( (iclts_{$tbl_alias_suffix}.status = ".ICL_TM_COMPLETE." OR iclts_{$tbl_alias_suffix}.status = ".ICL_TM_DUPLICATE.") AND iclts_{$tbl_alias_suffix}.needs_update = 0 ) OR\n";
+					foreach ( $this->sitepress->get_active_languages() as $lang ) {
+						if ( $lang['code'] == $slang ) {
+							continue;
+						}
+						$tbl_alias_suffix = str_replace( '-', '_', $lang['code'] );
+						$sql              .= "( (iclts_{$tbl_alias_suffix}.status = " . ICL_TM_COMPLETE . " OR iclts_{$tbl_alias_suffix}.status = " . ICL_TM_DUPLICATE . ") AND iclts_{$tbl_alias_suffix}.needs_update = 0 ) OR\n";
 					}
 					break;
 			}
-			$sql = substr($sql, 0, -3);
+			$sql = substr( $sql, 0, - 3 );
 			$sql .= " ) ";
 		}
 

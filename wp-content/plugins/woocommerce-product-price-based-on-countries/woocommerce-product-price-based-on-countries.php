@@ -1,13 +1,15 @@
 <?php
 
 /*
- Plugin Name: WooCommerce Price Based on Country
+ Plugin Name: WooCommerce Price Based on Country (Basic)
  Plugin URI: https://wordpress.org/plugins/woocommerce-product-price-based-on-countries/
- Description: Sets products prices based on country of your site's visitor.
+ Description: Product Pricing and Currency based on Shopper’s Country for WooCommerce.
  Author: Oscar Gare
- Version: 1.6.2
- Author URI: google.com/+OscarGarciaArenas
- License: GPLv2
+ Version: 1.6.19
+ Author URI: https://www.linkedin.com/in/oscargare
+ Text Domain: wc-price-based-country
+ Domain Path: /languages
+ License: GPLv2 
 */
 
  /*
@@ -36,14 +38,14 @@ if ( ! class_exists( 'WC_Product_Price_Based_Country' ) ) :
  * Main WC Product Price Based Country Class
  *
  * @class WC_Product_Price_Based_Country
- * @version	1.6.0
+ * @version	1.6.13
  */
 class WC_Product_Price_Based_Country {
 
 	/**
 	 * @var string
 	 */
-	public $version = '1.6.2';
+	public $version = '1.6.19';
 
 	/**
 	 * @var The single instance of the class		 
@@ -87,8 +89,7 @@ class WC_Product_Price_Based_Country {
 	/**
 	 * Include required files used in admin and on the frontend.
 	 */
-	private function includes() {		
-
+	private function includes() {							
 		include_once( 'includes/wcpbc-functions.php' );				
 		include_once( 'includes/class-wcpbc-integrations.php' );
 
@@ -108,56 +109,106 @@ class WC_Product_Price_Based_Country {
 	 * Hook actions
 	 */
 	private function init_hooks() {
+
 		register_activation_hook( __FILE__, array( 'WCPBC_Install', 'install' ) );
 		
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 		add_action( 'widgets_init', array($this, 'register_widgets') );		
 
 		if ( $this->is_request( 'frontend') ) {			
 
 			add_action( 'woocommerce_init', array( $this , 'frontend_init') , 100 );				
-		}
+			
+		}		
+
+		add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array( $this, 'plugin_action_links' ) );
 	}
 	
 	/**
 	 * What type of request is this?
-	 * string $type frontend or admin
+	 *
+	 * @param string $type frontend or admin	 
 	 * @return bool
 	 */
 	private function is_request( $type ) {
 		
-		$is_ajax = defined('DOING_AJAX') && DOING_AJAX;
-		
+		$is_ajax = defined('DOING_AJAX') && DOING_AJAX;				
+
 		switch ( $type ) {
-			case 'admin' :
-				$ajax_allow_actions = array( 'woocommerce_add_variation', 'woocommerce_load_variations', 'woocommerce_save_variations', 'woocommerce_bulk_edit_variations', 'inline-save' );
-				return ( is_admin() && !$is_ajax ) || ( is_admin() && $is_ajax && isset( $_POST['action'] ) && in_array( $_POST['action'], $ajax_allow_actions ) );				
 			case 'bot':
-				$user_agent = strtolower ( $_SERVER['HTTP_USER_AGENT'] );
-				return preg_match ( "/googlebot|adsbot|yahooseeker|yahoobot|msnbot|watchmouse|pingdom\.com|feedfetcher-google/", $user_agent );				
+				$user_agent = strtolower( ( isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '' ) );
+				return preg_match( "/googlebot|adsbot|yahooseeker|yahoobot|msnbot|watchmouse|pingdom\.com|feedfetcher-google/", $user_agent );				
+
+			case 'admin' :
+				$is_ajax_admin = $is_ajax && isset( $_POST['action'] ) && in_array( $_POST['action'], array(  'woocommerce_add_variation', 'woocommerce_load_variations', 'woocommerce_save_variations', 'woocommerce_bulk_edit_variations', 'inline-save', 'woocommerce_add_order_item' ) );
+				return $is_ajax_admin || ( is_admin() && ! $is_ajax );							
+
 			case 'frontend' :
-				$is_heartbeat = $is_ajax && isset( $_POST['action'] ) && in_array( $_POST['action'], array( 'heartbeat', 'get-comments', 'wp-remove-post-lock', 'wp-compression-test', 'wcs_update_one_time_shipping', 'wcs_product_has_trial_or_is_synced' ) );
+				$is_heartbeat = $is_ajax && isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], array( 'heartbeat', 'get-comments', 'wp-remove-post-lock', 'wp-compression-test', 'wcs_update_one_time_shipping', 'wcs_product_has_trial_or_is_synced', 'woocommerce_add_attribute', 'woocommerce_save_attributes', 'woocommerce_link_all_variations', 'oembed-cache' ) );
 				return ! $is_heartbeat && ! defined( 'DOING_CRON' ) && ! ( $this->is_request('admin') ) && ! ( $this->is_request('bot') );
 		}
+
 	}
+
+	/**
+	 * Register Widgets
+	 *
+	 * @since 1.6.3
+	 */
+	 public function load_textdomain(){	 	
+	 	load_plugin_textdomain( 'wc-price-based-country', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+	 }
 
 	/**
 	 * Register Widgets
 	 *
 	 * @since 1.5.0
 	 */
-	 public function register_widgets(){	 	
-	 	include_once( 'includes/class-wcpbc-widget-country-selector.php' );	
-	 	register_widget( 'WCPBC_Widget_Country_Selector' );
+	 public function register_widgets(){		 
+		if ( class_exists( 'WC_Widget' ) ) {
+			include_once( 'includes/class-wcpbc-widget-country-selector.php' );	
+			register_widget( 'WCPBC_Widget_Country_Selector' );
+		}	
 	 }
 
 	/**
-	 * Init front-end variables
+	 * Show action links on the plugin screen.
+	 *
+	 * @since 	1.6.11
+	 * @param	mixed $links Plugin Action links
+	 * @return	array
 	 */
-	 public function frontend_init(){	 
-	 
+	public function plugin_action_links( $links ) {
+
+		$action_links = array(
+			'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=price-based-country' ) . '" aria-label="' . esc_attr__( 'View Price Based on Country settings', 'wc-price-based-country' ) . '">' . esc_html__( 'Settings', 'wc-price-based-country' ) . '</a>'
+		);
+
+		if ( ! wcpbc_is_pro() ) {
+			$action_links['get-pro'] = '<a target="_blank" style="color:#46b450;" href="https://www.pricebasedcountry.com/pricing/?utm_source=action-link&utm_medium=banner&utm_campaign=Get_Pro" aria-label="' . esc_attr__( 'Get Price Based on Country Pro', 'wc-price-based-country' ) . '">' . esc_html__( 'Get Pro', 'wc-price-based-country' ) . '</a>';
+		}
+
+		return array_merge( $action_links, $links );
+	}
+
+	/**
+	 * Init front-end
+	 */
+	public function frontend_init(){	 
+	 	
+	 	if ( ! wcpbc_is_woocommerce_frontend() ) {
+	 		// Do only if woocommerce frontend have been loaded
+	 		return;	 		
+	 	}	 	
+	 	
+	 	if ( apply_filters( 'wc_price_based_country_stop_pricing', false ) )  {
+	 		// Allow developers to stop base on country pricing
+	 		return;	 		
+	 	}
+
 	 	do_action( 'wc_price_based_country_before_frontend_init' );
 
-		$this->customer = new WCPBC_Customer();		
+		$this->customer = new WCPBC_Customer();	
 
 		if ( $this->customer->zone_id ) {
 
@@ -169,10 +220,11 @@ class WC_Product_Price_Based_Country {
 		}
 		
 		do_action('wc_price_based_country_frontend_init');
-	 }
+	}	
 	 
 	/**
 	 * Get regions
+	 *
 	 * @return array
 	 */
 	public function get_regions(){
@@ -184,6 +236,7 @@ class WC_Product_Price_Based_Country {
 	
 	/**
 	 * Get the plugin url.
+	 *
 	 * @return string
 	 */
 	public function plugin_url() {		
@@ -192,6 +245,7 @@ class WC_Product_Price_Based_Country {
 
 	/**
 	 * Get the plugin path.
+	 *
 	 * @return string
 	 */
 	

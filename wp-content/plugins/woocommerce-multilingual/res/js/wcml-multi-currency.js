@@ -1,25 +1,23 @@
 jQuery(document).ready(function(){
 
-    jQuery(document).on( 'change', '.wcml_currency_switcher', function(){
-        wcml_load_currency( jQuery(this).val() );
-    });
-
-    jQuery(document).on( 'click', '.wcml_currency_switcher li', function(){
-        if(jQuery(this).hasClass('wcml-active-currency')){
-            return;
+    jQuery(document).on( 'click', '.wcml_currency_switcher a', function( event ){
+        event.preventDefault();
+        if( jQuery(this).is(':disabled') || jQuery(this).parent().hasClass('wcml-cs-active-currency') || jQuery(this).hasClass('wcml-cs-active-currency')){
+            return false;
+        }else{
+            jQuery( this ).off( event );
         }
+
         wcml_load_currency( jQuery(this).attr('rel') );
     });
 
-    if( typeof woocommerce_price_slider_params != 'undefined' ){
+    if( typeof woocommerce_price_slider_params !== 'undefined' ){
         woocommerce_price_slider_params.currency_symbol = wcml_mc_settings.current_currency.symbol;
     }
 });
 
-
 function wcml_load_currency( currency, force_switch ){
     var ajax_loader = jQuery('<img style=\"margin-left:10px;\" width=\"16\" heigth=\"16\" src=\"' + wcml_mc_settings.wcml_spinner +'\" />')
-    jQuery('.wcml_currency_switcher').attr('disabled', 'disabled');
     jQuery('.wcml_currency_switcher').after();
     ajax_loader.insertAfter(jQuery('.wcml_currency_switcher'));
 
@@ -32,8 +30,7 @@ function wcml_load_currency( currency, force_switch ){
         data : {
             action: 'wcml_switch_currency',
             currency : currency,
-            force_switch: force_switch,
-            wcml_nonce: wcml_mc_settings.wcml_mc_nonce
+            force_switch: force_switch
         },
         success: function(response) {
             if(typeof response.error !== 'undefined') {
@@ -41,20 +38,23 @@ function wcml_load_currency( currency, force_switch ){
             }else if( typeof response.prevent_switching !== 'undefined' ){
                 jQuery('body').append( response.prevent_switching );
             }else{
-                jQuery('.wcml_currency_switcher').removeAttr('disabled');
-                if(typeof wcml_mc_settings.w3tc !== 'undefined'){
-                    var original_url = window.location.href;
-                    original_url = original_url.replace(/&wcmlc(\=[^&]*)?(?=&|$)|wcmlc(\=[^&]*)?(&|$)/, '');
-                    original_url = original_url.replace(/\?$/, '');
 
-                    var url_glue = original_url.indexOf('?') != -1 ? '&' : '?';
-                    var target_location = original_url + url_glue + 'wcmlc=' + currency;
+                var target_location = window.location.href;
+                if(-1 !== target_location.indexOf('#') || wcml_mc_settings.w3tc ){
 
-                }else{
-                    var target_location = window.location.href;
+                    var url_dehash = target_location.split('#');
+                    var hash = url_dehash.length > 1 ? '#' + url_dehash[1] : '';
+
+                    target_location = url_dehash[0]
+                                    .replace(/&wcmlc(\=[^&]*)?(?=&|$)|wcmlc(\=[^&]*)?(&|$)/, '')
+                                    .replace(/\?$/, '');
+
+                    var url_glue = target_location.indexOf('?') != -1 ? '&' : '?';
+                    target_location += url_glue + 'wcmlc=' + currency + hash;
+
                 }
-
                 window.location = target_location;
+
             }
         }
     });

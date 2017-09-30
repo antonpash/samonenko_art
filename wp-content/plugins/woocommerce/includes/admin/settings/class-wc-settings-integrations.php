@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'WC_Settings_Integrations' ) ) :
+if ( ! class_exists( 'WC_Settings_Integrations', false ) ) :
 
 /**
- * WC_Settings_Integrations
+ * WC_Settings_Integrations.
  */
 class WC_Settings_Integrations extends WC_Settings_Page {
 
@@ -36,7 +36,7 @@ class WC_Settings_Integrations extends WC_Settings_Page {
 	}
 
 	/**
-	 * Get sections
+	 * Get sections.
 	 *
 	 * @return array
 	 */
@@ -64,15 +64,16 @@ class WC_Settings_Integrations extends WC_Settings_Page {
 	}
 
 	/**
-	 * Output the settings
+	 * Output the settings.
 	 */
 	public function output() {
 		global $current_section;
 
 		$integrations = WC()->integrations->get_integrations();
 
-		if ( isset( $integrations[ $current_section ] ) )
+		if ( isset( $integrations[ $current_section ] ) ) {
 			$integrations[ $current_section ]->admin_options();
+		}
 	}
 }
 

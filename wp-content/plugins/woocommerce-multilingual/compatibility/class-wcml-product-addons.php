@@ -12,9 +12,13 @@ class WCML_Product_Addons {
 
 	/**
 	 * WCML_Product_Addons constructor.
+	 * @param SitePress $sitepress
 	 */
-	function __construct( &$sitepress ) {
+	function __construct( $sitepress ){
 		$this->sitepress = $sitepress;
+	}
+
+	public function add_hooks(){
 		add_filter( 'get_product_addons_product_terms', array( $this, 'addons_product_terms' ) );
 		add_filter( 'get_product_addons_fields', array( $this, 'product_addons_filter' ), 10, 1 );
 
@@ -42,7 +46,15 @@ class WCML_Product_Addons {
 			add_action( 'wcml_update_extra_fields', array( $this, 'addons_update' ), 10, 3 );
 
 			add_action( 'woocommerce_product_data_panels',   array( $this, 'show_pointer_info' ) );
+
+			add_filter( 'wcml_do_not_display_custom_fields_for_product', array( $this, 'replace_tm_editor_custom_fields_with_own_sections' ) );
 		}
+
+		add_filter( 'wcml_cart_contents_not_changed', array(
+			$this,
+			'filter_booking_addon_product_in_cart_contents'
+		), 20 );
+
 	}
 
 	/**
@@ -260,4 +272,27 @@ class WCML_Product_Addons {
 
 		$pointer_ui->show();
 	}
+
+	function replace_tm_editor_custom_fields_with_own_sections( $fields ){
+		$fields[] = '_product_addons';
+
+		return $fields;
+	}
+
+	// special case for WC Bookings plugin - need add addon cost after re-calculating booking costs #wcml-1877
+	public function filter_booking_addon_product_in_cart_contents( $cart_item ) {
+
+		if ( $cart_item['data'] instanceof WC_Product_Booking && isset( $cart_item['addons'] ) ) {
+			$cost = $cart_item['data']->get_price();
+
+			foreach( $cart_item['addons'] as $addon ){
+				$cost += $addon['price'];
+			}
+
+			$cart_item['data']->set_price( $cost );
+		}
+
+		return $cart_item;
+	}
+
 }

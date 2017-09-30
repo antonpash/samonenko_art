@@ -15,6 +15,8 @@ jQuery( function ( $ ) {
 			$( '.js_field-country' ).select2().change( this.change_country );
 			$( '.js_field-country' ).trigger( 'change', [ true ] );
 			$( document.body ).on( 'change', 'select.js_field-state', this.change_state );
+
+			$( document.body ).on( 'click', 'button.js_copy-billing', this.copy_billing );
 		},
 
 		change_country: function( e, stickValue ) {
@@ -62,7 +64,9 @@ jQuery( function ( $ ) {
 				$state.replaceWith( '<input type="text" class="js_field-state" name="' + input_name + '" id="' + input_id + '" value="' + value + '" />' );
 			}
 
+			// This event has a typo - deprecated in 2.5.0
 			$( document.body ).trigger( 'contry-change.woocommerce', [country, $( this ).closest( 'div' )] );
+			$( document.body ).trigger( 'country-change.woocommerce', [country, $( this ).closest( 'div' )] );
 		},
 
 		change_state: function() {
@@ -73,6 +77,23 @@ jQuery( function ( $ ) {
 				country  = $country.val();
 
 			$country.data( 'woocommerce.stickState-' + country, state );
+		},
+
+		copy_billing: function( event ) {
+			event.preventDefault();
+
+			$( '#fieldset-billing' ).find( 'input, select' ).each( function( i, el ) {
+				// The address keys match up, except for the prefix
+				var shipName = el.name.replace( /^billing_/, 'shipping_' );
+				// Swap prefix, then check if there are any elements
+				var shipEl = $( '[name="' + shipName + '"]' );
+				// No corresponding shipping field, skip this item
+				if ( ! shipEl.length ) {
+					return;
+				}
+				// Found a matching shipping element, update the value
+				shipEl.val( el.value ).trigger( 'change' );
+			} );
 		}
 	};
 

@@ -1,12 +1,11 @@
 === WooCommerce Price Based on Country ===
 Contributors: oscargare
-Donate link: https://www.pricebasedcountry.com/
-Tags: price based country, dynamic price based country, price by country, dynamic price, woocommerce, geoip
+Tags: price based country, dynamic price based country, price by country, dynamic price, woocommerce, geoip, country-targeted pricing
 Requires at least: 3.8
-Tested up to: 4.6
-Stable tag: 1.6.2
+Tested up to: 4.8
+Stable tag: 1.6.19
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html	
 
 Add multicurrency support to WooCommerce, allowing you set product's prices in multiple currencies based on country of your site's visitor.
 
@@ -37,16 +36,25 @@ Apply currency conversion to Flat and International Flat Rate Shipping.
 = Compatible with WPML =
 WooCommerce Product Price Based on Countries is officially compatible with [WPML](https://wpml.org/extensions/woocommerce-product-price-based-countries/).
 
-= Premium Addons =
-Need a specific integration with a WooCommerce extension? Perhaps add automatic daily updated to exchange rate? Have a look at the extension catalog from the oficial site at [pricebasedcountry.com](http://www.pricebasedcountry.com?utm_source=wordpress.org&utm_medium=readme&utm_campaign=Extend)
+= Upgrade to Pro =
 
-**Popular extensions**
+>This plugin offers a Pro addon which adds the following features:
 
-* [WooCommerce Subscriptions Bridge](https://www.pricebasedcountry.com/product/woocommerce-subscriptions-bridge-price-based-country/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=Extend) - Integration with WooCommerce Subscriptions.
-* [Advanced Currency Options](https://www.pricebasedcountry.com/product/avanced-currency-options/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=Extend) - Show currency code in price, automatic updates of exchange rates and more
+>* Guaranteed support by private ticket system.
+>* Automatic updates of exchange rates.
+>* Display the currency code next to price.
+>* Thousand separator, decimal separator and number of decimals by pricing zone.
+>* Currency switcher widget.
+>* Support to WooCommerce Subscriptions 
+>* Support to WooCommerce Product Bundles.
+>* Support to WooCommerce Product Add-ons.
+>* Bulk editing of variations princing.
+>* More features and integrations is coming.
+ 
+>[Get Price Based on Country Pro now](https://www.pricebasedcountry.com?utm_source=wordpress.org&utm_medium=readme&utm_campaign=Extend)
 
 = Requirements =
-WooCommerce 2.3.0 or later.
+WooCommerce 2.6.0 or later.
 
 == Installation ==
 
@@ -60,11 +68,11 @@ Once you’ve added support for multiple country and their currencies, you could
 
 **Shortcode**
 
-[wcpbc_country_selector]
+[wcpbc_country_selector other_countries_text="Other countries"]
 
 **PHP Code**
 
-do_action('wcpbc_manual_country_selector');
+do_action('wcpbc_manual_country_selector', 'Other countries');
 
 = Customize country selector (only for developers) =
 
@@ -94,6 +102,82 @@ You should do the test in a private browsing window to prevent data stored in th
 5. /assets/screenshot-6.png
 
 == Changelog ==
+
+= 1.6.19 (2017-09-19) =
+* Fixed: All product are on sale.<br />https://wordpress.org/support/topic/all-product-are-on-sale-after-last-update/
+
+= 1.6.18 (2017-09-19) =
+* Fixed: Error on WooCommerce Reports message when only exists one currency.
+* Tweak: Improvements in frontend pricing core function.
+* Tweak: Deprecated hook "wc_price_based_country_stop_princing" replaced with "wc_price_based_country_stop_pricing".
+* Tweak: Improvements in system report.
+* Added: "Select Eurozone" button to settings page.
+
+= 1.6.17 (2017-07-22) =
+* Fixed: Error on edit product when WooCommerce Multilingual is active.
+* Tweak: Add "other countries text" param to "wcpbc_country_selector" shortcode.
+
+= 1.6.15 (2017-07-20) =
+* Fixed: file not found. https://wordpress.org/support/topic/error-message-after-updating-4/
+
+= 1.6.14 (2017-07-19) =
+* Fixed: Hide product data ads in default product types.
+* Fixed: Front-end prices for manual orders are deactivated, so manual orders does discrepancies between prices and currencies.
+
+= 1.6.13 (2017-06-26) =
+* Fixed: No round price set manually.<br />https://wordpress.org/support/topic/total-price-slightly-different-with-version-1-6-12-price-based-on-country/
+* Fixed: Round shipping cost after apply currency conversion.
+* Fixed: Do not echo selected() in country-selector.php.<br />https://wordpress.org/support/topic/do-not-echo-selected-in-country-selector-php/
+* Fixed: Check if class WC_Widget exists before load Country selector widget.
+
+= 1.6.12 (2017-06-10) =
+* Fixed: No round empty prices.
+
+= 1.6.11 (2017-06-10) =
+* Fixed: Wrong subtotal calculation with price by exchange rates and more of 10 items in cart.<br />https://wordpress.org/support/topic/wrong-subtotal-calculation/
+* Added: Code improvements.
+* Added: Integration with Pro Addon.
+
+= 1.6.10 (2017-05-07) =
+* Fixed: Deprecated WooCommerce functions and backward compatibility to 2.6
+
+= 1.6.9 (2017-04-24) =
+* Fixed: Deprecated WooCommerce functions and backward compatibility to 2.6
+* Fixed: Break styles on variations downloadable products.
+* Fixed: Bug on coupons with PHP 7<br />https://wordpress.org/support/topic/using-coupon-leads-to-an-error-with-php-7-1/#post-9051916
+
+= 1.6.8 (2017-04-10) =
+* Added: Support for deprecated WooCommerce functions and backward compatibility to 2.6.
+* Fixed: Bug on array with locale-sensitive sort function.<br />https://wordpress.org/support/topic/fatal-error-add-zone-or-viewedit-zone/
+* Tweak: Apply exchange rates to min order amount on free shipping method. Thanks @mariankadanka.<br />https://wordpress.org/support/topic/convert-free-shipping-costs/#post-8946654
+
+= 1.6.7 (2017-03-10) =
+* Fixed: Broken Dependencies on script wc-price-based-country-frontend.<br />https://wordpress.org/support/topic/prices-not-showing-after-latest-update/page/2/#post-8895976
+* Tweak: Improvements on WooCommerce report support.
+
+= 1.6.6 (2017-02-25) =
+* Fixed: Error when editing a draft variable product.<br />https://wordpress.org/support/topic/fatal-error-2460/
+* Fixed: Post object isn't instance.<br />https://wordpress.org/support/topic/error-trying-to-get-property-of-non-objec/
+* Tweak: Apply exchange rates to coupon minimum and max amounts.
+* Tweak: Load files code improvements.
+
+= 1.6.5 (2016-12-30) =
+* Fixed: Set customer session cookie after headers has been send.
+* Fixed: Sync the variable product prices with it's children when “Hide out of stock items from the catalog” option is enabled.<br />https://wordpress.org/support/topic/variable-product-price-not-showing-in-listing-and-details-page/
+
+= 1.6.4 (2016-12-18) =
+* Fixed: Bug with paypal express checkout by AngellEYE.<br />https://wordpress.org/support/topic/paypal-or-plugin-error/
+* Fixed: Enabled paypal standard in WooCommerce checkout settings when exists a supported country in Zone Pricing.
+
+= 1.6.3 (2016-11-26) =
+* Fixed: 'added_to_cart' javascript event causes a issue with some themes, replace by 'wcpbc_cart_refreshed'.
+* Fixed: Undefined index HTTP_USER_AGENT.<br />https://wordpress.org/support/topic/notice-undefined-index-http_user_agent-2/
+* Fixed: Exchange rate to minimum and maximum spend of coupon usage restriction.<br />https://wordpress.org/support/topic/any-coupon-discount-usage-restriction-support/
+* Tweak: Add plugin info to WooCommerce System Status Report.
+* Added: WooCommerce 2Checkout Gateway by Krokedil Integration 
+* Added: Spanish Translation.
+* Added: French Translation.
+* Added: Netherlands translation.
 
 = 1.6.2 (2016-09-24) =
 * Fixed: Price missing for variable products with all variation with manual price.
@@ -256,5 +340,5 @@ https://wordpress.org/support/topic/wcpbc_country_selector-widget-should-return-
 
 == Upgrade Notice ==
 
-= 1.6.0 =
-1.6.0 is a major update so it is important that you make backups, and ensure that PBC premium extensions are 1.6 compatible before upgrading, in particular WooCommerce Subscriptions Bridge.
+= 1.6.18 =
+Developers: hook 'wc_price_based_country_stop_princing' have been deprecated (misspelled filter name). Replace with 'wc_price_based_country_stop_pricing'.

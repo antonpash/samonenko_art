@@ -1,28 +1,28 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * WooCommerce Autoloader
+ * WooCommerce Autoloader.
  *
  * @class 		WC_Autoloader
  * @version		2.3.0
- * @package		WooCommerce/Classes/
+ * @package		WooCommerce/Classes
  * @category	Class
  * @author 		WooThemes
  */
 class WC_Autoloader {
 
 	/**
-	 * Path to the includes directory
+	 * Path to the includes directory.
+	 *
 	 * @var string
 	 */
 	private $include_path = '';
 
 	/**
-	 * The Constructor
+	 * The Constructor.
 	 */
 	public function __construct() {
 		if ( function_exists( "__autoload" ) ) {
@@ -35,7 +35,8 @@ class WC_Autoloader {
 	}
 
 	/**
-	 * Take a class name and turn it into a file name
+	 * Take a class name and turn it into a file name.
+	 *
 	 * @param  string $class
 	 * @return string
 	 */
@@ -44,7 +45,8 @@ class WC_Autoloader {
 	}
 
 	/**
-	 * Include a class file
+	 * Include a class file.
+	 *
 	 * @param  string $path
 	 * @return bool successful or not
 	 */
@@ -63,6 +65,11 @@ class WC_Autoloader {
 	 */
 	public function autoload( $class ) {
 		$class = strtolower( $class );
+
+		if ( 0 !== strpos( $class, 'wc_' ) ) {
+			return;
+		}
+
 		$file  = $this->get_file_name_from_class( $class );
 		$path  = '';
 
@@ -78,9 +85,13 @@ class WC_Autoloader {
 			$path = $this->include_path . 'admin/meta-boxes/';
 		} elseif ( strpos( $class, 'wc_admin' ) === 0 ) {
 			$path = $this->include_path . 'admin/';
+		} elseif ( strpos( $class, 'wc_payment_token_' ) === 0 ) {
+			$path = $this->include_path . 'payment-tokens/';
+		} elseif ( strpos( $class, 'wc_log_handler_' ) === 0 ) {
+			$path = $this->include_path . 'log-handlers/';
 		}
 
-		if ( empty( $path ) || ( ! $this->load_file( $path . $file ) && strpos( $class, 'wc_' ) === 0 ) ) {
+		if ( empty( $path ) || ! $this->load_file( $path . $file ) ) {
 			$this->load_file( $this->include_path . $file );
 		}
 	}

@@ -5,11 +5,54 @@
  * General functions available on both the front-end and admin.
  *
  * @author 		oscargare
- * @version     1.6.2
+ * @version     1.6.8
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+/**
+ * Check is WooCommerce frontend
+ *
+ * @since 1.6.6
+ * @return bool
+ */
+function wcpbc_is_woocommerce_frontend() {
+	return function_exists( 'WC' ) && isset( WC()->customer );
+}
+
+
+/**
+ * Get WooCommerce customer billing country	 
+ *
+ * @since 1.6.8
+ * @return string
+ */
+function wcpbc_get_wc_biling_country() {
+
+	if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+		$_country = WC()->customer->get_country();		
+	} else {
+		$_country = WC()->customer->get_billing_country();				
+	}
+
+	return $_country;
+}
+
+/**
+ * Set WooCommerce customer billing country	 
+ *
+ * @since 1.6.8
+ * @return string
+ */
+function wcpbc_set_wc_biling_country( $country ) {
+
+	if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
+		WC()->customer->set_country( $country );		
+	} else {
+		WC()->customer->set_billing_country( $country );		
+	}
 }
 
 /**
@@ -19,14 +62,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function wcpbc_get_woocommerce_country() {
 	
-	$_country = WC()->customer->get_country();	
-	
-	if ( $_country !== WC()->customer->get_shipping_country() && 'shipping' === get_option('wc_price_based_country_based_on', 'billing') ) {
-		$_country = WC()->customer->get_shipping_country();	
-	}		
-	
-	return $_country;
+	$_country = FALSE;	
+
+	if ( wcpbc_is_woocommerce_frontend() ) {
+		
+		$_country = wcpbc_get_wc_biling_country();		
+		
+		if ( $_country !== WC()->customer->get_shipping_country() && 'shipping' === get_option('wc_price_based_country_based_on', 'billing') ) {
+			$_country = WC()->customer->get_shipping_country();	
+		}						
+	}
+
+	return $_country;		
 }
+
 
 /**
  * Set WooCommerce customer country
@@ -35,19 +84,24 @@ function wcpbc_get_woocommerce_country() {
  */
 function wcpbc_set_woocommerce_country( $country ) {
 	
+	if ( ! wcpbc_is_woocommerce_frontend() ) {
+		return;
+	}
+
 	$ship_to_different_address = get_option( 'woocommerce_ship_to_destination' ) === 'shipping' ? 1 : 0;
 
 	if ( 
-		WC()->customer->get_country() !== WC()->customer->get_shipping_country() && 
+		wcpbc_get_wc_biling_country() !== WC()->customer->get_shipping_country() && 
 		'shipping' === get_option('wc_price_based_country_based_on', 'shipping') && 
 		'1' == apply_filters( 'woocommerce_ship_to_different_address_checked', $ship_to_different_address ) 
 		) 
 	{
 		WC()->customer->set_shipping_country( $country );
 	} else {
-		WC()->customer->set_country( $country );
+		wcpbc_set_wc_biling_country( $country );
 		WC()->customer->set_shipping_country( $country );
-	}
+	}	
+
 }
 
 /**
@@ -124,9 +178,11 @@ function wcpbc_get_children_price( $zone_price_meta_key, $parent_id, $min_or_max
 	
 	// Skip hidden products
 	if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) ) {
+
 		$notify_no_stock_amount = get_option( 'woocommerce_notify_no_stock_amount' );
+		
 		$query['from'] .= " LEFT JOIN {$wpdb->postmeta} _stock ON posts.ID = _stock.post_id AND _stock.meta_key = '_stock'";
-		$query['where'] .= " AND ( IFNULL(_stock.meta_value, '') = '' OR _stock.meta_value<%s)" ;
+		$query['where'] .= " AND ( IFNULL(_stock.meta_value, '') = '' OR ( _stock.meta_value + 0 ) > ( %s + 0 ) )" ;
 		
 		$query_params[] = $notify_no_stock_amount;
 	}
@@ -217,13 +273,28 @@ function wcpbc_zone_grouped_product_sync( $zone_id, $product_id ) {
  *
   * @since 1.6.0
  */
-function wcpbc_variable_product_sync( $product_id, $children ) {
+function wcpbc_variable_product_sync( $product_id, $children = false ) {
 	
 	foreach ( array_keys( WCPBC()->get_regions() ) as $zone_id ) {		
 		wcpbc_zone_variable_product_sync( $zone_id, $product_id );
 	}
 }
-add_action( 'woocommerce_variable_product_sync', 'wcpbc_variable_product_sync', 10, 2 );
+
+/**
+ * Sync with child variations.
+ *
+ * @since 1.6.10
+ * @param WC_Product_Variable $product 
+ */
+function wcpbc_variable_product_sync_data( $product ) {
+	wcpbc_variable_product_sync( $product->get_id() );
+}
+	
+if ( version_compare( get_option( 'woocommerce_version', null ), '3.0', '<' ) ) { 
+	add_action( 'woocommerce_variable_product_sync', 'wcpbc_variable_product_sync', 10, 2 );
+} else {
+	add_action( 'woocommerce_variable_product_sync_data', 'wcpbc_variable_product_sync_data' );
+}
 
 /**
  * Sync products prices by exchange rate for a pricing zone
@@ -453,61 +524,63 @@ add_action( 'woocommerce_delete_product_transients', 'wcpbc_delete_product_trans
  *
  * @return array
  */
-function wcpbc_get_currencies() {
+function wcpbc_get_currencies_countries( $currency_code = false ) {
 
-	return array_unique( 
-		apply_filters( 'wcpbc_currencies', 
-			array(
-				'AED' => array('AE'),
-				'ARS' => array('AR'),
-				'AUD' => array('AU', 'CC', 'CX', 'HM', 'KI', 'NF', 'NR', 'TV'),
-				'BDT' => array('BD'),
-				'BRL' => array('BR'),
-				'BGN' => array('BG'),
-				'CAD' => array('CA'),
-				'CLP' => array('CL'),
-				'CNY' => array('CN'),
-				'COP' => array('CO'),
-				'CZK' => array('CZ'),
-				'DKK' => array('DK', 'FO', 'GL'),
-				'DOP' => array('DO'),
-				'EUR' => array('AD', 'AT', 'AX', 'BE', 'BL', 'CY', 'DE', 'EE', 'ES', 'FI', 'FR', 'GF', 'GP', 'GR', 'IE', 'IT', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MQ', 'MT', 'NL', 'PM', 'PT', 'RE', 'SI', 'SK', 'SM', 'TF', 'VA', 'YT'),
-				'HKD' => array('HK'),
-				'HRK' => array('HR'),
-				'HUF' => array('HU'),
-				'ISK' => array('IS'),
-				'IDR' => array('ID'),
-				'INR' => array('IN'),
-				'NPR' => array('NP'),
-				'ILS' => array('IL'),
-				'JPY' => array('JP'),
-				'KIP' => array('LA'),
-				'KRW' => array('KR'),
-				'MYR' => array('MY'),
-				'MXN' => array('MX'),
-				'NGN' => array('NG'),
-				'NOK' => array('BV', 'NO', 'SJ'),
-				'NZD' => array('CK', 'NU', 'NZ', 'PN', 'TK'),
-				'PYG' => array('PY'),
-				'PHP' => array('PH'),
-				'PLN' => array('PL'),
-				'GBP' => array('GB', 'GG', 'GS', 'IM', 'JE'),
-				'RON' => array('RO'),
-				'RUB' => array('RU'),
-				'SGD' => array('SG'),
-				'ZAR' => array('ZA'),
-				'SEK' => array('SE'),
-				'CHF' => array('LI'),
-				'TWD' => array('TW'),
-				'THB' => array('TH'),
-				'TRY' => array('TR'),
-				'UAH' => array('UA'),
-				'USD' => array('BQ', 'EC', 'FM', 'IO', 'MH', 'PW', 'TC', 'TL', 'US', 'VG'),
-				'VND' => array('VN'),
-				'EGP' => array('EG')
-			)
-		)
+	$currencies = array(
+		'AED' => array('AE'),
+		'ARS' => array('AR'),
+		'AUD' => array('AU', 'CC', 'CX', 'HM', 'KI', 'NF', 'NR', 'TV'),
+		'BDT' => array('BD'),
+		'BRL' => array('BR'),
+		'BGN' => array('BG'),
+		'CAD' => array('CA'),
+		'CLP' => array('CL'),
+		'CNY' => array('CN'),
+		'COP' => array('CO'),
+		'CZK' => array('CZ'),
+		'DKK' => array('DK', 'FO', 'GL'),
+		'DOP' => array('DO'),
+		'EUR' => array('AD', 'AT', 'AX', 'BE', 'BL', 'CY', 'DE', 'EE', 'ES', 'FI', 'FR', 'GF', 'GP', 'GR', 'IE', 'IT', 'LT', 'LU', 'LV', 'MC', 'ME', 'MF', 'MQ', 'MT', 'NL', 'PM', 'PT', 'RE', 'SI', 'SK', 'SM', 'TF', 'VA', 'YT'),
+		'HKD' => array('HK'),
+		'HRK' => array('HR'),
+		'HUF' => array('HU'),
+		'ISK' => array('IS'),
+		'IDR' => array('ID'),
+		'INR' => array('IN'),
+		'NPR' => array('NP'),
+		'ILS' => array('IL'),
+		'JPY' => array('JP'),
+		'KIP' => array('LA'),
+		'KRW' => array('KR'),
+		'MYR' => array('MY'),
+		'MXN' => array('MX'),
+		'NGN' => array('NG'),
+		'NOK' => array('BV', 'NO', 'SJ'),
+		'NZD' => array('CK', 'NU', 'NZ', 'PN', 'TK'),
+		'PYG' => array('PY'),
+		'PHP' => array('PH'),
+		'PLN' => array('PL'),
+		'GBP' => array('GB', 'GG', 'GS', 'IM', 'JE'),
+		'RON' => array('RO'),
+		'RUB' => array('RU'),
+		'SGD' => array('SG'),
+		'ZAR' => array('ZA'),
+		'SEK' => array('SE'),
+		'CHF' => array('LI'),
+		'TWD' => array('TW'),
+		'THB' => array('TH'),
+		'TRY' => array('TR'),
+		'UAH' => array('UA'),
+		'USD' => array('BQ', 'EC', 'FM', 'IO', 'MH', 'PW', 'TC', 'TL', 'US', 'VG'),
+		'VND' => array('VN'),
+		'EGP' => array('EG')
 	);
+	
+	if ( $currency_code && array_key_exists( $currency_code, $currencies ) ) {
+		$currencies = $currencies[ $currency_code ];
+	}
+
+	return $currencies;
 }
 
 /**
@@ -519,9 +592,36 @@ function wcpbc_get_currencies() {
  */
 function wcpbc_maybe_asort_locale( &$arr ) {
 	
-	if ( class_exists('Collator') ) {		
-		return collator_asort( new Collator( get_locale() ), $arr );
-	} else {
+	try {
+
+		if ( function_exists('collator_create') && $coll = collator_create( get_locale() ) ) {		
+			return collator_asort( $coll, $arr );
+		} else {
+			return asort( $arr );
+		}
+
+	} catch ( Exception $e ) {
 		return asort( $arr );
-	}
+	}		
 }
+
+/**
+ * Is Pro version
+ *
+ * @since 1.6.11
+ * return boolean
+ */
+function wcpbc_is_pro() {
+	return class_exists('WCPBC_Avanced_Currency_Options') || class_exists('WCPBC_Subscriptions') || class_exists( 'WC_Product_Price_Based_Country_Pro' );
+}
+
+/**
+ * Run deprecated hooks
+ */
+function _wcpbc_deprecated_filter_hook( $value ){
+	if ( has_filter( 'wc_price_based_country_stop_princing' ) ) {
+		error_log( 'WooCommerce Price Based on Country: "wc_price_based_country_stop_princing" have been deprecated (misspelled filter name). Replace with "wc_price_based_country_stop_pricing"' );	
+		apply_filters( 'wc_price_based_country_stop_princing', $value );
+	}	
+}
+add_filter( 'wc_price_based_country_stop_pricing', '_wcpbc_deprecated_filter_hook', -1 );

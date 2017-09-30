@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * WCPBC_Frontend_Pricing class.
  *
  * @class 		WCPBC_Frontend_Pricing
- * @version		1.6.0
+ * @version		1.6.19
  * @author 		oscargare
  */
 class WCPBC_Frontend_Pricing {
@@ -26,6 +26,12 @@ class WCPBC_Frontend_Pricing {
 	 * @var float
 	 */
 	private static $_exchange_rate;
+	
+	/**
+	 * @var int
+	 * @since 1.6.11
+	 */
+	private static $_num_decimals;
 
 	/**
 	 * Hook actions and filters
@@ -35,8 +41,9 @@ class WCPBC_Frontend_Pricing {
 	public static function init( $zone_id, $currency, $exchange_rate ) { 
 
 		self::$_meta_key_prefix = '_' . $zone_id;
-		self::$_currency = $currency;
-		self::$_exchange_rate = $exchange_rate;
+		self::$_currency 		= $currency;
+		self::$_exchange_rate 	= $exchange_rate;
+		self::$_num_decimals 	= wc_get_price_decimals();
 
 		add_filter( 'get_post_metadata', array( __CLASS__, 'get_price_metadata'), 10, 4 );
 		add_filter( 'woocommerce_currency',  array( __CLASS__ , 'get_currency' ) );
@@ -46,6 +53,7 @@ class WCPBC_Frontend_Pricing {
 		add_filter( 'woocommerce_price_filter_meta_keys', array( __CLASS__ , 'price_filter_meta_keys' ) );
 		add_filter( 'pre_transient_wc_products_onsale', array( __CLASS__ , 'product_ids_on_sale' ), 10, 2 );
 		add_filter( 'woocommerce_package_rates', array( __CLASS__ , 'package_rates' ), 10, 2 );
+		add_filter( 'woocommerce_shipping_zone_shipping_methods', array( __CLASS__ , 'shipping_zone_shipping_methods' ), 10, 4 );			
 		add_action( 'woocommerce_coupon_loaded', array( __CLASS__ , 'coupon_loaded' ) );	
 
 		do_action( 'wc_price_based_country_frontend_princing_init' );
@@ -60,27 +68,46 @@ class WCPBC_Frontend_Pricing {
      * @param bool              $single    Whether to return only the first value of the specified $meta_key.
 	 */
 	public static function get_price_metadata( $meta_value, $object_id, $meta_key, $single ) {
-		if ( $single && in_array( $meta_key, wcpbc_get_overwrite_meta_keys() ) ) {			
-			
+		
+		if ( $single && in_array( $meta_key, wcpbc_get_overwrite_meta_keys() ) ) {						
+
 			// Remove filter to not going into a endless loop			
 			remove_filter( 'get_post_metadata', array( __CLASS__, 'get_price_metadata'), 10, 4 );
-						
-			// Check if price is correct
-			if ( in_array( $meta_key, wcpbc_get_price_meta_keys() ) && 
-				( ! ( $price_method = get_post_meta( $object_id, self::$_meta_key_prefix . '_price_method', true ) ) || $price_method == 'exchange_rate' ) &&
-				( $meta_value = get_post_meta( $object_id, $meta_key , true ) ) &&				
-				( get_post_meta( $object_id, self::$_meta_key_prefix . $meta_key , true ) != $meta_value * self::$_exchange_rate )
-			) {
-				// Set correct price
-				update_post_meta( $object_id, self::$_meta_key_prefix . $meta_key , $meta_value * self::$_exchange_rate );
-			}
-			
-			// Return value
+									
+			// Get the return value
 			$meta_value = get_post_meta( $object_id, self::$_meta_key_prefix . $meta_key , true );			
+
+			// Is a price
+			if ( in_array( $meta_key, wcpbc_get_price_meta_keys() ) ) {
+
+				// Get price method
+				$price_method = get_post_meta( $object_id, self::$_meta_key_prefix . '_price_method', true );
+				$price_method = empty( $price_method ) ? 'exchange_rate' : $price_method ;				
+
+				if ( $price_method === 'exchange_rate' ) {
+					
+					// Apply exchange rate
+					$_meta_value = get_post_meta( $object_id, $meta_key , true ) ;
+					$_meta_value = empty( $_meta_value ) && $_meta_value !== '0' ? $_meta_value : strval( $_meta_value * self::$_exchange_rate ) ;
+					
+					if ( $meta_value <> $_meta_value ) {					
+						
+						$meta_value = $_meta_value;						
+						
+						update_post_meta( $object_id, self::$_meta_key_prefix . $meta_key , $meta_value );								
+					}
+					
+					if ( ! empty( $meta_value ) ) {
+						$meta_value = round( $meta_value, self::$_num_decimals );	
+					}
+					
+				}
+			}			
 			
 			// Add filter			 
 			add_filter( 'get_post_metadata', array( __CLASS__, 'get_price_metadata'), 10, 4 );
 		}
+		
 		return $meta_value;
 	}
 
@@ -146,7 +173,7 @@ class WCPBC_Frontend_Pricing {
 	public static function product_ids_on_sale( $value, $transient = false ) {
 		global $wpdb;
 		
-		$cache_key = 'wcpbc_products_onsale_' . self::$_meta_key_prefix;
+		$cache_key = 'wcpbc_products_onsale' . self::$_meta_key_prefix;
 			
 		// Load from cache
 		$product_ids_on_sale = get_transient( $cache_key );
@@ -156,6 +183,8 @@ class WCPBC_Frontend_Pricing {
 			return $product_ids_on_sale;
 		}
 		
+		$decimals = absint( wc_get_price_decimals() );
+
 		$on_sale_posts = $wpdb->get_results( $wpdb->prepare( "
 			SELECT post.ID, post.post_parent FROM `{$wpdb->posts}` AS post
 			LEFT JOIN `{$wpdb->postmeta}` AS meta ON post.ID = meta.post_id
@@ -166,7 +195,7 @@ class WCPBC_Frontend_Pricing {
 				AND meta2.meta_key = %s
 				AND CAST( meta.meta_value AS DECIMAL ) >= 0
 				AND CAST( meta.meta_value AS CHAR ) != ''
-				AND CAST( meta.meta_value AS DECIMAL ) = CAST( meta2.meta_value AS DECIMAL )
+				AND CAST( meta.meta_value AS DECIMAL( 10, {$decimals} ) ) = CAST( meta2.meta_value AS DECIMAL( 10, {$decimals} ) )
 			GROUP BY post.ID
 		", self::$_meta_key_prefix . '_sale_price', self::$_meta_key_prefix .'_price' ) );
 
@@ -208,7 +237,12 @@ class WCPBC_Frontend_Pricing {
 				
 				if ( $change ) {
 					//Apply exchange rate
-					$rate->cost = $rate->wcpbc_data['orig_cost'] * self::$_exchange_rate;
+					$rate->cost = $rate->wcpbc_data['orig_cost'] * self::$_exchange_rate;					
+
+					if ( ! wc_prices_include_tax() ) {
+						$rate->cost = round( $rate->cost, self::$_num_decimals );						
+					}									
+
 					//recalculate taxes
 					foreach ( $rate->wcpbc_data['orig_taxes'] as $i => $tax ){
 						$rate->taxes[$i] = ( $tax/$rate->wcpbc_data['orig_cost'] ) * $rate->cost;
@@ -221,12 +255,59 @@ class WCPBC_Frontend_Pricing {
 	}
 	
 	/**
+      * Apply exchange rate to free shipping min amount
+	  * @param array $methods
+	  * @param array $raw_methods
+	  * @param array $allowed_classes
+	  * @param WC_Shipping_Zone $shipping
+	  */
+    public static function shipping_zone_shipping_methods( $methods, $raw_methods, $allowed_classes, $shipping ) {
+    	
+    	if ( get_option( 'wc_price_based_country_shipping_exchange_rate', 'no') == 'yes' ) {
+
+    		foreach ( $methods as $instance_id => $method ) {
+				if ( $method->id === 'free_shipping' ) {
+					$method->min_amount = $method->min_amount * self::$_exchange_rate;
+				}
+			}
+    	}		
+		
+		return $methods;
+	 }
+
+	/**
      * Apply exchange rate to coupon
      * @param WC_Coupon $coupon          
      */
     public static function coupon_loaded( $coupon ) {
-		if ( 'exchange_rate' === get_post_meta( $coupon->id, 'zone_pricing_type', true ) ) {
-			$coupon->coupon_amount = $coupon->coupon_amount * self::$_exchange_rate;
+		$_back = version_compare( WC_VERSION, '3.0', '<' );
+
+		if ( 'exchange_rate' === get_post_meta( ( $_back ? $coupon->id : $coupon->get_id() ), 'zone_pricing_type', true ) ) {			
+			if ( $_back ) {
+				$coupon->coupon_amount 	= floatval( $_back ? $coupon->coupon_amount : $coupon->get_amount() )  * self::$_exchange_rate;			
+			} else {
+				$coupon->set_amount( floatval( $coupon->get_amount() )  * self::$_exchange_rate );		
+			}						
 		}
+
+		$_min = $_back ? $coupon->minimum_amount : $coupon->get_minimum_amount();
+		$_max = $_back ? $coupon->maximum_amount : $coupon->get_maximum_amount();
+		
+		if ( $_min ) {
+			if ( $_back ) {
+				$coupon->minimum_amount = floatval($_min) * self::$_exchange_rate;		
+			} else {
+				$coupon->set_minimum_amount( floatval($_min) * self::$_exchange_rate );	
+			}
+			
+		}
+		if ( $_max ) {
+			if ( $_back ) {
+				$coupon->maximum_amount = floatval($_max) * self::$_exchange_rate;		
+			} else {
+				$coupon->set_maximum_amount( floatval($_max) * self::$_exchange_rate );		
+			}
+						
+		}		
 	}
 }

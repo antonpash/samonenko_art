@@ -8,30 +8,38 @@ class WCML_Bookings {
 	/**
 	 * @var WPML_Element_Translation_Package
 	 */
-	public $tp;
+	private $tp;
 
 	/**
 	 * @var SitePress
 	 */
-	public $sitepress;
+	private $sitepress;
 
 	/**
 	 * @var woocommerce_wpml
 	 */
-	public $woocommerce_wpml;
+	private $woocommerce_wpml;
 
 	/**
 	 * @var wpdb
 	 */
-	public $wpdb;
+	private $wpdb;
 
 	/**
 	 * WCML_Bookings constructor.
+	 * @param SitePress $sitepress
+	 * @param woocommerce_wpml $woocommerce_wpml
+	 * @param wpdb $wpdb
+	 * @param WPML_Element_Translation_Package $tp
 	 */
-	function __construct( &$sitepress, &$woocommerce_wpml, &$wpdb ) {
+	function __construct( SitePress $sitepress, woocommerce_wpml $woocommerce_wpml, wpdb $wpdb, WPML_Element_Translation_Package $tp ) {
 		$this->sitepress        = $sitepress;
 		$this->woocommerce_wpml = $woocommerce_wpml;
 		$this->wpdb             = $wpdb;
+		$this->tp               = $tp;
+	}
+
+	public function add_hooks(){
 		add_action( 'woocommerce_bookings_after_booking_base_cost', array(
 			$this,
 			'wcml_price_field_after_booking_base_cost'
@@ -107,7 +115,7 @@ class WCML_Bookings {
 		add_action( 'wcml_gui_additional_box_html', array( $this, 'custom_box_html' ), 10, 3 );
 		add_filter( 'wcml_gui_additional_box_data', array( $this, 'custom_box_html_data' ), 10, 4 );
 		add_filter( 'wcml_check_is_single', array( $this, 'show_custom_blocks_for_resources_and_persons' ), 10, 3 );
-		add_filter( 'wcml_product_content_exception', array( $this, 'remove_custom_fields_to_translate' ), 10, 3 );
+		add_filter( 'wcml_do_not_display_custom_fields_for_product', array( $this, 'replace_tm_editor_custom_fields_with_own_sections' ) );
 		add_filter( 'wcml_not_display_single_fields_to_translate', array(
 			$this,
 			'remove_single_custom_fields_to_translate'
@@ -138,8 +146,6 @@ class WCML_Bookings {
 
 		if ( is_admin() ) {
 
-			$this->tp = new WPML_Element_Translation_Package;
-
 			add_filter( 'wpml_tm_translation_job_data', array(
 				$this,
 				'append_persons_to_translation_package'
@@ -159,26 +165,39 @@ class WCML_Bookings {
 			//allow filtering resources by language
 			add_filter( 'get_booking_resources_args', array( $this, 'filter_get_booking_resources_args' ) );
 
+            if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'ICL_SITEPRESS_VERSION' ), '3.8.0', '<' ) ) {
+                add_filter( 'get_translatable_documents', array( $this, 'filter_translatable_documents' ) );
+
+                //@TODO review after WPML 3.6
+                if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'ICL_SITEPRESS_VERSION' ), '3.6', '<' ) ) {
+                    add_action( 'added_post_meta', array(
+                        $this,
+                        'maybe_fix_double_serialized_wc_booking_availability'
+                    ), 10, 4 );
+                }
+            }
+            add_filter( 'get_translatable_documents_all', array( $this, 'filter_translatable_documents' ) );
+
+			add_filter( 'pre_wpml_is_translated_post_type', array( $this, 'filter_is_translated_post_type' ) );
+
 			add_action( 'woocommerce_product_data_panels',   array( $this, 'show_pointer_info' ) );
+
+			add_action( 'save_post', array( $this, 'sync_booking_status' ), 10, 3 );
 		}
 
 		if ( ! is_admin() || isset( $_POST['action'] ) && $_POST['action'] == 'wc_bookings_calculate_costs' ) {
 			add_filter( 'get_post_metadata', array( $this, 'filter_wc_booking_cost' ), 10, 4 );
 		}
-
-		//@TODO review after WPML 3.6
-		if ( version_compare( ICL_SITEPRESS_VERSION, '3.6', '<' ) ) {
-			add_action( 'added_post_meta', array(
-				$this,
-				'maybe_fix_double_serialized_wc_booking_availability'
-			), 10, 4 );
-		}
-
+		
 		add_filter( 'wpml_language_filter_extra_conditions_snippet', array( $this, 'extra_conditions_to_filter_bookings' ) );
 
 		$this->clear_transient_fields();
 
 		add_filter( 'wpml_tm_dashboard_translatable_types', array(	$this, 'hide_bookings_type_on_tm_dashboard'	) );
+
+		add_filter( 'wcml_add_to_cart_sold_individually', array( $this, 'add_to_cart_sold_individually'	), 10, 4 );
+
+		add_filter( 'woocommerce_bookings_account_tables', array( $this, 'filter_my_account_bookings_tables_by_current_language'	) );
 
 	}
 
@@ -745,7 +764,7 @@ class WCML_Bookings {
 
 			if ( $this->woocommerce_wpml->settings['enable_multi_currency'] == WCML_MULTI_CURRENCIES_INDEPENDENT ) {
 
-				$original_id = apply_filters( 'translate_object_id', $object_id, 'product', true, $this->woocommerce_wpml->products->get_original_product_language( $object_id ) );
+				$original_id = $this->woocommerce_wpml->products->get_original_product_id( $object_id );
 
 				$cost_status = get_post_meta( $original_id, '_wcml_custom_costs_status', true );
 
@@ -868,7 +887,7 @@ class WCML_Bookings {
 	function sync_resource_costs_with_translations( $object_id, $meta_key, $check = false ) {
 
 
-		$original_product_id = apply_filters( 'translate_object_id', $object_id, 'product', true, $this->woocommerce_wpml->products->get_original_product_language( $object_id ) );
+		$original_product_id = $this->woocommerce_wpml->products->get_original_product_id( $object_id );
 
 		if ( $object_id == $original_product_id ) {
 
@@ -970,7 +989,7 @@ class WCML_Bookings {
 			}
 
 			if ( isset( $booking_id ) ) {
-				$original_id = apply_filters( 'translate_object_id', $booking_id, 'product', true, $this->woocommerce_wpml->products->get_original_product_language( $booking_id ) );
+				$original_id = $this->woocommerce_wpml->products->get_original_product_id( $booking_id );
 
 				if ( $booking_id != $original_id ) {
 					$fields = maybe_unserialize( get_post_meta( $original_id, '_wc_booking_pricing', true ) );
@@ -978,10 +997,14 @@ class WCML_Bookings {
 				}
 			}
 
-			if ( isset( $fields[ $name . $currency ] ) ) {
-				return $fields[ $name . $currency ];
-			} else {
-				return $this->woocommerce_wpml->multi_currency->prices->convert_price_amount( $cost, $currency );
+			$needs_filter_pricing_cost = $this->needs_filter_pricing_cost( $name, $fields );
+
+			if( $needs_filter_pricing_cost ){
+				if ( isset( $fields[ $name . $currency ] ) ) {
+					return $fields[ $name . $currency ];
+				} else {
+					return $this->woocommerce_wpml->multi_currency->prices->convert_price_amount( $cost, $currency );
+				}
 			}
 
 		}
@@ -990,13 +1013,28 @@ class WCML_Bookings {
 
 	}
 
+	function needs_filter_pricing_cost( $name, $fields ){
+
+		$modifier_skip_values = array( 'divide', 'times' );
+
+		if(
+			'override_block_' === $name ||
+			( 'cost_' === $name && !in_array( $fields[ 'modifier' ], $modifier_skip_values ) ) ||
+			( 'base_cost_' === $name && !in_array( $fields[ 'base_modifier' ], $modifier_skip_values ) )
+		){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	function load_assets( $external_product_type = false ) {
 		global $pagenow;
 
 		$product_id = $pagenow == 'post.php' && isset( $_GET['post'] ) ? (int)$_GET['post'] : false;
 
 		if( $product_id && get_post_type( $product_id ) === 'product' ){
-			$product_type = Deprecated_WC_Functions::get_product_type( $product_id );
+			$product_type = WooCommerce_Functions_Wrapper::get_product_type( $product_id );
 
 			if ( ( $product_type === 'booking' || $product_type === $external_product_type ) || $pagenow == 'post-new.php' ) {
 
@@ -1065,11 +1103,7 @@ class WCML_Bookings {
 
 				$booking_form = new WC_Booking_Form( wc_get_product( $current_id ) );
 
-				$prod_qty = get_post_meta( $current_id, '_wc_booking_qty', true );
-				update_post_meta( $current_id, '_wc_booking_qty', intval( $prod_qty + $cart_item['booking']['_qty'] ) );
 				$cost = $booking_form->calculate_booking_cost( $booking_info );
-				update_post_meta( $current_id, '_wc_booking_qty', $prod_qty );
-
 				if ( ! is_wp_error( $cost ) ) {
 					$cart_item['data']->set_price( $cost );
 				}
@@ -1078,7 +1112,6 @@ class WCML_Bookings {
 		}
 
 		return $cart_item;
-
 	}
 
 	function booking_currency_dropdown() {
@@ -1227,7 +1260,7 @@ class WCML_Bookings {
 	}
 
 	function custom_box_html( $obj, $product_id, $data ) {
-		if ( Deprecated_WC_Functions::get_product_type( $product_id ) !== 'booking' ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $product_id ) !== 'booking' ) {
 			return;
 		}
 
@@ -1290,7 +1323,7 @@ class WCML_Bookings {
 
 	function custom_box_html_data( $data, $product_id, $translation, $lang ) {
 
-		if ( Deprecated_WC_Functions::get_product_type( $product_id ) !== 'booking' ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $product_id ) !== 'booking' ) {
 			return $data;
 		}
 
@@ -1353,12 +1386,11 @@ class WCML_Bookings {
 		return $check;
 	}
 
-	function remove_custom_fields_to_translate( $exception, $product_id, $meta_key ) {
-		if ( in_array( $meta_key, array( '_resource_base_costs', '_resource_block_costs' ) ) ) {
-			$exception = true;
-		}
+	function replace_tm_editor_custom_fields_with_own_sections( $fields ) {
+		$fields[] = '_resource_base_costs';
+		$fields[] = '_resource_block_costs';
 
-		return $exception;
+		return $fields;
 	}
 
 	function remove_single_custom_fields_to_translate( $fields ) {
@@ -1495,9 +1527,13 @@ class WCML_Bookings {
 			'post_type'   => 'wc_booking',
 			'post_title'  => $booking_object->post_title,
 			'post_status' => $booking_object->post_status,
-			'ping_status' => 'closed',
-			'post_parent' => $booking_object->post_parent,
+			'ping_status' => 'closed'
 		);
+
+		if( $booking_object->post_parent && $lang ){
+			$translated_parent = apply_filters( 'translate_object_id', $booking_object->post_parent, get_post_type( $booking_object->post_parent ), false, $lang );
+			if( $translated_parent ) $booking_data[ 'post_parent' ] = $translated_parent;
+		}
 
 		$active_languages = $this->sitepress->get_active_languages();
 
@@ -1536,7 +1572,7 @@ class WCML_Bookings {
 			$this->sitepress->set_element_language_details( $trnsl_booking_id, 'post_wc_booking', $trid, $language['code'] );
 
 			$meta_args = array(
-				'_booking_order_item_id' => get_post_meta( $booking_id, '_booking_order_item_id', true ),
+				'_booking_order_item_id' => 0,
 				'_booking_product_id'    => $this->get_translated_booking_product_id( $booking_id, $language['code'] ),
 				'_booking_resource_id'   => $this->get_translated_booking_resource_id( $booking_id, $language['code'] ),
 				'_booking_persons'       => $this->get_translated_booking_persons_ids( $booking_id, $language['code'] ),
@@ -1768,7 +1804,7 @@ class WCML_Bookings {
 	function append_persons_to_translation_package( $package, $post ) {
 
 		if ( $post->post_type == 'product' ) {
-			$product_type = Deprecated_WC_Functions::get_product_type( $post->ID );
+			$product_type = WooCommerce_Functions_Wrapper::get_product_type( $post->ID );
 
 			if ( $product_type === 'booking' ) {
 
@@ -1778,15 +1814,17 @@ class WCML_Bookings {
 
 				foreach ( $person_types as $person_type ) {
 
-					$package['contents'][ 'wc_bookings:person:' . $person_type->ID . ':name' ] = array(
+					$bookable_person = get_post( $person_type->ID );
+
+					$package['contents'][ 'wc_bookings:person:' . $bookable_person->ID . ':name' ] = array(
 						'translate' => 1,
-						'data'      => $this->tp->encode_field_data( $person_type->post_title, 'base64' ),
+						'data'      => $this->tp->encode_field_data( $bookable_person->post_title, 'base64' ),
 						'format'    => 'base64'
 					);
 
-					$package['contents'][ 'wc_bookings:person:' . $person_type->ID . ':description' ] = array(
+					$package['contents'][ 'wc_bookings:person:' . $bookable_person->ID . ':description' ] = array(
 						'translate' => 1,
-						'data'      => $this->tp->encode_field_data( $person_type->post_excerpt, 'base64' ),
+						'data'      => $this->tp->encode_field_data( $bookable_person->post_excerpt, 'base64' ),
 						'format'    => 'base64'
 					);
 
@@ -1803,7 +1841,7 @@ class WCML_Bookings {
 	function save_person_translation( $post_id, $data, $job ) {
 		$person_translations = array();
 
-		if ( Deprecated_WC_Functions::get_product_type( $post_id ) === 'booking' ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $post_id ) === 'booking' ) {
 
 			foreach ( $data as $value ) {
 
@@ -1870,7 +1908,7 @@ class WCML_Bookings {
 		if ( $post->post_type == 'product' ) {
 			$product = wc_get_product( $post->ID );
 
-			$product_type = Deprecated_WC_Functions::get_product_type( $post->ID );
+			$product_type = WooCommerce_Functions_Wrapper::get_product_type( $post->ID );
 
 			if ( $product_type === 'booking' && $product->has_resources() ) {
 
@@ -1897,7 +1935,7 @@ class WCML_Bookings {
 	function save_resource_translation( $post_id, $data, $job ) {
 		$resource_translations = array();
 
-		if ( Deprecated_WC_Functions::get_product_type( $post_id ) === 'booking' ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $post_id ) === 'booking' ) {
 
 			foreach ( $data as $value ) {
 
@@ -2248,5 +2286,103 @@ class WCML_Bookings {
 		$pointer_ui->show();
 
 	}
+
+	public function add_to_cart_sold_individually( $sold_indiv, $cart_item_data, $product_id, $quantity ){
+
+		if( isset(  $cart_item_data[ 'booking' ] ) ){
+			$sold_indiv = false;
+			foreach( WC()->cart->cart_contents as $cart_item ){
+				if(
+					isset( $cart_item[ 'booking' ] ) && isset( $cart_item[ 'booking' ][ '_booking_id' ] ) &&
+					$cart_item[ 'booking' ][ '_start_date' ] == $cart_item_data[ 'booking' ][ '_start_date' ] &&
+					$cart_item[ 'booking' ][ '_end_date' ] == $cart_item_data[ 'booking' ][ '_end_date' ] &&
+					$cart_item[ 'booking' ][ '_booking_id' ] == $cart_item_data[ 'booking' ][ '_booking_id' ]
+				){
+					$sold_indiv = true;
+				}
+			}
+		}
+
+		return $sold_indiv;
+	}
+
+	// unset "bookings" from translatable documents to hide WPML languages section from booking edit page
+	public function filter_translatable_documents( $icl_post_types ){
+
+		if(
+			( isset( $_GET[ 'post' ] ) && get_post_type( $_GET[ 'post' ] ) == 'wc_booking' ) ||
+			( isset( $_GET[ 'post_type' ] ) && $_GET[ 'post_type' ] == 'wc_booking' )
+		){
+			unset( $icl_post_types[ 'wc_booking' ] );
+		}
+
+		return $icl_post_types;
+	}
+
+	// hide WPML languages links section from bookings list page
+	public function filter_is_translated_post_type( $type ){
+
+		if( isset( $_GET[ 'post_type' ] ) && $_GET[ 'post_type' ] == 'wc_booking' ){
+			return false;
+		}
+
+		return $type;
+	}
+
+	/**
+	 * @param int $post_id
+	 * @param WP_Post $post
+	 * @param bool $update
+	 *
+	 */
+	public function sync_booking_status( $post_id, $post, $update ){
+
+		if( $post->post_type === 'wc_booking' && $update ){
+
+			$trid = $this->sitepress->get_element_trid( $post_id, 'post_wc_booking' );
+			$translations = $this->sitepress->get_element_translations( $trid, 'post_wc_booking' );
+
+			foreach( $translations as $translation ){
+				if( $translation->element_id != $post_id ){
+					$this->wpdb->update(
+						$this->wpdb->posts,
+						array( 'post_status' => $post->post_status ),
+						array( 'ID' => $translation->element_id )
+					);
+				}
+			}
+
+		}
+
+	}
+
+	public function filter_my_account_bookings_tables_by_current_language( $tables ) {
+
+		$current_language = $this->sitepress->get_current_language();
+
+		foreach ( $tables as $table_key => $table ) {
+
+			if ( isset( $table['bookings'] ) ) {
+
+				foreach ( $table['bookings'] as $key => $booking ) {
+					$language_code    = get_post_meta( $booking->get_id(), '_language_code', true );
+
+					if( !$language_code ){
+					    $language_code = $this->sitepress->get_language_for_element( $booking->get_product_id(), 'post_product' );
+                    }
+
+					if ( $language_code !== $current_language ) {
+						unset( $tables[ $table_key ]['bookings'][ $key ] );
+					}
+				}
+			}
+
+			$tables[ $table_key ]['bookings'] = array_values( $tables[ $table_key ]['bookings'] );
+		}
+
+		return $tables;
+	}
+
+
 
 }

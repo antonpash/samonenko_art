@@ -50,7 +50,22 @@ jQuery( function( $ ) {
 		parent_class = parent_class.replace(']', '');
 		
 		$(this).closest(parent_class).next('.wcpbc_show_if_manual').toggle( $(this).val() == 'manual' );		
-	});		
+	});
+
+	$('.wcpbc-region-settings').on( 'click', '.select_eur', function(){
+		var countries = $(this).data('countries');		
+		
+		if ( countries instanceof Array ) {
+			$( this ).closest( 'td' ).find( 'select option' ).each( function( index, that ) {
+				if ( countries.indexOf( $(that).attr('value') ) > -1 ) {
+					$(that).attr('selected', 'selected');
+				}
+			});	
+			$( this ).closest( 'td' ).find( 'select' ).trigger('change');
+		}
+
+		return false;		
+	});
 	
 	$('#wc_price_based_country_test_mode').on('change', function() {
    		if ($(this).is(':checked')) {
@@ -74,6 +89,15 @@ jQuery( function( $ ) {
 		});		
 		
 		$('#general_coupon_data #zone_pricing_type').closest('p').toggle( $('#general_coupon_data #discount_type').val()=='fixed_cart' ||  $('#general_coupon_data #discount_type').val()=='fixed_product' );
+
+		// Variation pricing bulk edit	
+		$( 'select.variation_actions' ).on('wcpbc_variable_bulk_edit_popup', function(e){
+			tb_show( 'Upgrade to Price Based on Country Pro now!', '#TB_inline?width=600&height=350&inlineId=variable-bulk-edit-popup', false );
+			$('#TB_window').css({
+				width: '680px',
+				height: '380px'
+			});
+		});
 				
 	});
 	
