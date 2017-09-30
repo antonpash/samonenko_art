@@ -218,9 +218,11 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
 .woocommerce-cart table.cart .button-md{
     margin-left: auto;
 }
-.woocommerce-cart table.cart .product-thumbnail a{
+.woocommerce-cart table.cart .product-thumbnail{
+    text-align: center;
+}
+.woocommerce a.remove{
     margin: 0 auto;
-    display: block;
 }
 
 p.portfolio-price{
