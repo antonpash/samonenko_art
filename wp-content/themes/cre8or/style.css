@@ -52,6 +52,7 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     list-style: none;
     display: block;
     float: left;
+    margin: 0;
 }
 
 .second_nav ul.social{
@@ -194,6 +195,9 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     color: #5f1e46;
     font-size: 1em;
 }
+.woocommerce ul.products li.product .price del{
+    display: inline;
+}
 
 
 .woocommerce .portfolio-info li a{
@@ -295,11 +299,13 @@ p.portfolio-price{
     padding-left: 25px;
 }
 
-.breadcrumb{
-    margin: 0 0 1em;
-    padding: 0 5px 15px;
-    font-size: .92em;
-    color: #777;
+.breadcrumb, .woocommerce-breadcrumb{
+    margin: 0 0 2em !important;
+    padding: 0 1em !important;
+    font-size: .92em !important;
+}
+.breadcrumb, .woocommerce-breadcrumb a{
+    color: #191919 !important;
 }
 .breadcrumb div, .woocommerce-breadcrumb div{
     display: inline;
