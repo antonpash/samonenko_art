@@ -153,6 +153,17 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     margin-top: 40px;
 }
 
+.woocommerce .vc_tta-tabs-list li a{
+    border: none !important;
+    background-color: #fff !important;
+    color: #222 !important;
+}
+
+.woocommerce .vc_tta-tabs-list li.vc_active a, .woocommerce .vc_tta-tabs-list li:hover a{
+    background-color: #5f1e46 !important;
+    color: #fff !important;
+}
+
 .logo{
     display: inline !important;
 }
