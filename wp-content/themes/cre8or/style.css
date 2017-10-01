@@ -157,15 +157,15 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     display: inline !important;
 }
 
-.woocommerce div.product_custom p.price{
+.woocommerce div.product_custom p.price, .woocommerce ul.products li .price{
     color: #5f1e46;
     font-size: 1.4em;
     margin-top: 20px;
 }
-.woocommerce div.product_custom p.price del{
+.woocommerce div.product_custom p.price del, .woocommerce ul.products li .price del{
     opacity: 0.5;
 }
-.woocommerce div.product_custom p.price ins {
+.woocommerce div.product_custom p.price ins, .woocommerce ul.products li .price ins{
     background: inherit;
     font-weight: 600;
 }
@@ -210,6 +210,9 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
 .woocommerce div.related.products{
     background-color: #fff;
     padding: 10px 24px 0;
+}
+.woocommerce ul.products li{
+    text-align: center;
 }
 
 .woocommerce-cart table.cart img{
