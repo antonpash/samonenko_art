@@ -1852,7 +1852,7 @@ function woocommerce_get_all_categories(){
 }
 
 function my_enqueue_tabs_styles() {
-    if ( is_shop() && is_product_category() ) {
+    if ( is_shop() || is_product_category() ) {
         wp_enqueue_style('tabs-styles', plugins_url('js_composer/assets/css/js_composer_tta.min.css'));
     }
 }
