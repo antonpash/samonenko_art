@@ -62,13 +62,13 @@ if (post_password_required()) {
 
                     $product->list_attributes();
 
-                    do_action('woocommerce_' . $product->product_type . '_add_to_cart');
-
                     ?>
 
                 </ul>
 
                 <?php
+
+                do_action('woocommerce_' . $product->product_type . '_add_to_cart');
 
                 wc_get_template('single-product/short-description.php');
 
