@@ -1670,10 +1670,6 @@ i[data-icon="ios-cart"] {
         margin:0 0 1em;
     }
 
-    .product .button-sm, .product_custom .button-sm, .related .button-sm {
-        padding: 3px 12px 0px;
-    }
-
     .portfolio-sidebar .button-md {
         padding: 10px 24px 6px;
     }
