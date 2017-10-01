@@ -157,18 +157,23 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     display: inline !important;
 }
 
-.woocommerce div.product_custom p.price, .woocommerce ul.products li .price{
+.woocommerce div.product_custom p.price{
     color: #5f1e46;
     font-size: 1.4em;
     margin-top: 20px;
 }
-.woocommerce div.product_custom p.price del, .woocommerce ul.products li .price del{
+.woocommerce div.product_custom p.price del{
     opacity: 0.5;
 }
-.woocommerce div.product_custom p.price ins, .woocommerce ul.products li .price ins{
+.woocommerce div.product_custom p.price ins {
     background: inherit;
     font-weight: 600;
 }
+.woocommerce ul.products li.product .price{
+    color: #5f1e46;
+    font-size: 1em;
+}
+
 
 .woocommerce .portfolio-info li a{
     vertical-align: inherit;
