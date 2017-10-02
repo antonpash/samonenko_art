@@ -2,14 +2,17 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-28 18:57:50+0000\n"
+"PO-Revision-Date: 2017-10-02 03:02+0300\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/2.4.0-alpha\n"
+"X-Generator: Poedit 1.8.10\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 
 #: includes/import/abstract-wc-product-importer.php:562
 msgid "Unable to use image \"%s\"."
@@ -18235,7 +18238,7 @@ msgstr "Подробнее"
 #: includes/abstracts/abstract-wc-product.php:1709
 #: includes/class-wc-product-simple.php:54
 msgid "Add to cart"
-msgstr "Добавить в корзину"
+msgstr "+ В корзину"
 
 #: includes/gateways/class-wc-payment-gateway-cc.php:55
 msgid "CVC"
@@ -18267,7 +18270,6 @@ msgstr "Запас товара %1$s увеличился с %2$s до %3$s."
 msgid "Order status changed from %1$s to %2$s."
 msgstr "Статус заказа изменен с %s на %s."
 
-#. #-#-#-#-#  woocommerce-code.pot (WooCommerce 3.1.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: includes/admin/class-wc-admin-assets.php:90
 #: includes/admin/class-wc-admin-menus.php:60
