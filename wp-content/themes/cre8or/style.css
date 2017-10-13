@@ -305,7 +305,7 @@ p.portfolio-price{
     font-size: .92em !important;
     color: #777;
 }
-.breadcrumb, .woocommerce-breadcrumb a{
+.breadcrumb a, .woocommerce-breadcrumb a{
     color: #191919 !important;
 }
 .breadcrumb div, .woocommerce-breadcrumb div{
