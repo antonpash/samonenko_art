@@ -303,6 +303,7 @@ p.portfolio-price{
     margin: 0 0 2em !important;
     padding: 0 1em !important;
     font-size: .92em !important;
+    color: #777;
 }
 .breadcrumb, .woocommerce-breadcrumb a{
     color: #191919 !important;
