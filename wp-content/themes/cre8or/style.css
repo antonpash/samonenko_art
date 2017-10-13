@@ -207,9 +207,6 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
 .woocommerce div.product_custom .portfolio-title{
     font-size: 25px;
 }
-.woocommerce div.product_custom form.cart {
-    margin: 0;
-}
 .woocommerce div.product_custom table.variations{
     border: none;
     margin: 0;
