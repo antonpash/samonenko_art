@@ -288,6 +288,10 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     margin-right: auto;
 }
 
+.woocommerce .quantity .qty{
+    height: 36px;
+}
+
 button:disabled, input[type="submit"]:disabled, [class*="button-"]:disabled{
     opacity: 0.3;
 }
