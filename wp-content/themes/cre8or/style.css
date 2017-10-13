@@ -284,9 +284,13 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
 .woocommerce-cart-tab-container .widget_shopping_cart .buttons a{
     margin-right: auto;
 }
-
 .woocommerce .quantity .qty{
     height: 36px;
+}
+.woocommerce span.onsale{
+    background-color: #a46497;
+    border-radius: 0;
+    right: -.5em;
 }
 
 button:disabled, input[type="submit"]:disabled, [class*="button-"]:disabled{
