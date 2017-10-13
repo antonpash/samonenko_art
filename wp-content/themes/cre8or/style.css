@@ -291,6 +291,11 @@ Tags: light, theme-options, creative, responsive, unique, filtered portfolio
     background-color: #a46497;
     border-radius: 0;
     right: -.5em;
+    left: auto;
+    opacity: .9;
+}
+.woocommerce ul.products li.product .onsale{
+    margin: 0;
 }
 
 button:disabled, input[type="submit"]:disabled, [class*="button-"]:disabled{
