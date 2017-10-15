@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Saphali WooCommerce Nova Pocta\n"
+"POT-Creation-Date: 2016-04-06 12:39+0300\n"
+"PO-Revision-Date: 2016-04-06 12:40+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: delivery-in-nova-pochta.php\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: delivery-in-nova-pochta.php:33 delivery-in-nova-pochta.php:62
+#: delivery-in-nova-pochta.php:110 delivery-in-nova-pochta.php:288
+#: delivery-in-nova-pochta.php:319
+msgid "Новая почта"
+msgstr "Нова Пошта"
+
+#: delivery-in-nova-pochta.php:38
+msgid "Free"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:53 delivery-in-nova-pochta.php:101
+msgid "Enable/Disable"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:55 delivery-in-nova-pochta.php:103
+msgid "Активировать Новую почту"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:59 delivery-in-nova-pochta.php:107
+msgid "Method Title"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:61 delivery-in-nova-pochta.php:109
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: delivery-in-nova-pochta.php:65 delivery-in-nova-pochta.php:145
+msgid "Minimum Order Amount"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:67
+msgid ""
+"Users will need to spend this amount to get free shipping. Leave blank to "
+"disable."
+msgstr ""
+
+#: delivery-in-nova-pochta.php:71 delivery-in-nova-pochta.php:157
+msgid "Delivery Fee"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:77
+msgid "Добавочная стоимость при выборе этого метода доставки."
+msgstr ""
+
+#: delivery-in-nova-pochta.php:83
+msgid "Coupon"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:85
+msgid "Free shipping requires a free shipping coupon"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:86
+msgid ""
+"Users will need to enter a valid free shipping coupon code to use this "
+"method. If a coupon is used, the minimum order amount will be ignored."
+msgstr ""
+
+#: delivery-in-nova-pochta.php:115
+msgid "Method availability"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:120
+msgid "All allowed countries"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:121 delivery-in-nova-pochta.php:125
+msgid "Specific Countries"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:133
+msgid "Новая почта (опции задействия)"
+msgstr "Нова пошта (опції задіяння)"
+
+#: delivery-in-nova-pochta.php:137
+msgid "N/A"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:138
+msgid "Купон на бесплатную доставку. Активация новой почты"
+msgstr "Купон на безкоштовну доставку. Активація нової пошти"
+
+#: delivery-in-nova-pochta.php:139
+msgid "A minimum order amount (defined below)"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:140
+msgid "A minimum order amount OR a coupon"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:141
+msgid "A minimum order amount AND a coupon"
+msgstr ""
+
+#: delivery-in-nova-pochta.php:151
+msgid ""
+"Покупателям необходимо потратить именно столько, чтобы активировать данный "
+"метод доставки. Оставте пустым, чтобы опция была неактивной."
+msgstr ""
+"Покупцям необхідно витратити саме стільки, щоб активувати даний метод "
+"доставки. Залишіть порожнім, щоб опція була неактивною."
+
+#: delivery-in-nova-pochta.php:252
+msgid "Адрес или № склада Новой Почты:"
+msgstr "Адреса або № складу Нової Пошти:"
+
+#: delivery-in-nova-pochta.php:453
+msgid "Адрес или № склада Новой Почты"
+msgstr "Адреса або № складу Нової Пошти"
+
+#. Plugin Name of the plugin/theme
+msgid "Saphali WooCommerce Nova Pocta"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://saphali.com/saphali-woocommerce-plugin-wordpress"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Nova Pocta - Позволяет сразу выбрать и оформить доставку в РЕГИОНЫ через "
+"транспортные компании при оформлении заказа. Подробнее на сайте <a href="
+"\"http://saphali.com/saphali-woocommerce-plugin-wordpress\">Saphali "
+"Woocommerce</a>"
+msgstr ""
+"Nova Pocta - Дозволяє відразу вибрати і оформити доставку в РЕГІОНИ через "
+"транспортні компанії при оформленні замовлення. Детальніше на сайті <a "
+"href=\"http://saphali.com/saphali-woocommerce-plugin-wordpress\">Saphali "
+"Woocommerce</a>"
+
+#. Author of the plugin/theme
+msgid "Saphali"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://saphali.com/"
+msgstr ""
