@@ -372,6 +372,9 @@ class WC_New_Pochta extends WC_Free_Shipping {
 		
 	}
 		if(!$is_available) $this->enabled = "no";
+		
+		if ( isset($package['destination']['country']) && ! in_array( $package['destination']['country'], array('UA') ) ) 
+			return false;
 		return apply_filters( 'woocommerce_shipping_' . $this->id . '_is_available', $is_available, $package );
 	}
 	
